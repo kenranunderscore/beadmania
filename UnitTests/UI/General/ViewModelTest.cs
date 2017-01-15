@@ -1,14 +1,8 @@
 ﻿using beadmania.UI.General;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UnitTests.UI.General
+namespace beadmania.UnitTests.UI.General
 {
     [TestClass]
     public class BaseViewModelTest
@@ -17,7 +11,7 @@ namespace UnitTests.UI.General
             = typeof(ViewModel).GetMethod("SetProperty", BindingFlags.NonPublic | BindingFlags.Instance);
 
         [TestMethod]
-        public void SetProperty_Sets_Value_For_Reference_Types()
+        public void SetProperty_sets_value_for_reference_types()
         {
             Bar bar = new Bar();
             TestViewModel vm = new TestViewModel
@@ -29,7 +23,7 @@ namespace UnitTests.UI.General
         }
 
         [TestMethod]
-        public void SetProperty_Does_Nothing_If_References_Are_Identical_For_Reference_Types()
+        public void SetProperty_does_nothing_if_references_are_identical_for_reference_types()
         {
             Bar bar = new Bar();
             TestViewModel vm = new TestViewModel
@@ -41,7 +35,7 @@ namespace UnitTests.UI.General
         }
 
         [TestMethod]
-        public void SetProperty_Does_Nothing_If_Values_Are_Identical_For_Value_Types()
+        public void SetProperty_does_nothing_if_values_are_identical_for_value_types()
         {
             TestViewModel vm = new TestViewModel
             {
@@ -52,7 +46,7 @@ namespace UnitTests.UI.General
         }
 
         [TestMethod]
-        public void SetProperty_Sets_Value_For_Value_Types()
+        public void SetProperty_sets_value_for_value_types()
         {
             TestViewModel vm = new TestViewModel
             {
@@ -63,7 +57,7 @@ namespace UnitTests.UI.General
         }
 
         [TestMethod]
-        public void SetProperty_Notifies_That_Property_Changed()
+        public void SetProperty_notifies_that_property_changed()
         {
             TestViewModel vm = new TestViewModel();
             int count = 0;
