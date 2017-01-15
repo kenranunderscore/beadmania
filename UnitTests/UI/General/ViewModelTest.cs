@@ -1,5 +1,6 @@
 ﻿using beadmania.UI.General;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,16 @@ namespace UnitTests.UI.General
             };
             bool result = InvokeSetProperty(vm, vm.Foo, 6, nameof(TestViewModel.Foo));
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void SetProperty_Notifies_That_Property_Changed()
+        {
+            TestViewModel vm = new TestViewModel();
+            int count = 0;
+            vm.PropertyChanged += (sender, e) => ++count;
+            InvokeSetProperty(vm, 0, 1, nameof(TestViewModel.Foo));
+            Assert.AreEqual(1, count);
         }
 
         private class TestViewModel : ViewModel
