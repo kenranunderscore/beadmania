@@ -9,11 +9,13 @@
         mc:Ignorable="d"
         Title="beadmania"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
-        Height="350"
-        Width="525">
+        WindowState="Maximized">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
-    <controls:BeadCanvas ImageSource="{Binding Bitmap}" />
+    <controls:BeadCanvas
+        ImageSource="{Binding Bitmap}"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        ShowGrid="{Binding ShowGrid}" />
 </Window>
