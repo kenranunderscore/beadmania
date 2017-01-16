@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:beadmania.UI"
+        xmlns:vm="clr-namespace:beadmania.UI.ViewModels"
+        xmlns:controls="clr-namespace:beadmania.UI.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-
-    </Grid>
+        Title="beadmania"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Height="350"
+        Width="525">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <controls:BeadCanvas ImageSource="{Binding Bitmap}" />
 </Window>

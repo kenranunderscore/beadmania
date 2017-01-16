@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace beadmania.UI.General
 {
-    public class RelayCommand : ICommand
+    internal class RelayCommand : ICommand
     {
         private readonly Action<object> execute;
         private readonly Predicate<object> canExecute;
