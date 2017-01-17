@@ -14,6 +14,7 @@
         <vm:MainViewModel />
     </Window.DataContext>
     <controls:BeadCanvas
+        Background="Transparent"
         ImageSource="{Binding Bitmap}"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"

@@ -41,51 +41,14 @@ namespace beadmania.UI.Controls
         private static void ImageSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             var target = (BeadCanvas)obj;
-            target.Draw();
+            target.InvalidateVisual();
         }
 
         private static void ShowGridChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             var target = (BeadCanvas)obj;
-            target.DrawGrid();
+            target.InvalidateVisual();
         }
-
-        private void DrawGrid()
-        {
-            var gridLines = Children.OfType<Line>().ToList();
-            if (!ShowGrid)
-            {
-                foreach (var line in gridLines)
-                {
-                    Children.Remove(line);
-                }
-            }
-            else
-            {
-                for (int x = 0; x < ImageSource.Width; ++x)
-                {
-                    for (int y = 0; y < ImageSource.Height; ++y)
-                    {
-                        double scaledX = (x + 1) * pixelSize;
-                        double scaledY = (y + 1) * pixelSize;
-
-                        Children.Add(CreateGridLine(scaledX, 0, GridLineAlignment.Vertical));
-                        Children.Add(CreateGridLine(0, scaledY, GridLineAlignment.Horizontal));
-                    }
-                }
-            }
-        }
-
-        private Line CreateGridLine(double x, double y, GridLineAlignment direction)
-            => new Line
-            {
-                X1 = x,
-                Y1 = y,
-                X2 = direction == GridLineAlignment.Horizontal ? pixelSize * ImageSource.Width : x,
-                Y2 = direction == GridLineAlignment.Vertical ? pixelSize * ImageSource.Height : y,
-                Stroke = Brushes.Black,
-                StrokeThickness = 0.2d
-            };
 
         private void Draw()
         {
@@ -104,8 +67,28 @@ namespace beadmania.UI.Controls
                     SetTop(rect, y * pixelSize);
                 }
             }
+        }
 
-            DrawGrid();
+        protected override void OnRender(DrawingContext dc)
+        {
+            for (int x = 0; x < ImageSource.Width; ++x)
+            {
+                for (int y = 0; y < ImageSource.Height; ++y)
+                {
+                    double scaledX = (x + 1) * pixelSize;
+                    double scaledY = (y + 1) * pixelSize;
+
+                    if (ShowGrid)
+                    {
+                        dc.DrawLine(new Pen(Brushes.Black, 0.2d), new Point(scaledX, 0), new Point(scaledX, pixelSize * ImageSource.Height));
+                        dc.DrawLine(new Pen(Brushes.Black, 0.2d), new Point(0, scaledY), new Point(pixelSize * ImageSource.Width, scaledY));
+                    }
+
+                    var pixelColor = ImageSource.GetPixel(x, y);
+                    var fillBrush = new SolidColorBrush(Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B));
+                    dc.DrawRectangle(fillBrush, null, new Rect(scaledX, scaledY, pixelSize, pixelSize));
+                }
+            }
         }
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
@@ -115,7 +98,7 @@ namespace beadmania.UI.Controls
 
             double scaling = e.Delta > 0 ? 2d : 0.5d;
             pixelSize = (int)(pixelSize * scaling);
-            Draw();
+            InvalidateVisual();
         }
     }
 }
