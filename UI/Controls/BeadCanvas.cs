@@ -66,28 +66,26 @@ namespace beadmania.UI.Controls
                 {
                     for (int y = 0; y < ImageSource.Height; ++y)
                     {
-                        Line lv = new Line();
-                        lv.X1 = (x + 1) * pixelSize;
-                        lv.Y1 = 0;
-                        lv.X2 = lv.X1;
-                        lv.Y2 = pixelSize * ImageSource.Height;
-                        lv.Stroke = Brushes.DarkGray;
-                        lv.StrokeThickness = 0.2d;
+                        double scaledX = (x + 1) * pixelSize;
+                        double scaledY = (y + 1) * pixelSize;
 
-                        Line lh = new Line();
-                        lh.X1 = 0;
-                        lh.Y1 = (y + 1) * pixelSize;
-                        lh.X2 = pixelSize * ImageSource.Width;
-                        lh.Y2 = lh.Y1;
-                        lh.Stroke = Brushes.DarkGray;
-                        lh.StrokeThickness = 0.2d;
-
-                        Children.Add(lv);
-                        Children.Add(lh);
+                        Children.Add(CreateGridLine(scaledX, 0, GridLineAlignment.Vertical));
+                        Children.Add(CreateGridLine(0, scaledY, GridLineAlignment.Horizontal));
                     }
                 }
             }
         }
+
+        private Line CreateGridLine(double x, double y, GridLineAlignment direction)
+            => new Line
+            {
+                X1 = x,
+                Y1 = y,
+                X2 = direction == GridLineAlignment.Horizontal ? pixelSize * ImageSource.Width : x,
+                Y2 = direction == GridLineAlignment.Vertical ? pixelSize * ImageSource.Height : y,
+                Stroke = Brushes.Black,
+                StrokeThickness = 0.2d
+            };
 
         private void Draw()
         {
