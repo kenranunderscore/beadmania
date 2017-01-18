@@ -50,25 +50,6 @@ namespace beadmania.UI.Controls
             target.InvalidateVisual();
         }
 
-        private void Draw()
-        {
-            Children.Clear();
-            for (int x = 0; x < ImageSource.Width; ++x)
-            {
-                for (int y = 0; y < ImageSource.Height; ++y)
-                {
-                    var pixelColor = ImageSource.GetPixel(x, y);
-                    Rectangle rect = new Rectangle();
-                    rect.Width = pixelSize;
-                    rect.Height = pixelSize;
-                    rect.Fill = new SolidColorBrush(Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B));
-                    Children.Add(rect);
-                    SetLeft(rect, x * pixelSize);
-                    SetTop(rect, y * pixelSize);
-                }
-            }
-        }
-
         protected override void OnRender(DrawingContext dc)
         {
             for (int x = 0; x < ImageSource.Width; ++x)
