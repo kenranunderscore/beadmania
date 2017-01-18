@@ -10,8 +10,10 @@ namespace beadmania.UI.Controls
 {
     internal class BeadCanvas : Canvas
     {
-        private int pixelSize = 10;
         private const double ScalingFactor = 1.5d;
+        private const double GridStrokeThickness = 0.5d;
+        private static readonly Pen GridPen = new Pen(Brushes.Black, GridStrokeThickness);
+        private int pixelSize = 10;
 
         private static DependencyProperty ImageSourceProp =
             DependencyProperty.Register(
@@ -60,19 +62,30 @@ namespace beadmania.UI.Controls
             {
                 for (int y = 0; y < ImageSource.Height; ++y)
                 {
-                    double scaledX = (x + 1) * pixelSize;
-                    double scaledY = (y + 1) * pixelSize;
-
-                    if (ShowGrid)
-                    {
-                        dc.DrawLine(new Pen(Brushes.Black, 0.2d), new Point(scaledX, 0), new Point(scaledX, pixelSize * ImageSource.Height));
-                        dc.DrawLine(new Pen(Brushes.Black, 0.2d), new Point(0, scaledY), new Point(pixelSize * ImageSource.Width, scaledY));
-                    }
-
+                    double scaledX = x * pixelSize;
+                    double scaledY = y * pixelSize;
                     var pixelColor = ImageSource.GetPixel(x, y);
                     var fillBrush = new SolidColorBrush(Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B));
                     dc.DrawRectangle(fillBrush, null, new Rect(scaledX, scaledY, pixelSize, pixelSize));
                 }
+            }
+            RenderGrid(dc);
+        }
+
+        private void RenderGrid(DrawingContext dc)
+        {
+            if (!ShowGrid)
+                return;
+
+            for (int x = 0; x <= ImageSource.Width; ++x)
+            {
+                double scaledX = x * pixelSize;
+                dc.DrawLine(GridPen, new Point(scaledX, 0), new Point(scaledX, pixelSize * ImageSource.Height));
+            }
+            for (int y = 0; y <= ImageSource.Height; ++y)
+            {
+                double scaledY = y * pixelSize;
+                dc.DrawLine(GridPen, new Point(0, scaledY), new Point(pixelSize * ImageSource.Width, scaledY));
             }
         }
 
@@ -84,7 +97,7 @@ namespace beadmania.UI.Controls
             double scaling = e.Delta > 0 ? ScalingFactor : (1 / ScalingFactor);
             double scaledPixelSize = pixelSize * scaling;
 
-            if (scaledPixelSize * ImageSource.Width < 100 || scaledPixelSize * ImageSource.Height < 100)
+            if (scaling < 1 && (scaledPixelSize * ImageSource.Width < 100 || scaledPixelSize * ImageSource.Height < 100))
                 return;
 
             pixelSize = (int)(pixelSize * scaling);

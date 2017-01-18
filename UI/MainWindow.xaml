@@ -18,6 +18,7 @@
             </MenuItem>
         </Menu>
         <controls:BeadCanvas
+            Margin="5"
             ClipToBounds="True"
             ImageSource="{Binding Bitmap}"
             HorizontalAlignment="Stretch"
