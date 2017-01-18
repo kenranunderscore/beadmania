@@ -11,6 +11,7 @@ namespace beadmania.UI.Controls
     internal class BeadCanvas : Canvas
     {
         private int pixelSize = 10;
+        private const double ScalingFactor = 1.5d;
 
         private static DependencyProperty ImageSourceProp =
             DependencyProperty.Register(
@@ -80,7 +81,12 @@ namespace beadmania.UI.Controls
             if (e.Delta == 0)
                 return;
 
-            double scaling = e.Delta > 0 ? 2d : 0.5d;
+            double scaling = e.Delta > 0 ? ScalingFactor : (1 / ScalingFactor);
+            double scaledPixelSize = pixelSize * scaling;
+
+            if (scaledPixelSize * ImageSource.Width < 100 || scaledPixelSize * ImageSource.Height < 100)
+                return;
+
             pixelSize = (int)(pixelSize * scaling);
             InvalidateVisual();
         }
