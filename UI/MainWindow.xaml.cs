@@ -1,14 +1,17 @@
-﻿using System.Windows;
+﻿using beadmania.UI.General;
+using beadmania.UI.ViewModels;
+using System.Windows;
 
 namespace beadmania.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    internal partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel vm)
         {
+            DataContext = vm;
             InitializeComponent();
         }
     }

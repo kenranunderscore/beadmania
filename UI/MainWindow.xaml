@@ -1,4 +1,5 @@
 ﻿<Window x:Class="beadmania.UI.MainWindow"
+        x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,13 +11,17 @@
         Title="beadmania"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
-    <Window.DataContext>
-        <vm:MainViewModel />
-    </Window.DataContext>
-    <controls:BeadCanvas
-        Background="Transparent"
-        ImageSource="{Binding Bitmap}"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch"
-        ShowGrid="{Binding ShowGrid}" />
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open image" Command="{Binding OpenImageCmd}" />
+            </MenuItem>
+        </Menu>
+        <controls:BeadCanvas
+            ClipToBounds="True"
+            ImageSource="{Binding Bitmap}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ShowGrid="{Binding ShowGrid}" />
+    </DockPanel>
 </Window>

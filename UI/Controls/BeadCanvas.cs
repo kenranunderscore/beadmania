@@ -52,6 +52,9 @@ namespace beadmania.UI.Controls
 
         protected override void OnRender(DrawingContext dc)
         {
+            if (ImageSource == null)
+                return;
+
             for (int x = 0; x < ImageSource.Width; ++x)
             {
                 for (int y = 0; y < ImageSource.Height; ++y)
