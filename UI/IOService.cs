@@ -15,9 +15,14 @@ namespace beadmania.UI
             return File.Open(path, FileMode.Open);
         }
 
-        public string OpenFileDialog(string initialPath)
+        public string ChooseFile(string initialPath)
         {
-            var openFileDialog = new OpenFileDialog { InitialDirectory = initialPath };
+            return ChooseFile(initialPath, null);
+        }
+
+        public string ChooseFile(string initialPath, string filter)
+        {
+            var openFileDialog = new OpenFileDialog { InitialDirectory = initialPath, Filter = filter };
             if (openFileDialog.ShowDialog() == true)
             {
                 return openFileDialog.FileName;

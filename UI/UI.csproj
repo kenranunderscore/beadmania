@@ -61,9 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\BeadCanvas.cs" />
-    <Compile Include="FileSystemService.cs" />
+    <Compile Include="IOService.cs" />
     <Compile Include="GridLineAlignment.cs" />
-    <Compile Include="IFileSystemService.cs" />
+    <Compile Include="IIOService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

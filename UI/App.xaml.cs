@@ -16,7 +16,7 @@ namespace beadmania.UI
             base.OnStartup(e);
 
             ninjectKernel = new StandardKernel();
-            ninjectKernel.Bind<IFileSystemService>().To<FileSystemService>();
+            ninjectKernel.Bind<IIOService>().To<IOService>();
 
             var mainWindow = ninjectKernel.Get<MainWindow>();
             Current.MainWindow = mainWindow;

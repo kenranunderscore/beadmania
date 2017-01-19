@@ -15,7 +15,7 @@ namespace beadmania.UI.ViewModels
         public MainViewModel(IIOService ioService)
         {
             this.ioService = ioService;
-            OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.OpenFileDialog(null));
+            OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
         }
 
         public ICommand OpenImageCmd { get; }
