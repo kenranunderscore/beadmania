@@ -10,7 +10,7 @@ namespace beadmania.UI
             return File.Exists(path);
         }
 
-        public FileStream OpenFile(string path)
+        public Stream OpenFile(string path)
         {
             return File.Open(path, FileMode.Open);
         }
