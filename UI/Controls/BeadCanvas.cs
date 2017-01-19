@@ -97,10 +97,18 @@ namespace beadmania.UI.Controls
             double scaling = e.Delta > 0 ? ScalingFactor : (1 / ScalingFactor);
             double scaledPixelSize = pixelSize * scaling;
 
-            if (scaling < 1 && (scaledPixelSize * ImageSource.Width < 100 || scaledPixelSize * ImageSource.Height < 100))
-                return;
+            if (scaling < 1)
+            {
+                if (scaledPixelSize * ImageSource.Width < 50 || scaledPixelSize * ImageSource.Height < 50)
+                    return;
+            }
+            else
+            {
+                if (scaledPixelSize > 100)
+                    return;
+            }
 
-            pixelSize = (int)(pixelSize * scaling);
+            pixelSize = (int)scaledPixelSize;
             InvalidateVisual();
         }
     }
