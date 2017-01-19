@@ -2,7 +2,7 @@
 using beadmania.UI.ViewModels;
 using System.Windows;
 
-namespace beadmania.UI
+namespace beadmania.UI.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

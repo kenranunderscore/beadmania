@@ -1,4 +1,4 @@
-﻿using beadmania.UI.ViewModels;
+﻿using beadmania.UI.Views;
 using Ninject;
 using System.Windows;
 
