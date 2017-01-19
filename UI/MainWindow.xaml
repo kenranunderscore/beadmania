@@ -14,7 +14,11 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open image" Command="{Binding OpenImageCmd}" />
+                <MenuItem Header="Open image" Command="{Binding OpenImageCmd}">
+                    <MenuItem.Icon>
+                        <Image Source="/Icons/OpenFolder.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <controls:BeadCanvas
