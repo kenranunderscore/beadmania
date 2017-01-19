@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.IO;
-using Microsoft.Win32;
-using System.Drawing;
 
 namespace beadmania.UI
 {
-    internal class FileSystemService : IFileSystemService
+    internal class IOService : IIOService
     {
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
+
         public FileStream OpenFile(string path)
         {
             return File.Open(path, FileMode.Open);

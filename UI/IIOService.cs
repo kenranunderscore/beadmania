@@ -2,9 +2,10 @@
 
 namespace beadmania.UI
 {
-    public interface IFileSystemService
+    public interface IIOService
     {
         string OpenFileDialog(string initialPath);
         FileStream OpenFile(string path);
+        bool FileExists(string path);
     }
 }
