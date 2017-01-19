@@ -6,16 +6,16 @@ namespace beadmania.UI.ViewModels
 {
     internal class MainViewModel : ViewModel
     {
-        private readonly IIOService fileSystemService;
+        private readonly IIOService ioService;
 
         private Bitmap bitmap;
         private bool showGrid = true;
         private string imagePath;
 
-        public MainViewModel(IIOService fileSystemService)
+        public MainViewModel(IIOService ioService)
         {
-            this.fileSystemService = fileSystemService;
-            OpenImageCmd = new RelayCommand(_ => ImagePath = this.fileSystemService.OpenFileDialog(null));
+            this.ioService = ioService;
+            OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.OpenFileDialog(null));
         }
 
         public ICommand OpenImageCmd { get; }
@@ -37,14 +37,14 @@ namespace beadmania.UI.ViewModels
             set
             {
                 SetProperty(ref imagePath, value);
-                if (fileSystemService.FileExists(imagePath))
+                if (ioService.FileExists(imagePath))
                     LoadBitmap();
             }
         }
 
         private void LoadBitmap()
         {
-            using (var fileStream = fileSystemService.OpenFile(ImagePath))
+            using (var fileStream = ioService.OpenFile(ImagePath))
             {
                 bitmap = (Bitmap)Image.FromStream(fileStream);
                 OnPropertyChanged(nameof(Bitmap));
