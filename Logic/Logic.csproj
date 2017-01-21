@@ -7,8 +7,8 @@
     <ProjectGuid>{822F7867-7157-46B3-9827-19891DA5548D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Logic</RootNamespace>
-    <AssemblyName>Logic</AssemblyName>
+    <RootNamespace>beadmania.Logic</RootNamespace>
+    <AssemblyName>beadmania.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
