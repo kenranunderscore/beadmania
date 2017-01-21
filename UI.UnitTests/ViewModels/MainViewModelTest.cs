@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace beadmania.UI.Tests.ViewModels
+namespace beadmania.UI.UnitTests.ViewModels
 {
     [TestClass]
     public class MainViewModelTest

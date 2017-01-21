@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace beadmania.UI.Tests.General
+namespace beadmania.UI.UnitTests.MVVM
 {
     [TestClass]
     public class BaseViewModelTest
