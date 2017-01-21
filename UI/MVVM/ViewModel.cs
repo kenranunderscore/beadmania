@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace beadmania.UI.General
+namespace beadmania.UI.MVVM
 {
     internal abstract class ViewModel : INotifyPropertyChanged
     {

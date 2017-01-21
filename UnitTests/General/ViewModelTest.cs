@@ -1,8 +1,8 @@
-﻿using beadmania.UI.General;
+﻿using beadmania.UI.MVVM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace beadmania.UnitTests.UI.General
+namespace beadmania.UI.Tests.General
 {
     [TestClass]
     public class BaseViewModelTest

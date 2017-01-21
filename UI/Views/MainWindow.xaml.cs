@@ -1,4 +1,4 @@
-﻿using beadmania.UI.General;
+﻿using beadmania.UI.MVVM;
 using beadmania.UI.ViewModels;
 using System.Windows;
 

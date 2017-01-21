@@ -1,12 +1,11 @@
-﻿using beadmania.UI;
-using beadmania.UI.ViewModels;
+﻿using beadmania.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace beadmania.UnitTests.UI.ViewModels
+namespace beadmania.UI.Tests.ViewModels
 {
     [TestClass]
     public class MainViewModelTest

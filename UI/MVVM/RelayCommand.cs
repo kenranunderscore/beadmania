@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace beadmania.UI.General
+namespace beadmania.UI.MVVM
 {
     internal class RelayCommand : ICommand
     {
