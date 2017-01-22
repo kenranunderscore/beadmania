@@ -48,6 +48,13 @@ namespace beadmania.Logic.UnitTests.Math
         }
 
         [TestMethod]
+        public void Two_vectors_with_different_coordinates_are_not_equal()
+        {
+            Vector3D w = new Vector3D(-1d, -1d, -1d);
+            Assert.IsFalse(v.Equals(w));
+        }
+
+        [TestMethod]
         public void Null_is_not_equal_to_a_vector_instance()
         {
             Assert.IsFalse(v.Equals(null));
@@ -91,6 +98,12 @@ namespace beadmania.Logic.UnitTests.Math
         public void Array_constructor_throws_when_dimension_is_wrong()
         {
             Vector3D w = new Vector3D(new double[] { 1d, 2d, 3d, 4d });
+        }
+
+        [TestMethod]
+        public void Array_and_normal_constructors_have_same_result()
+        {
+            Vector3D w = new Vector3D(new double[] { 1d, 2d, 3.5d });
         }
     }
 }

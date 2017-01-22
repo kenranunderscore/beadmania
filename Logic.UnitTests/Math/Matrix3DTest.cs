@@ -55,6 +55,18 @@ namespace beadmania.Logic.UnitTests.Math
         }
 
         [TestMethod]
+        public void Two_matrices_with_different_entries_are_not_equal()
+        {
+            Matrix3D n = new Matrix3D(new double[,]
+            {
+                { -1d, 0d, 0.5d },
+                { 0d, 2d, 0d },
+                { 1d, 1d, 0d }
+            });
+            Assert.IsFalse(m.Equals(n));
+        }
+
+        [TestMethod]
         public void Null_is_not_equal_to_a_matrix_instance()
         {
             Assert.IsFalse(m.Equals(null));
