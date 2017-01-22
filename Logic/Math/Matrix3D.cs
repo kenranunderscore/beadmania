@@ -5,14 +5,14 @@ namespace beadmania.Logic.Math
     public sealed class Matrix3D : IEquatable<Matrix3D>
     {
         private const int Dimension = 3;
-        private readonly double[,] rows;
+        private readonly double[,] entries;
 
-        public Matrix3D(double[,] rows)
+        public Matrix3D(double[,] entries)
         {
-            if (rows.GetLength(0) != Dimension || rows.GetLength(1) != Dimension)
-                throw new ArgumentOutOfRangeException($"{nameof(rows)} must be 3x3");
+            if (entries.GetLength(0) != Dimension || entries.GetLength(1) != Dimension)
+                throw new ArgumentOutOfRangeException($"{nameof(entries)} must be 3x3");
 
-            this.rows = rows;
+            this.entries = entries;
         }
 
         public bool Equals(Matrix3D other)
@@ -24,7 +24,7 @@ namespace beadmania.Logic.Math
             {
                 for (int j = 0; j < Dimension; ++j)
                 {
-                    if (rows[i, j] != other.rows[i, j])
+                    if (entries[i, j] != other.entries[i, j])
                         return false;
                 }
             }
@@ -36,6 +36,22 @@ namespace beadmania.Logic.Math
         {
             var matrix = obj as Matrix3D;
             return Equals(matrix);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                for (int i = 0; i < Dimension; ++i)
+                {
+                    for (int j = 0; j < Dimension; ++j)
+                    {
+                        hash = hash * 486187739 + entries[i, j].GetHashCode();
+                    }
+                }
+                return hash;
+            }
         }
     }
 }

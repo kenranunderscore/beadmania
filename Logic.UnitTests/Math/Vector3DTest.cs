@@ -53,7 +53,7 @@ namespace beadmania.Logic.UnitTests.Math
         }
 
         [TestMethod]
-        public void Two_distinct_references_of_equal_vectors_have_identical_hash_code()
+        public void Two_distinct_references_of_equal_vectors_have_identical_hash_codes()
         {
             Vector3D w = new Vector3D(1d, 2d, 3.5d);
             Assert.IsTrue(v.GetHashCode() == w.GetHashCode());

@@ -59,5 +59,23 @@ namespace beadmania.Logic.UnitTests.Math
         {
             Assert.IsFalse(m.Equals(null));
         }
+
+        [TestMethod]
+        public void A_matrix_is_not_equal_to_instances_of_another_class()
+        {
+            Assert.IsFalse(m.Equals("abc"));
+        }
+
+        [TestMethod]
+        public void Two_distinct_references_of_equal_matrices_have_identical_hash_codes()
+        {
+            Matrix3D n = new Matrix3D(new double[,]
+            {
+                { -1d, 0d, 0.5d },
+                { 0d, 2d, 0d },
+                { 1d, -1d, 0d },
+            });
+            Assert.IsTrue(m.GetHashCode() == n.GetHashCode());
+        }
     }
 }
