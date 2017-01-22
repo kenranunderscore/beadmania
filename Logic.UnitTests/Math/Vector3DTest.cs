@@ -58,5 +58,18 @@ namespace beadmania.Logic.UnitTests.Math
             Vector3D v2 = new Vector3D(1d, 2d, 3.5d);
             Assert.IsTrue(v1.GetHashCode() == v2.GetHashCode());
         }
+
+        [TestMethod]
+        public void A_vector_is_not_equal_to_instances_of_another_class()
+        {
+            Assert.IsFalse(v1.Equals("abc"));
+        }
+
+        [TestMethod]
+        public void Addition_of_two_vectors_adds_coordinates()
+        {
+            Vector3D v2 = new Vector3D(-0.5d, 1d, -4d);
+            Assert.AreEqual(new Vector3D(0.5d, 3d, -0.5d), v1 + v2);
+        }
     }
 }

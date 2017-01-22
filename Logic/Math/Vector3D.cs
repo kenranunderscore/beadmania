@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace beadmania.Logic.Math
 {
-    public class Vector3D : IEquatable<Vector3D>
+    public sealed class Vector3D : IEquatable<Vector3D>
     {
         private const int Dimensions = 3;
         private const string RepresentationMask = "x={0};y={1};z={2}";
@@ -20,6 +20,11 @@ namespace beadmania.Logic.Math
         public double Y => points[1];
         public double Z => points[2];
 
+        public static Vector3D operator +(Vector3D v1, Vector3D v2)
+        {
+            return new Vector3D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
+        }
+
         public override string ToString()
         {
             return string.Format(CultureInfo.InvariantCulture, RepresentationMask, X, Y, Z);
@@ -35,7 +40,11 @@ namespace beadmania.Logic.Math
 
         public override bool Equals(object obj)
         {
-            return Equals((Vector3D)obj);
+            var vector = obj as Vector3D;
+            if (vector == null)
+                return false;
+
+            return Equals(vector);
         }
 
         public override int GetHashCode()
