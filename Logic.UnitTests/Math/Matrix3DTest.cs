@@ -95,5 +95,35 @@ namespace beadmania.Logic.UnitTests.Math
             });
             Assert.AreEqual(expected, m + n);
         }
+
+        [TestMethod]
+        public void Subtraction_of_matrices_subtracts_entries()
+        {
+            Matrix3D n = new Matrix3D(new double[,]
+            {
+                { 1d, 1d, 1d },
+                { 1d, 1d, 1d },
+                { 1d, 1d, 1d }
+            });
+            Matrix3D expected = new Matrix3D(new double[,]
+            {
+                { -2d, -1d, -0.5d },
+                { -1d, 1d, -1d },
+                { 0d, -2d, -1d }
+            });
+            Assert.AreEqual(expected, m - n);
+        }
+
+        [TestMethod]
+        public void Scalar_multiplication_works_entry_wise()
+        {
+            Matrix3D expected = new Matrix3D(new double[,]
+            {
+                { -0.5d, 0d, 0.25d },
+                { 0d, 1d, 0d },
+                { 0.5d, -0.5d, 0d }
+            });
+            Assert.AreEqual(expected, 0.5d * m);
+        }
     }
 }
