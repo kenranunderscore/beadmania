@@ -125,5 +125,12 @@ namespace beadmania.Logic.UnitTests.Math
             });
             Assert.AreEqual(expected, 0.5d * m);
         }
+
+        [TestMethod]
+        public void Matrix_vector_multiplication_produces_correct_result()
+        {
+            Vector3D v = new Vector3D(3d, 2d, 1d);
+            Assert.AreEqual(new Vector3D(-2.5d, 4d, 1d), m * v);
+        }
     }
 }

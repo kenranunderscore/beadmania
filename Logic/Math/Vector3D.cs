@@ -7,18 +7,26 @@ namespace beadmania.Logic.Math
     {
         private const int Dimensions = 3;
         private const string RepresentationMask = "x={0};y={1};z={2}";
-        private readonly double[] points = new double[Dimensions];
+        private readonly double[] coordinates;
 
         public Vector3D(double x, double y, double z)
         {
-            points[0] = x;
-            points[1] = y;
-            points[2] = z;
+            coordinates = new double[] { x, y, z };
         }
 
-        public double X => points[0];
-        public double Y => points[1];
-        public double Z => points[2];
+        public Vector3D(double[] coordinates)
+        {
+            if (coordinates.Length != 3)
+                throw new ArgumentOutOfRangeException("Array length must be 3");
+
+            this.coordinates = (double[])coordinates.Clone();
+        }
+
+        public double X => coordinates[0];
+
+        public double Y => coordinates[1];
+
+        public double Z => coordinates[2];
 
         public static Vector3D operator *(double factor, Vector3D v)
         {

@@ -1,5 +1,6 @@
 ﻿using beadmania.Logic.Math;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace beadmania.Logic.UnitTests.Math
 {
@@ -83,6 +84,13 @@ namespace beadmania.Logic.UnitTests.Math
         public void Scalar_multiplication_works_coordinate_wise()
         {
             Assert.AreEqual(new Vector3D(-2d, -4d, -7d), (-2d) * v);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Array_constructor_throws_when_dimension_is_wrong()
+        {
+            Vector3D w = new Vector3D(new double[] { 1d, 2d, 3d, 4d });
         }
     }
 }

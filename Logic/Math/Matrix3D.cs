@@ -28,6 +28,19 @@ namespace beadmania.Logic.Math
             return new Matrix3D(resultEntries);
         }
 
+        public static Vector3D operator *(Matrix3D m, Vector3D v)
+        {
+            var coordinates = new double[Dimension];
+            for (int i = 0; i < Dimension; ++i)
+            {
+                coordinates[i] =
+                    m.entries[i, 0] * v.X
+                    + m.entries[i, 1] * v.Y
+                    + m.entries[i, 2] * v.Z;
+            }
+            return new Vector3D(coordinates[0], coordinates[1], coordinates[2]);
+        }
+
         public static Matrix3D operator +(Matrix3D m1, Matrix3D m2)
         {
             var resultEntries = new double[Dimension, Dimension];
