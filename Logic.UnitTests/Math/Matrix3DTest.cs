@@ -29,5 +29,17 @@ namespace beadmania.Logic.UnitTests.Math
             var array = new double[3, 7];
             Matrix3D matrix = new Matrix3D(array);
         }
+
+        [TestMethod]
+        public void Two_matrices_are_equal_if_all_their_entries_coincide()
+        {
+            Matrix3D n = new Matrix3D(new double[,]
+            {
+                { -1d, 0d, 0.5d },
+                { 0d, 2d, 0d },
+                { 1d, -1d, 0d },
+            });
+            Assert.IsTrue(m.Equals(n));
+        }
     }
 }
