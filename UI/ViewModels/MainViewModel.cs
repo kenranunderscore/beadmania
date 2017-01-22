@@ -1,4 +1,5 @@
 ﻿using beadmania.UI.MVVM;
+using beadmania.UI.Services;
 using System.Drawing;
 using System.Windows.Input;
 

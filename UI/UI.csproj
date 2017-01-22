@@ -61,9 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\BeadCanvas.cs" />
-    <Compile Include="IOService.cs" />
+    <Compile Include="Services\IOService.cs" />
     <Compile Include="GridLineAlignment.cs" />
-    <Compile Include="IIOService.cs" />
+    <Compile Include="Services\IIOService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +111,7 @@
   <ItemGroup>
     <Resource Include="Icons\OpenFolder.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,5 @@
-﻿using beadmania.UI.ViewModels;
+﻿using beadmania.UI.Services;
+using beadmania.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Drawing;

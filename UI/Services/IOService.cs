@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.IO;
 
-namespace beadmania.UI
+namespace beadmania.UI.Services
 {
     internal class IOService : IIOService
     {

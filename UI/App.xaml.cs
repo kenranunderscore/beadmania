@@ -1,4 +1,5 @@
-﻿using beadmania.UI.Views;
+﻿using beadmania.UI.Services;
+using beadmania.UI.Views;
 using Ninject;
 using System.Windows;
 
