@@ -11,7 +11,7 @@ namespace beadmania.Logic.UnitTests.Math
         {
             { -1d, 0d, 0.5d },
             { 0d, 2d, 0d },
-            { 1d, -1d, 0d },
+            { 1d, -1d, 0d }
         });
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace beadmania.Logic.UnitTests.Math
             {
                 { -1d, 0d, 0.5d },
                 { 0d, 2d, 0d },
-                { 1d, -1d, 0d },
+                { 1d, -1d, 0d }
             });
             Assert.IsTrue(m.Equals(n));
         }
@@ -49,7 +49,7 @@ namespace beadmania.Logic.UnitTests.Math
             {
                 { -1d, 0d, 0.5d },
                 { 0d, 2d, 0d },
-                { 1d, -1d, 0d },
+                { 1d, -1d, 0d }
             });
             Assert.IsTrue(Equals(m, n));
         }
@@ -73,9 +73,27 @@ namespace beadmania.Logic.UnitTests.Math
             {
                 { -1d, 0d, 0.5d },
                 { 0d, 2d, 0d },
-                { 1d, -1d, 0d },
+                { 1d, -1d, 0d }
             });
             Assert.IsTrue(m.GetHashCode() == n.GetHashCode());
+        }
+
+        [TestMethod]
+        public void Addition_of_matrices_adds_entries()
+        {
+            Matrix3D n = new Matrix3D(new double[,]
+            {
+                { 1d, 1d, 1d },
+                { 1d, 1d, 1d },
+                { 1d, 1d, 1d }
+            });
+            Matrix3D expected = new Matrix3D(new double[,]
+            {
+                { 0d, 1d, 1.5d },
+                { 1d, 3d, 1d },
+                { 2d, 0d, 1d }
+            });
+            Assert.AreEqual(expected, m + n);
         }
     }
 }

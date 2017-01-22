@@ -15,6 +15,19 @@ namespace beadmania.Logic.Math
             this.entries = entries;
         }
 
+        public static Matrix3D operator +(Matrix3D m1, Matrix3D m2)
+        {
+            var resultEntries = new double[Dimension, Dimension];
+            for (int i = 0; i < Dimension; ++i)
+            {
+                for (int j = 0; j < Dimension; ++j)
+                {
+                    resultEntries[i, j] = m1.entries[i, j] + m2.entries[i, j];
+                }
+            }
+            return new Matrix3D(resultEntries);
+        }
+
         public bool Equals(Matrix3D other)
         {
             if (other == null)
