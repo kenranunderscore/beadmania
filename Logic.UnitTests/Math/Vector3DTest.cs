@@ -47,7 +47,7 @@ namespace beadmania.Logic.UnitTests.Math
         }
 
         [TestMethod]
-        public void Null_is_not_equal_to_an_instance()
+        public void Null_is_not_equal_to_a_vector_instance()
         {
             Assert.IsFalse(v.Equals(null));
         }

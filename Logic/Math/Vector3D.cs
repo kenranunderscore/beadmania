@@ -51,9 +51,6 @@ namespace beadmania.Logic.Math
         public override bool Equals(object obj)
         {
             var vector = obj as Vector3D;
-            if (vector == null)
-                return false;
-
             return Equals(vector);
         }
 

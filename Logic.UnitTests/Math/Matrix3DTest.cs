@@ -41,5 +41,23 @@ namespace beadmania.Logic.UnitTests.Math
             });
             Assert.IsTrue(m.Equals(n));
         }
+
+        [TestMethod]
+        public void Two_matrices_are_object_equal_if_all_their_entries_coincide()
+        {
+            Matrix3D n = new Matrix3D(new double[,]
+            {
+                { -1d, 0d, 0.5d },
+                { 0d, 2d, 0d },
+                { 1d, -1d, 0d },
+            });
+            Assert.IsTrue(Equals(m, n));
+        }
+
+        [TestMethod]
+        public void Null_is_not_equal_to_a_matrix_instance()
+        {
+            Assert.IsFalse(m.Equals(null));
+        }
     }
 }

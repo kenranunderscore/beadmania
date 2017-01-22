@@ -17,6 +17,9 @@ namespace beadmania.Logic.Math
 
         public bool Equals(Matrix3D other)
         {
+            if (other == null)
+                return false;
+
             for (int i = 0; i < Dimension; ++i)
             {
                 for (int j = 0; j < Dimension; ++j)
@@ -27,6 +30,12 @@ namespace beadmania.Logic.Math
             }
 
             return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var matrix = obj as Matrix3D;
+            return Equals(matrix);
         }
     }
 }
