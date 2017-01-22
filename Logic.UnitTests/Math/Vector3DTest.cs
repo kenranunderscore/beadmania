@@ -51,5 +51,12 @@ namespace beadmania.Logic.UnitTests.Math
         {
             Assert.IsFalse(v1.Equals(null));
         }
+
+        [TestMethod]
+        public void Two_distinct_references_of_equal_vectors_have_identical_hash_code()
+        {
+            Vector3D v2 = new Vector3D(1d, 2d, 3.5d);
+            Assert.IsTrue(v1.GetHashCode() == v2.GetHashCode());
+        }
     }
 }

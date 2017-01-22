@@ -37,5 +37,17 @@ namespace beadmania.Logic.Math
         {
             return Equals((Vector3D)obj);
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 486187739 + X.GetHashCode();
+                hash = hash * 486187739 + Y.GetHashCode();
+                hash = hash * 486187739 + Z.GetHashCode();
+                return hash;
+            }
+        }
     }
 }
