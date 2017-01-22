@@ -20,9 +20,19 @@ namespace beadmania.Logic.Math
         public double Y => points[1];
         public double Z => points[2];
 
+        public static Vector3D operator *(double factor, Vector3D v)
+        {
+            return new Vector3D(factor * v.X, factor * v.Y, factor * v.Z);
+        }
+
         public static Vector3D operator +(Vector3D v1, Vector3D v2)
         {
             return new Vector3D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
+        }
+
+        public static Vector3D operator -(Vector3D v1, Vector3D v2)
+        {
+            return v1 + (-1d) * v2;
         }
 
         public override string ToString()

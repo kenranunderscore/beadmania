@@ -71,5 +71,18 @@ namespace beadmania.Logic.UnitTests.Math
             Vector3D v2 = new Vector3D(-0.5d, 1d, -4d);
             Assert.AreEqual(new Vector3D(0.5d, 3d, -0.5d), v1 + v2);
         }
+
+        [TestMethod]
+        public void Subtraction_of_two_vectors_subtracts_coordinates()
+        {
+            Vector3D v2 = new Vector3D(-0.5d, 1d, -4d);
+            Assert.AreEqual(new Vector3D(1.5d, 1d, 7.5d), v1 - v2);
+        }
+
+        [TestMethod]
+        public void Scalar_multiplication_works_coordinate_wise()
+        {
+            Assert.AreEqual(new Vector3D(-2d, -4d, -7d), (-2d) * v1);
+        }
     }
 }
