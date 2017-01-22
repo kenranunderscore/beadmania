@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace beadmania.UI.MVVM
 {
-    internal abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         protected bool SetProperty<T>(ref T backingField, T value, [CallerMemberName]string propertyName = "")
         {

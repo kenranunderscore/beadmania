@@ -61,10 +61,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\BeadCanvas.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IOService.cs" />
     <Compile Include="GridLineAlignment.cs" />
     <Compile Include="Services\IIOService.cs" />
+    <Compile Include="ViewModels\ColorPaletteEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Page Include="Views\ColorPaletteEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +82,9 @@
     </Compile>
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />
+    <Compile Include="Views\ColorPaletteEditor.xaml.cs">
+      <DependentUpon>ColorPaletteEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

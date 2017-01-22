@@ -1,6 +1,14 @@
 ﻿<Application x:Class="beadmania.UI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:beadmania.UI">
-    <Application.Resources />
+             xmlns:views="clr-namespace:beadmania.UI.Views"
+             xmlns:viewModels="clr-namespace:beadmania.UI.ViewModels">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type viewModels:ColorPaletteEditorViewModel}">
+            <views:ColorPaletteEditor />
+        </DataTemplate>
+
+        <!-- Dummy style to work around a WPF resource bug -->
+        <Style TargetType="{x:Type Rectangle}" x:Key="DummyStyle" />
+    </Application.Resources>
 </Application>
