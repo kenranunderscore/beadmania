@@ -31,5 +31,25 @@ namespace beadmania.Logic.UnitTests.Math
         {
             Assert.AreEqual("x=1;y=2;z=3.5", v1.ToString());
         }
+
+        [TestMethod]
+        public void Two_vectors_are_equal_if_their_coordinates_coincide()
+        {
+            Vector3D v2 = new Vector3D(1d, 2d, 3.5d);
+            Assert.IsTrue(v1.Equals(v2));
+        }
+
+        [TestMethod]
+        public void Two_vectors_are_object_equal_if_their_coordinates_coincide()
+        {
+            Vector3D v2 = new Vector3D(1d, 2d, 3.5d);
+            Assert.IsTrue(Equals(v1, v2));
+        }
+
+        [TestMethod]
+        public void Null_is_not_equal_to_an_instance()
+        {
+            Assert.IsFalse(v1.Equals(null));
+        }
     }
 }

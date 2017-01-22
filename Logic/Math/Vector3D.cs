@@ -1,8 +1,9 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace beadmania.Logic.Math
 {
-    public class Vector3D
+    public class Vector3D : IEquatable<Vector3D>
     {
         private const int Dimensions = 3;
         private const string RepresentationMask = "x={0};y={1};z={2}";
@@ -22,6 +23,19 @@ namespace beadmania.Logic.Math
         public override string ToString()
         {
             return string.Format(CultureInfo.InvariantCulture, RepresentationMask, X, Y, Z);
+        }
+
+        public bool Equals(Vector3D other)
+        {
+            if (other == null)
+                return false;
+
+            return X == other.X && Y == other.Y && Z == other.Z;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals((Vector3D)obj);
         }
     }
 }
