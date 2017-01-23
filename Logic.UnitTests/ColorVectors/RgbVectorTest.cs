@@ -17,5 +17,19 @@ namespace beadmania.Logic.UnitTests.ColorVectors
         {
             RgbVector rgb = new RgbVector(-1d, 25d, 0d);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Negative_G_value_throws()
+        {
+            RgbVector rgb = new RgbVector(31d, -5d, 0d);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Negative_B_value_throws()
+        {
+            RgbVector rgb = new RgbVector(31d, 5d, -200d);
+        }
     }
 }
