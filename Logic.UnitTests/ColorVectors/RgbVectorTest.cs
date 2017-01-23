@@ -31,5 +31,26 @@ namespace beadmania.Logic.UnitTests.ColorVectors
         {
             RgbVector rgb = new RgbVector(31d, 5d, -200d);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void R_value_greater_than_255_throws()
+        {
+            RgbVector rgb = new RgbVector(256d, 5d, 3d);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void G_value_greater_than_255_throws()
+        {
+            RgbVector rgb = new RgbVector(6d, 256d, 3d);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void B_value_greater_than_255_throws()
+        {
+            RgbVector rgb = new RgbVector(0d, 0d, 2574d);
+        }
     }
 }
