@@ -1,5 +1,6 @@
 ﻿using beadmania.Logic.Math;
 using System;
+using System.Drawing;
 
 namespace beadmania.Logic.ColorVectors
 {
@@ -13,6 +14,11 @@ namespace beadmania.Logic.ColorVectors
         {
             if (IsOutOfRange(r) || IsOutOfRange(g) || IsOutOfRange(b))
                 throw new ArgumentOutOfRangeException();
+        }
+
+        public RgbVector(Color color)
+            : base(color.R, color.G, color.B)
+        {
         }
 
         private static bool IsOutOfRange(double val) => val < MinValue || val > MaxValue;

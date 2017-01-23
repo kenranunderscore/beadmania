@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,27 @@ namespace beadmania.Logic.UnitTests.ColorVectors
         public void B_value_greater_than_255_throws()
         {
             RgbVector rgb = new RgbVector(0d, 0d, 2574d);
+        }
+
+        [TestMethod]
+        public void Constructing_from_color_keeps_R_value()
+        {
+            RgbVector rgb = new RgbVector(Color.FromArgb(0, 3, 5));
+            Assert.AreEqual(0, rgb.X);
+        }
+
+        [TestMethod]
+        public void Constructing_from_color_keeps_G_value()
+        {
+            RgbVector rgb = new RgbVector(Color.FromArgb(0, 3, 5));
+            Assert.AreEqual(3, rgb.Y);
+        }
+
+        [TestMethod]
+        public void Constructing_from_color_keeps_B_value()
+        {
+            RgbVector rgb = new RgbVector(Color.FromArgb(0, 3, 5));
+            Assert.AreEqual(5, rgb.Z);
         }
     }
 }
