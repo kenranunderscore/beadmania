@@ -17,7 +17,7 @@ namespace beadmania.Logic.ColorVectors
         }
 
         public RgbVector(Color color)
-            : base(color.R, color.G, color.B)
+            : this(color.R, color.G, color.B)
         {
         }
 
