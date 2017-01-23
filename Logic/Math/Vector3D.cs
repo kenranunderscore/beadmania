@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace beadmania.Logic.Math
 {
-    public sealed class Vector3D : IEquatable<Vector3D>
+    public class Vector3D : IEquatable<Vector3D>
     {
         private const int Dimensions = 3;
         private const string RepresentationMask = "x={0};y={1};z={2}";
