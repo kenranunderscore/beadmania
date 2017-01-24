@@ -1,13 +1,13 @@
 ﻿using beadmania.UI.MVVM;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 
 namespace beadmania.UI.UnitTests.MVVM
 {
-    [TestClass]
+    [TestFixture]
     public class RelayCommandTest
     {
-        [TestMethod]
+        [Test]
         public void Execute_executes_registered_logic()
         {
             int count = -1;
@@ -16,18 +16,18 @@ namespace beadmania.UI.UnitTests.MVVM
             Assert.AreEqual(3, count);
         }
 
-        [TestMethod]
+        [Test]
         public void Can_execute_if_no_predicate_is_specified()
         {
             RelayCommand cmd = new RelayCommand(_ => { });
             Assert.IsTrue(cmd.CanExecute(new object()));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void Constructor_throws_if_no_action_is_specified()
         {
-            RelayCommand cmd = new RelayCommand(null);
+            Action create = () => new RelayCommand(null);
+            Assert.Throws<ArgumentNullException>(new TestDelegate(create));
         }
     }
 }

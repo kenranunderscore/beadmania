@@ -1,17 +1,17 @@
 ﻿using beadmania.UI.Services;
 using beadmania.UI.ViewModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
 namespace beadmania.UI.UnitTests.ViewModels
 {
-    [TestClass]
+    [TestFixture]
     public class MainViewModelTest
     {
-        [TestMethod]
+        [Test]
         public void Grid_is_shown_by_default()
         {
             var ioService = new Mock<IIOService>().Object;
@@ -19,7 +19,7 @@ namespace beadmania.UI.UnitTests.ViewModels
             Assert.IsTrue(vm.ShowGrid);
         }
 
-        [TestMethod]
+        [Test]
         public void Can_toggle_grid_visibility()
         {
             var ioService = new Mock<IIOService>().Object;
@@ -28,7 +28,7 @@ namespace beadmania.UI.UnitTests.ViewModels
             Assert.IsFalse(vm.ShowGrid);
         }
 
-        [TestMethod]
+        [Test]
         public void Changing_image_path_reloads_image_if_path_exists()
         {
             string path = "foo.bar";
@@ -46,7 +46,7 @@ namespace beadmania.UI.UnitTests.ViewModels
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Setting_image_path_to_nonexistent_file_does_not_load_image()
         {
             var ioServiceMock = new Mock<IIOService>();
@@ -56,7 +56,7 @@ namespace beadmania.UI.UnitTests.ViewModels
             ioServiceMock.Verify(_ => _.OpenFile(It.IsAny<string>()), Times.Never());
         }
 
-        [TestMethod]
+        [Test]
         public void Opening_image_triggers_open_file_dialog()
         {
             var ioServiceMock = new Mock<IIOService>();
@@ -65,7 +65,7 @@ namespace beadmania.UI.UnitTests.ViewModels
             ioServiceMock.Verify(_ => _.ChooseFile(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public void Opening_image_sets_image_path()
         {
             var ioServiceMock = new Mock<IIOService>();

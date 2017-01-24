@@ -1,10 +1,10 @@
 ﻿using beadmania.Logic.Math;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 
 namespace beadmania.Logic.UnitTests.Math
 {
-    [TestClass]
+    [TestFixture]
     public class Matrix3DTest
     {
         private Matrix3D m = new Matrix3D(new double[,]
@@ -14,23 +14,23 @@ namespace beadmania.Logic.UnitTests.Math
             { 1d, -1d, 0d }
         });
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Test]
         public void Constructor_throws_if_first_dimension_is_not_3()
         {
             var array = new double[2, 3];
-            Matrix3D matrix = new Matrix3D(array);
+            Action create = () => new Matrix3D(array);
+            Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Test]
         public void Constructor_throws_if_second_dimension_is_not_3()
         {
             var array = new double[3, 7];
-            Matrix3D matrix = new Matrix3D(array);
+            Action create = () => new Matrix3D(array);
+            Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
         }
 
-        [TestMethod]
+        [Test]
         public void Two_matrices_are_equal_if_all_their_entries_coincide()
         {
             Matrix3D n = new Matrix3D(new double[,]
@@ -42,7 +42,7 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.IsTrue(m.Equals(n));
         }
 
-        [TestMethod]
+        [Test]
         public void Two_matrices_are_object_equal_if_all_their_entries_coincide()
         {
             Matrix3D n = new Matrix3D(new double[,]
@@ -54,7 +54,7 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.IsTrue(Equals(m, n));
         }
 
-        [TestMethod]
+        [Test]
         public void Two_matrices_with_different_entries_are_not_equal()
         {
             Matrix3D n = new Matrix3D(new double[,]
@@ -66,19 +66,19 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.IsFalse(m.Equals(n));
         }
 
-        [TestMethod]
+        [Test]
         public void Null_is_not_equal_to_a_matrix_instance()
         {
             Assert.IsFalse(m.Equals(null));
         }
 
-        [TestMethod]
+        [Test]
         public void A_matrix_is_not_equal_to_instances_of_another_class()
         {
             Assert.IsFalse(m.Equals("abc"));
         }
 
-        [TestMethod]
+        [Test]
         public void Two_distinct_references_of_equal_matrices_have_identical_hash_codes()
         {
             Matrix3D n = new Matrix3D(new double[,]
@@ -90,7 +90,7 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.IsTrue(m.GetHashCode() == n.GetHashCode());
         }
 
-        [TestMethod]
+        [Test]
         public void Addition_of_matrices_adds_entries()
         {
             Matrix3D n = new Matrix3D(new double[,]
@@ -108,7 +108,7 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.AreEqual(expected, m + n);
         }
 
-        [TestMethod]
+        [Test]
         public void Subtraction_of_matrices_subtracts_entries()
         {
             Matrix3D n = new Matrix3D(new double[,]
@@ -126,7 +126,7 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.AreEqual(expected, m - n);
         }
 
-        [TestMethod]
+        [Test]
         public void Scalar_multiplication_works_entry_wise()
         {
             Matrix3D expected = new Matrix3D(new double[,]
@@ -138,7 +138,7 @@ namespace beadmania.Logic.UnitTests.Math
             Assert.AreEqual(expected, 0.5d * m);
         }
 
-        [TestMethod]
+        [Test]
         public void Matrix_vector_multiplication_produces_correct_result()
         {
             Vector3D v = new Vector3D(3d, 2d, 1d);

@@ -1,16 +1,16 @@
 ﻿using beadmania.UI.MVVM;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Reflection;
 
 namespace beadmania.UI.UnitTests.MVVM
 {
-    [TestClass]
+    [TestFixture]
     public class BaseViewModelTest
     {
         private static readonly MethodInfo SetPropertyHandle
             = typeof(ViewModel).GetMethod("SetProperty", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        [TestMethod]
+        [Test]
         public void SetProperty_sets_value_for_reference_types()
         {
             Bar bar = new Bar();
@@ -22,7 +22,7 @@ namespace beadmania.UI.UnitTests.MVVM
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void SetProperty_does_nothing_if_references_are_identical_for_reference_types()
         {
             Bar bar = new Bar();
@@ -34,7 +34,7 @@ namespace beadmania.UI.UnitTests.MVVM
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void SetProperty_does_nothing_if_values_are_identical_for_value_types()
         {
             TestViewModel vm = new TestViewModel
@@ -45,7 +45,7 @@ namespace beadmania.UI.UnitTests.MVVM
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void SetProperty_sets_value_for_value_types()
         {
             TestViewModel vm = new TestViewModel
@@ -56,7 +56,7 @@ namespace beadmania.UI.UnitTests.MVVM
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void SetProperty_notifies_that_property_changed()
         {
             TestViewModel vm = new TestViewModel();
