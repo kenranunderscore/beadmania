@@ -11,42 +11,42 @@ namespace beadmania.Logic.UnitTests.ColorVectors
         [Test]
         public void Negative_R_value_throws()
         {
-            Action construct = () => new RgbVector(-1d, 25d, 0d);
+            Action construct = () => new RgbVector(-1, 25, 0);
             Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(construct));
         }
 
         [Test]
         public void Negative_G_value_throws()
         {
-            Action construct = () => new RgbVector(31d, -5d, 0d);
+            Action construct = () => new RgbVector(31, -5, 0);
             Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(construct));
         }
 
         [Test]
         public void Negative_B_value_throws()
         {
-            Action construct = () => new RgbVector(31d, 5d, -200d);
+            Action construct = () => new RgbVector(31, 5, -200);
             Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(construct));
         }
 
         [Test]
         public void R_value_greater_than_255_throws()
         {
-            Action create = () => new RgbVector(256d, 5d, 3d);
+            Action create = () => new RgbVector(256, 5, 3);
             Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
         }
 
         [Test]
         public void G_value_greater_than_255_throws()
         {
-            Action create = () => new RgbVector(6d, 256d, 3d);
+            Action create = () => new RgbVector(6, 256, 3);
             Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
         }
 
         [Test]
         public void B_value_greater_than_255_throws()
         {
-            Action create = () => new RgbVector(0d, 0d, 2574d);
+            Action create = () => new RgbVector(0, 0, 2574);
             Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
         }
 

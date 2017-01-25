@@ -4,12 +4,12 @@ using System.Drawing;
 
 namespace beadmania.Logic.ColorVectors
 {
-    public class RgbVector : Vector3D
+    public sealed class RgbVector : Vector3D
     {
-        private const double MinValue = 0d;
-        private const double MaxValue = 255d;
+        private const int MinValue = 0;
+        private const int MaxValue = 255;
 
-        public RgbVector(double r, double g, double b)
+        public RgbVector(int r, int g, int b)
             : base(r, g, b)
         {
             if (IsOutOfRange(r) || IsOutOfRange(g) || IsOutOfRange(b))
