@@ -18,16 +18,14 @@ namespace beadmania.Logic.UnitTests.Math
         public void Constructor_throws_if_first_dimension_is_not_3()
         {
             var array = new double[2, 3];
-            Action create = () => new Matrix3D(array);
-            Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
+            Assert.That(() => new Matrix3D(array), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
         public void Constructor_throws_if_second_dimension_is_not_3()
         {
             var array = new double[3, 7];
-            Action create = () => new Matrix3D(array);
-            Assert.Throws<ArgumentOutOfRangeException>(new TestDelegate(create));
+            Assert.That(() => new Matrix3D(array), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -39,7 +37,7 @@ namespace beadmania.Logic.UnitTests.Math
                 { 0d, 2d, 0d },
                 { 1d, -1d, 0d }
             });
-            Assert.IsTrue(m.Equals(n));
+            Assert.That(m.Equals(n));
         }
 
         [Test]
@@ -51,7 +49,7 @@ namespace beadmania.Logic.UnitTests.Math
                 { 0d, 2d, 0d },
                 { 1d, -1d, 0d }
             });
-            Assert.IsTrue(Equals(m, n));
+            Assert.That(m.Equals((object)n));
         }
 
         [Test]
@@ -63,19 +61,19 @@ namespace beadmania.Logic.UnitTests.Math
                 { 0d, 2d, 0d },
                 { 1d, 1d, 0d }
             });
-            Assert.IsFalse(m.Equals(n));
+            Assert.That(m, Is.Not.EqualTo(n));
         }
 
         [Test]
         public void Null_is_not_equal_to_a_matrix_instance()
         {
-            Assert.IsFalse(m.Equals(null));
+            Assert.That(m, Is.Not.EqualTo(null));
         }
 
         [Test]
         public void A_matrix_is_not_equal_to_instances_of_another_class()
         {
-            Assert.IsFalse(m.Equals("abc"));
+            Assert.That(m, Is.Not.EqualTo("abc"));
         }
 
         [Test]
@@ -87,7 +85,7 @@ namespace beadmania.Logic.UnitTests.Math
                 { 0d, 2d, 0d },
                 { 1d, -1d, 0d }
             });
-            Assert.IsTrue(m.GetHashCode() == n.GetHashCode());
+            Assert.That(n.GetHashCode(), Is.EqualTo(n.GetHashCode()));
         }
 
         [Test]
@@ -105,7 +103,7 @@ namespace beadmania.Logic.UnitTests.Math
                 { 1d, 3d, 1d },
                 { 2d, 0d, 1d }
             });
-            Assert.AreEqual(expected, m + n);
+            Assert.That(m + n, Is.EqualTo(expected));
         }
 
         [Test]
@@ -123,7 +121,7 @@ namespace beadmania.Logic.UnitTests.Math
                 { -1d, 1d, -1d },
                 { 0d, -2d, -1d }
             });
-            Assert.AreEqual(expected, m - n);
+            Assert.That(m - n, Is.EqualTo(expected));
         }
 
         [Test]
@@ -135,14 +133,14 @@ namespace beadmania.Logic.UnitTests.Math
                 { 0d, 1d, 0d },
                 { 0.5d, -0.5d, 0d }
             });
-            Assert.AreEqual(expected, 0.5d * m);
+            Assert.That(0.5d * m, Is.EqualTo(expected));
         }
 
         [Test]
         public void Matrix_vector_multiplication_produces_correct_result()
         {
             Vector3D v = new Vector3D(3d, 2d, 1d);
-            Assert.AreEqual(new Vector3D(-2.5d, 4d, 1d), m * v);
+            Assert.That(m * v, Is.EqualTo(new Vector3D(-2.5d, 4d, 1d)));
         }
     }
 }
