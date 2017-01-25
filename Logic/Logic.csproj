@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorSpaceConverters\RgbToXyzConverter.cs" />
     <Compile Include="ColorVectors\LabVector.cs" />
     <Compile Include="ColorVectors\RgbVector.cs" />
     <Compile Include="ColorVectors\XyzVector.cs" />

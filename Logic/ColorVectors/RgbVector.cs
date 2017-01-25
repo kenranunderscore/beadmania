@@ -21,6 +21,11 @@ namespace beadmania.Logic.ColorVectors
         {
         }
 
+        public XyzVector ToXyz()
+        {
+            return null;
+        }
+
         private static bool IsOutOfRange(double val) => val < MinValue || val > MaxValue;
     }
 }

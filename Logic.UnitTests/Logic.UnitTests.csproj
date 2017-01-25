@@ -51,6 +51,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ColorSpaceConverters\RgbToXyzConverterTest.cs" />
+    <Compile Include="ColorVectors\LabVectorTest.cs" />
     <Compile Include="ColorVectors\RgbVectorTest.cs" />
     <Compile Include="ColorVectors\XyzVectorTest.cs" />
     <Compile Include="Math\Matrix3DTest.cs" />
@@ -66,6 +68,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
