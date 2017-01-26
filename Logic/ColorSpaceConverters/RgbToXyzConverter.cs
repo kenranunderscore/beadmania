@@ -3,7 +3,7 @@ using beadmania.Logic.Math;
 
 namespace beadmania.Logic.ColorSpaceConverters
 {
-    internal class RgbToXyzConverter
+    internal sealed class RgbToXyzConverter
     {
         private static readonly Matrix3D transformation
             = new Matrix3D(new double[,]
