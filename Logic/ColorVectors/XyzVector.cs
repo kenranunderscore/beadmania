@@ -1,4 +1,5 @@
-﻿using beadmania.Logic.Math;
+﻿using beadmania.Logic.ColorSpaceConverters;
+using beadmania.Logic.Math;
 
 namespace beadmania.Logic.ColorVectors
 {
@@ -7,6 +8,11 @@ namespace beadmania.Logic.ColorVectors
         public XyzVector(double x, double y, double z)
             : base(x, y, z)
         {
+        }
+
+        public LabVector ToLab()
+        {
+            return new XyzToLabConverter().Convert(this);
         }
     }
 }
