@@ -9,7 +9,7 @@ namespace beadmania.Logic.UnitTests.ColorSpaceConverters
     public class RgbToXyzConverterTest
     {
         [Test]
-        public void Black_is_converted_to_xyz_correctly()
+        public void Black_is_converted_correctly()
         {
             RgbVector black = new RgbVector(Color.Black);
             RgbToXyzConverter converter = new RgbToXyzConverter();
@@ -18,7 +18,7 @@ namespace beadmania.Logic.UnitTests.ColorSpaceConverters
         }
 
         [Test]
-        public void White_is_converted_to_xyz_correctly()
+        public void White_is_converted_correctly()
         {
             RgbVector white = new RgbVector(Color.White);
             RgbToXyzConverter converter = new RgbToXyzConverter();

@@ -33,9 +33,12 @@ bld/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-# NUNIT
+# NUnit
 *.VisualState.xml
 TestResult.xml
+
+# OpenCover
+OpenCover/
 
 # Build Results of an ATL Project
 [Dd]ebugPS/

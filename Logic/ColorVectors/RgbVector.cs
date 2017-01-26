@@ -1,4 +1,5 @@
-﻿using beadmania.Logic.Math;
+﻿using beadmania.Logic.ColorSpaceConverters;
+using beadmania.Logic.Math;
 using System;
 using System.Drawing;
 
@@ -23,7 +24,7 @@ namespace beadmania.Logic.ColorVectors
 
         public XyzVector ToXyz()
         {
-            return null;
+            return new RgbToXyzConverter().Convert(this);
         }
 
         private static bool IsOutOfRange(double val) => val < MinValue || val > MaxValue;

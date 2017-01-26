@@ -1,4 +1,5 @@
-﻿using beadmania.Logic.ColorVectors;
+﻿using beadmania.Logic.ColorSpaceConverters;
+using beadmania.Logic.ColorVectors;
 using NUnit.Framework;
 using System;
 using System.Drawing;
@@ -63,6 +64,15 @@ namespace beadmania.Logic.UnitTests.ColorVectors
         {
             RgbVector rgb = new RgbVector(Color.FromArgb(0, 3, 5));
             Assert.That(rgb.Z, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void Conversion_to_XYZ_is_identical_to_converter_result()
+        {
+            RgbVector rgb = new RgbVector(255, 0, 13);
+            RgbToXyzConverter converter = new RgbToXyzConverter();
+            XyzVector xyz = converter.Convert(rgb);
+            Assert.That(rgb.ToXyz(), Is.EqualTo(xyz));
         }
     }
 }
