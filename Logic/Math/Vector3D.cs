@@ -28,6 +28,8 @@ namespace beadmania.Logic.Math
 
         public double Z => coordinates[2];
 
+        public static Vector3D Zero => new Vector3D(0d, 0d, 0d);
+
         public static Vector3D operator *(double factor, Vector3D v)
         {
             return new Vector3D(factor * v.X, factor * v.Y, factor * v.Z);

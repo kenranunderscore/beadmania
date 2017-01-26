@@ -56,6 +56,7 @@
     <Compile Include="ColorVectors\LabVectorTest.cs" />
     <Compile Include="ColorVectors\RgbVectorTest.cs" />
     <Compile Include="ColorVectors\XyzVectorTest.cs" />
+    <Compile Include="Delta\EuclideanDistanceTest.cs" />
     <Compile Include="Math\Matrix3DTest.cs" />
     <Compile Include="Math\Vector3DTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
