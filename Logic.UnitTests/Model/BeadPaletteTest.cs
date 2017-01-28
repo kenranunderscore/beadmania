@@ -1,6 +1,7 @@
 ﻿using beadmania.Logic.Model;
 using NUnit.Framework;
 using System.Drawing;
+using System.Linq;
 
 namespace beadmania.Logic.UnitTests.Model
 {
@@ -36,8 +37,19 @@ namespace beadmania.Logic.UnitTests.Model
         public void Empty_palette_produces_XML_with_only_a_root_node()
         {
             BeadPalette palette = new BeadPalette();
-            var xml = palette.ToXml();
             Assert.That(palette.ToXml().ToString(), Is.EqualTo("<BeadPalette />"));
+        }
+
+        [Test]
+        public void Correct_number_of_beads_is_saved()
+        {
+            BeadPalette palette = new BeadPalette();
+            palette.Add(new Bead { Description = "Check", Color = Color.Firebrick });
+            palette.Add(new Bead { Description = "Mate", Color = Color.DeepSkyBlue });
+            var numberOfBeads = palette.ToXml()
+                .Descendants(nameof(Bead))
+                .Count();
+            Assert.That(numberOfBeads, Is.EqualTo(2));
         }
     }
 }
