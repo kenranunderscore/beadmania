@@ -1,4 +1,5 @@
-﻿using beadmania.UI.MVVM;
+﻿using beadmania.Logic.Model;
+using beadmania.UI.MVVM;
 using beadmania.UI.Services;
 using System.Drawing;
 using System.Windows.Input;
@@ -9,7 +10,7 @@ namespace beadmania.UI.ViewModels
     {
         private readonly IIOService ioService;
 
-        private Bitmap bitmap;
+        private BeadPattern pattern;
         private bool showGrid = true;
         private string imagePath;
 
@@ -21,9 +22,10 @@ namespace beadmania.UI.ViewModels
 
         public ICommand OpenImageCmd { get; }
 
-        public Bitmap Bitmap
+        public BeadPattern Pattern
         {
-            get { return bitmap; }
+            get { return pattern; }
+            private set { SetProperty(ref pattern, value); }
         }
 
         public bool ShowGrid
@@ -47,8 +49,8 @@ namespace beadmania.UI.ViewModels
         {
             using (var fileStream = ioService.OpenFile(ImagePath))
             {
-                bitmap = (Bitmap)Image.FromStream(fileStream);
-                OnPropertyChanged(nameof(Bitmap));
+                Bitmap image = (Bitmap)Image.FromStream(fileStream);
+                Pattern = new BeadPattern(image);
             }
         }
     }

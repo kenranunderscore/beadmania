@@ -21,10 +21,10 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <controls:BeadCanvas
+        <controls:PatternCanvas
             Margin="5"
             ClipToBounds="True"
-            ImageSource="{Binding Bitmap}"
+            Pattern="{Binding Pattern}"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             ShowGrid="{Binding ShowGrid}" />

@@ -1,11 +1,12 @@
-﻿using System.Windows;
+﻿using beadmania.Logic.Model;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace beadmania.UI.Controls
 {
-    internal class BeadCanvas : Canvas
+    internal class PatternCanvas : Canvas
     {
         private const double ScalingFactor = 1.5d;
         private const double GridStrokeThickness = 0.5d;
@@ -14,24 +15,24 @@ namespace beadmania.UI.Controls
         private static readonly Pen GridPen = new Pen(Brushes.Black, GridStrokeThickness);
         private int currentPixelSize = 10;
 
-        private static DependencyProperty ImageSourceProp =
+        private static DependencyProperty PatternProperty =
             DependencyProperty.Register(
-                nameof(ImageSource),
-                typeof(System.Drawing.Bitmap),
-                typeof(BeadCanvas),
-                new PropertyMetadata(ImageSourceChanged));
+                nameof(Pattern),
+                typeof(BeadPattern),
+                typeof(PatternCanvas),
+                new PropertyMetadata(PatternChanged));
 
         private static DependencyProperty ShowGridProp =
             DependencyProperty.Register(
                 nameof(ShowGrid),
                 typeof(bool),
-                typeof(BeadCanvas),
+                typeof(PatternCanvas),
                 new PropertyMetadata(ShowGridChanged));
 
-        public System.Drawing.Bitmap ImageSource
+        public BeadPattern Pattern
         {
-            get { return (System.Drawing.Bitmap)GetValue(ImageSourceProp); }
-            set { SetValue(ImageSourceProp, value); }
+            get { return (BeadPattern)GetValue(PatternProperty); }
+            set { SetValue(PatternProperty, value); }
         }
 
         public bool ShowGrid
@@ -40,30 +41,30 @@ namespace beadmania.UI.Controls
             set { SetValue(ShowGridProp, value); }
         }
 
-        private static void ImageSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void PatternChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var target = (BeadCanvas)obj;
+            var target = (PatternCanvas)obj;
             target.InvalidateVisual();
         }
 
         private static void ShowGridChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var target = (BeadCanvas)obj;
+            var target = (PatternCanvas)obj;
             target.InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext dc)
         {
-            if (ImageSource == null)
+            if (Pattern == null)
                 return;
 
-            for (int x = 0; x < ImageSource.Width; ++x)
+            for (int x = 0; x < Pattern.Width; ++x)
             {
-                for (int y = 0; y < ImageSource.Height; ++y)
+                for (int y = 0; y < Pattern.Height; ++y)
                 {
                     double scaledX = x * currentPixelSize;
                     double scaledY = y * currentPixelSize;
-                    var pixelColor = ImageSource.GetPixel(x, y);
+                    var pixelColor = Pattern[x, y].Color;
                     var fillBrush = new SolidColorBrush(Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B));
                     dc.DrawRectangle(fillBrush, null, new Rect(scaledX, scaledY, currentPixelSize, currentPixelSize));
                 }
@@ -76,15 +77,15 @@ namespace beadmania.UI.Controls
             if (!ShowGrid)
                 return;
 
-            for (int x = 0; x <= ImageSource.Width; ++x)
+            for (int x = 0; x <= Pattern.Width; ++x)
             {
                 double scaledX = x * currentPixelSize;
-                dc.DrawLine(GridPen, new Point(scaledX, 0), new Point(scaledX, currentPixelSize * ImageSource.Height));
+                dc.DrawLine(GridPen, new Point(scaledX, 0), new Point(scaledX, currentPixelSize * Pattern.Height));
             }
-            for (int y = 0; y <= ImageSource.Height; ++y)
+            for (int y = 0; y <= Pattern.Height; ++y)
             {
                 double scaledY = y * currentPixelSize;
-                dc.DrawLine(GridPen, new Point(0, scaledY), new Point(currentPixelSize * ImageSource.Width, scaledY));
+                dc.DrawLine(GridPen, new Point(0, scaledY), new Point(currentPixelSize * Pattern.Width, scaledY));
             }
         }
 

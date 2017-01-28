@@ -42,7 +42,7 @@ namespace beadmania.UI.UnitTests.ViewModels
                 MainViewModel vm = new MainViewModel(ioServiceMock.Object);
                 vm.ImagePath = path;
                 ioServiceMock.Verify(_ => _.OpenFile(path), Times.Once());
-                Assert.IsNotNull(vm.Bitmap);
+                Assert.IsNotNull(vm.Pattern);
             }
         }
 

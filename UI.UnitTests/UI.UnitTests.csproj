@@ -68,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{822f7867-7157-46b3-9827-19891da5548d}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{14d7f003-b242-443e-a7a8-03fe5d81df58}</Project>
       <Name>UI</Name>

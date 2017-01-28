@@ -50,6 +50,8 @@
     <Compile Include="Math\Matrix3D.cs" />
     <Compile Include="Math\Vector3D.cs" />
     <Compile Include="Delta\EuclideanDistance.cs" />
+    <Compile Include="Model\BeadPattern.cs" />
+    <Compile Include="Model\Bead.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
