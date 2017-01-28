@@ -50,7 +50,7 @@ namespace beadmania.UI.ViewModels
             using (var fileStream = ioService.OpenFile(ImagePath))
             {
                 Bitmap image = (Bitmap)Image.FromStream(fileStream);
-                Pattern = new BeadPattern(image);
+                Pattern = BeadPattern.FromBitmap(image);
             }
         }
     }
