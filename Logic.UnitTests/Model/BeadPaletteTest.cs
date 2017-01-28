@@ -1,5 +1,6 @@
 ﻿using beadmania.Logic.Model;
 using NUnit.Framework;
+using System.Drawing;
 
 namespace beadmania.Logic.UnitTests.Model
 {
@@ -29,6 +30,14 @@ namespace beadmania.Logic.UnitTests.Model
             palette.Add(new Bead());
             palette.Add(new Bead());
             Assert.That(palette.Beads, Contains.Item(new Bead()).With.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void Empty_palette_produces_XML_with_only_a_root_node()
+        {
+            BeadPalette palette = new BeadPalette();
+            var xml = palette.ToXml();
+            Assert.That(palette.ToXml().ToString(), Is.EqualTo("<BeadPalette />"));
         }
     }
 }
