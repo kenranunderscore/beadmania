@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,6 +8,31 @@ namespace beadmania.Logic.Model
     public class BeadPalette
     {
         private readonly HashSet<Bead> beads = new HashSet<Bead>();
+
+        public BeadPalette(string name)
+        {
+            Name = name;
+        }
+
+        public static BeadPalette FromXml(XDocument xml)
+        {
+            string name = xml.Root.Attribute(nameof(Name)).Value;
+            BeadPalette palette = new BeadPalette(name);
+            var beads = xml
+                .Descendants(nameof(Bead))
+                .Select(x => new Bead
+                {
+                    Description = x.Attribute(nameof(Bead.Description)).Value,
+                    Color = System.Drawing.Color.FromArgb(int.Parse(x.Attribute(nameof(Bead.Color)).Value, CultureInfo.InvariantCulture))
+                });
+            foreach (var bead in beads)
+            {
+                palette.beads.Add(bead);
+            }
+            return palette;
+        }
+
+        public string Name { get; }
 
         public IEnumerable<Bead> Beads => beads;
 
@@ -19,6 +45,7 @@ namespace beadmania.Logic.Model
         {
             return new XDocument(
                 new XElement(nameof(BeadPalette),
+                    new XAttribute(nameof(Name), Name),
                     beads.Select(b =>
                         new XElement(nameof(Bead),
                             new XElement(nameof(Bead.Description), b.Description),

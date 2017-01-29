@@ -18,7 +18,7 @@ namespace beadmania.UI.ViewModels
         public MainViewModel(IIOService ioService)
         {
             this.ioService = ioService;
-            Palette = new BeadPalette();
+            Palette = new BeadPalette("Foo");
             Palette.Add(new Bead { Description = "Black", Color = Color.Black });
             Palette.Add(new Bead { Description = "White", Color = Color.White });
             Palette.Add(new Bead { Description = "Gray", Color = Color.Gray });
