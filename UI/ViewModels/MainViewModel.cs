@@ -17,10 +17,21 @@ namespace beadmania.UI.ViewModels
         public MainViewModel(IIOService ioService)
         {
             this.ioService = ioService;
+            Palette = new BeadPalette();
+            Palette.Add(new Bead { Description = "Black", Color = Color.Black });
+            Palette.Add(new Bead { Description = "White", Color = Color.White });
+            Palette.Add(new Bead { Description = "Gray", Color = Color.Gray });
+            Palette.Add(new Bead { Description = "LightGray", Color = Color.LightGray });
+            Palette.Add(new Bead { Description = "DarkGray", Color = Color.DarkGray });
             OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
+            ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(Palette));
         }
 
         public ICommand OpenImageCmd { get; }
+
+        public ICommand ConvertCmd { get; }
+
+        public BeadPalette Palette { get; set; }
 
         public BeadPattern Pattern
         {

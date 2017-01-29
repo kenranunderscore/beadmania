@@ -7,18 +7,18 @@ namespace beadmania.Logic.Model
 {
     public sealed class BeadPattern
     {
-        private Bead[,] beads;
+        private readonly Bead[,] beads;
 
-        private BeadPattern() { }
+        private BeadPattern(int width, int height)
+        {
+            Width = width;
+            Height = height;
+            beads = new Bead[Width, Height];
+        }
 
         public static BeadPattern FromBitmap(Bitmap bitmap)
         {
-            BeadPattern pattern = new BeadPattern
-            {
-                Width = bitmap.Width,
-                Height = bitmap.Height,
-                beads = new Bead[bitmap.Width, bitmap.Height]
-            };
+            BeadPattern pattern = new BeadPattern(bitmap.Width, bitmap.Height);
             for (int i = 0; i < bitmap.Width; ++i)
             {
                 for (int j = 0; j < bitmap.Height; ++j)
@@ -38,7 +38,7 @@ namespace beadmania.Logic.Model
 
         public BeadPattern Convert(BeadPalette palette)
         {
-            BeadPattern convertedPattern = new BeadPattern();
+            BeadPattern convertedPattern = new BeadPattern(Width, Height);
             for (int i = 0; i < Width; ++i)
             {
                 for (int j = 0; j < Height; ++j)
@@ -46,6 +46,7 @@ namespace beadmania.Logic.Model
                     Color color = beads[i, j].Color;
                     RgbVector rgb = new RgbVector(color);
                     Color bestFit = FindBestFittingColor(rgb, palette, new EuclideanDistance());
+                    convertedPattern.beads[i, j] = new Bead { Color = bestFit };
                 }
             }
             return convertedPattern;

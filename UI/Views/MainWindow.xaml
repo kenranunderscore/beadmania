@@ -20,6 +20,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Convert" Command="{Binding ConvertCmd}" />
         </Menu>
         <controls:PatternCanvas
             Margin="5"
