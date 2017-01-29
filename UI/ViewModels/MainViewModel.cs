@@ -2,8 +2,11 @@
 using beadmania.Logic.Model;
 using beadmania.UI.MVVM;
 using beadmania.UI.Services;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace beadmania.UI.ViewModels
 {
@@ -14,23 +17,21 @@ namespace beadmania.UI.ViewModels
         private BeadPattern pattern;
         private bool showGrid = true;
         private string imagePath;
+        private ObservableCollection<BeadPalette> allPalettes = new ObservableCollection<BeadPalette>();
 
         public MainViewModel(IIOService ioService)
         {
             this.ioService = ioService;
-            Palette = new BeadPalette("Foo");
-            Palette.Add(new Bead { Description = "Black", Color = Color.Black });
-            Palette.Add(new Bead { Description = "White", Color = Color.White });
-            Palette.Add(new Bead { Description = "Gray", Color = Color.Gray });
-            Palette.Add(new Bead { Description = "LightGray", Color = Color.LightGray });
-            Palette.Add(new Bead { Description = "DarkGray", Color = Color.DarkGray });
             OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
             ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(Palette, new DeltaE94Distance()), _ => Pattern != null);
+            AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
         }
 
         public ICommand OpenImageCmd { get; }
 
         public ICommand ConvertCmd { get; }
+
+        public ObservableCollection<BeadPalette> AllPalettes { get; }
 
         public BeadPalette Palette { get; set; }
 
@@ -64,6 +65,21 @@ namespace beadmania.UI.ViewModels
                 Bitmap image = (Bitmap)Image.FromStream(fileStream);
                 Pattern = BeadPattern.FromBitmap(image);
             }
+        }
+
+        private IReadOnlyCollection<BeadPalette> LoadPalettesFromXml()
+        {
+            List<BeadPalette> palettes = new List<BeadPalette>();
+            foreach (string fileName in ioService.GetFileNamesInCurrentDirectory("*.bpal"))
+            {
+                using (var fileStream = ioService.OpenFile(fileName))
+                {
+                    var xml = XDocument.Load(fileStream);
+                    var palette = BeadPalette.FromXml(xml);
+                    palettes.Add(palette);
+                }
+            }
+            return palettes;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.IO;
+using System;
+using System.Collections.Generic;
 
 namespace beadmania.UI.Services
 {
@@ -29,6 +31,11 @@ namespace beadmania.UI.Services
             }
 
             return null;
+        }
+
+        public IEnumerable<string> GetFileNamesInCurrentDirectory(string filter)
+        {
+            return Directory.EnumerateFiles(".", filter, SearchOption.TopDirectoryOnly);
         }
     }
 }
