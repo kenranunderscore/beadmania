@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using beadmania.Logic.ColorVectors;
+using beadmania.Logic.Delta;
+using System.Drawing;
+using System.Linq;
 
 namespace beadmania.Logic.Model
 {
@@ -32,5 +35,39 @@ namespace beadmania.Logic.Model
         public int Height { get; private set; }
 
         public Bead this[int i, int j] => beads[i, j];
+
+        public BeadPattern Convert(BeadPalette palette)
+        {
+            BeadPattern convertedPattern = new BeadPattern();
+            for (int i = 0; i < Width; ++i)
+            {
+                for (int j = 0; j < Height; ++j)
+                {
+                    Color color = beads[i, j].Color;
+                    RgbVector rgb = new RgbVector(color);
+                    Color bestFit = FindBestFittingColor(rgb, palette, new EuclideanDistance());
+                }
+            }
+            return convertedPattern;
+        }
+
+        private static Color FindBestFittingColor(RgbVector rgb, BeadPalette palette, IColorDistance<RgbVector> colorDistance)
+        {
+            double minimumDistance = double.MaxValue;
+            Color bestFit = Color.Empty;
+
+            foreach (var color in palette.Beads.Select(b => b.Color))
+            {
+                var v = new RgbVector(color);
+                double d = colorDistance.Between(rgb, v);
+                if (d < minimumDistance)
+                {
+                    minimumDistance = d;
+                    bestFit = color;
+                }
+            }
+
+            return bestFit;
+        }
     }
 }

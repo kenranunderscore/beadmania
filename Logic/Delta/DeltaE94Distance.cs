@@ -1,25 +1,26 @@
-﻿using beadmania.Logic.ColorVectors;
+﻿using System;
+using beadmania.Logic.ColorVectors;
 
 namespace beadmania.Logic.Delta
 {
-    public sealed class DeltaE94Distance
+    public sealed class DeltaE94Distance : IColorDistance<RgbVector>, IColorDistance<LabVector>
     {
         private const double K1 = 0.045d;
         private const double K2 = 0.015d;
 
-        public double Between(LabVector v1, LabVector v2)
+        public double Between(LabVector first, LabVector other)
         {
-            double a1 = v1.Y;
-            double a2 = v2.Y;
-            double b1 = v1.Z;
-            double b2 = v2.Z;
+            double a1 = first.Y;
+            double a2 = other.Y;
+            double b1 = first.Z;
+            double b2 = other.Z;
 
             double C1 = System.Math.Sqrt(a1 * a1 + b1 * b1);
             double C2 = System.Math.Sqrt(a2 * a2 + b2 * b2);
             double dC = C1 - C2;
             double da = a1 - a2;
             double db = b1 - b2;
-            double dL = v1.X - v2.X;
+            double dL = first.X - other.X;
             double dH = System.Math.Sqrt(da * da + db * db - dC * dC);
 
             double SC = 1 + K1 * C1;
@@ -27,6 +28,14 @@ namespace beadmania.Logic.Delta
 
             double radicand = dL * dL + System.Math.Pow(dC / SC, 2d) + System.Math.Pow(dH / SH, 2d);
             return System.Math.Sqrt(radicand);
+        }
+
+        public double Between(RgbVector first, RgbVector other)
+        {
+            LabVector v1 = first.ToXyz().ToLab();
+            LabVector v2 = other.ToXyz().ToLab();
+
+            return Between(v1, v2);
         }
     }
 }

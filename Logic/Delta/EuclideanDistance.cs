@@ -2,7 +2,7 @@
 
 namespace beadmania.Logic.Delta
 {
-    public sealed class EuclideanDistance
+    public sealed class EuclideanDistance : IColorDistance<Vector3D>
     {
         public double Between(Vector3D v1, Vector3D v2)
         {
