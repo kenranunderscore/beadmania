@@ -22,6 +22,16 @@
             </MenuItem>
             <MenuItem Header="Convert" Command="{Binding ConvertCmd}" />
         </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar ToolBarTray.IsLocked="True">
+                <Button ToolTip="Open image" Command="{Binding OpenImageCmd}">
+                    <Image Source="/Icons/OpenFolder_16x_32.bmp" />
+                </Button>
+                <ToggleButton ToolTip="Show grid lines" IsChecked="{Binding ShowGrid}">
+                    <Image Source="/Icons/ShowGrid_16x_32.bmp" />
+                </ToggleButton>
+            </ToolBar>
+        </ToolBarTray>
         <controls:PatternCanvas
             Margin="5"
             ClipToBounds="True"

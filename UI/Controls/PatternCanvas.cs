@@ -69,14 +69,12 @@ namespace beadmania.UI.Controls
                     dc.DrawRectangle(fillBrush, null, new Rect(scaledX, scaledY, currentPixelSize, currentPixelSize));
                 }
             }
-            RenderGrid(dc);
+            if (ShowGrid)
+                RenderGrid(dc);
         }
 
         private void RenderGrid(DrawingContext dc)
         {
-            if (!ShowGrid)
-                return;
-
             for (int x = 0; x <= Pattern.Width; ++x)
             {
                 double scaledX = x * currentPixelSize;
