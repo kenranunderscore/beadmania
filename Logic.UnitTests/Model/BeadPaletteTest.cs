@@ -67,5 +67,20 @@ namespace beadmania.Logic.UnitTests.Model
             const string xml = "<BeadPalette />";
             Assert.That(() => BeadPalette.FromXml(XDocument.Parse(xml)), Throws.Exception);
         }
+
+        [Test]
+        public void Beads_in_XML_are_contained_in_loaded_palette()
+        {
+            const string xml =
+                @"<BeadPalette Name=""Abc"">
+                    <Bead>
+                        <Description>MrBead</Description>
+                        <Color>123</Color>
+                    </Bead>
+                </BeadPalette>";
+            var palette = BeadPalette.FromXml(XDocument.Parse(xml));
+            Bead expectedBead = new Bead { Description = "MrBead", Color = Color.FromArgb(123) };
+            Assert.That(palette.Beads, Contains.Item(expectedBead));
+        }
     }
 }

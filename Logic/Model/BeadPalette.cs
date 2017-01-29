@@ -24,8 +24,8 @@ namespace beadmania.Logic.Model
                 .Descendants(nameof(Bead))
                 .Select(x => new Bead
                 {
-                    Description = x.Attribute(nameof(Bead.Description)).Value,
-                    Color = System.Drawing.Color.FromArgb(int.Parse(x.Attribute(nameof(Bead.Color)).Value, CultureInfo.InvariantCulture))
+                    Description = x.Element(nameof(Bead.Description)).Value,
+                    Color = System.Drawing.Color.FromArgb(int.Parse(x.Element(nameof(Bead.Color)).Value, CultureInfo.InvariantCulture))
                 });
             foreach (var bead in beads)
             {
