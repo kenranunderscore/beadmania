@@ -22,7 +22,7 @@
             </MenuItem>
             <MenuItem Header="Convert" Command="{Binding ConvertCmd}" />
             <MenuItem Header="Colors">
-                <MenuItem Header="Palettes" ItemsSource="{Binding AllPalettes}" />
+                <MenuItem Header="Palettes" ItemsSource="{Binding AllPalettes}" DisplayMemberPath="Name" />
             </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
