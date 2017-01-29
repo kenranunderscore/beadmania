@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
@@ -14,6 +15,7 @@ namespace beadmania.Logic.Model
             Name = name;
         }
 
+        //TODO: Validation
         public static BeadPalette FromXml(XDocument xml)
         {
             string name = xml.Root.Attribute(nameof(Name)).Value;

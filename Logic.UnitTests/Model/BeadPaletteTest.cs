@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Drawing;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace beadmania.Logic.UnitTests.Model
 {
@@ -50,6 +51,21 @@ namespace beadmania.Logic.UnitTests.Model
                 .Descendants(nameof(Bead))
                 .Count();
             Assert.That(numberOfBeads, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Palette_loaded_from_XML_has_correct_name()
+        {
+            const string xml = "<BeadPalette Name=\"Jelly\" />";
+            var palette = BeadPalette.FromXml(XDocument.Parse(xml));
+            Assert.That(palette.Name, Is.EqualTo("Jelly"));
+        }
+
+        [Test]
+        public void Cannot_load_from_XML_that_has_not_specified_palette_name()
+        {
+            const string xml = "<BeadPalette />";
+            Assert.That(() => BeadPalette.FromXml(XDocument.Parse(xml)), Throws.Exception);
         }
     }
 }
