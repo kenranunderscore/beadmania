@@ -36,7 +36,7 @@ namespace beadmania.Logic.Model
 
         public Bead this[int i, int j] => beads[i, j];
 
-        public BeadPattern Convert(BeadPalette palette)
+        public BeadPattern Convert(BeadPalette palette, IColorDistance<RgbVector> colorDistance)
         {
             BeadPattern convertedPattern = new BeadPattern(Width, Height);
             for (int i = 0; i < Width; ++i)
@@ -45,26 +45,26 @@ namespace beadmania.Logic.Model
                 {
                     Color color = beads[i, j].Color;
                     RgbVector rgb = new RgbVector(color);
-                    Color bestFit = FindBestFittingColor(rgb, palette, new EuclideanDistance());
-                    convertedPattern.beads[i, j] = new Bead { Color = bestFit };
+                    Bead bestFit = FindBestFittingBead(rgb, palette, colorDistance);
+                    convertedPattern.beads[i, j] = bestFit;
                 }
             }
             return convertedPattern;
         }
 
-        private static Color FindBestFittingColor(RgbVector rgb, BeadPalette palette, IColorDistance<RgbVector> colorDistance)
+        private static Bead FindBestFittingBead(RgbVector rgb, BeadPalette palette, IColorDistance<RgbVector> colorDistance)
         {
             double minimumDistance = double.MaxValue;
-            Color bestFit = Color.Empty;
+            Bead bestFit = null;
 
-            foreach (var color in palette.Beads.Select(b => b.Color))
+            foreach (var bead in palette.Beads)
             {
-                var v = new RgbVector(color);
+                var v = new RgbVector(bead.Color);
                 double d = colorDistance.Between(rgb, v);
                 if (d < minimumDistance)
                 {
                     minimumDistance = d;
-                    bestFit = color;
+                    bestFit = bead;
                 }
             }
 

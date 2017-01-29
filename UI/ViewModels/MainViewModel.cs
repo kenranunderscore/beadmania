@@ -1,4 +1,5 @@
-﻿using beadmania.Logic.Model;
+﻿using beadmania.Logic.Delta;
+using beadmania.Logic.Model;
 using beadmania.UI.MVVM;
 using beadmania.UI.Services;
 using System.Drawing;
@@ -24,7 +25,7 @@ namespace beadmania.UI.ViewModels
             Palette.Add(new Bead { Description = "LightGray", Color = Color.LightGray });
             Palette.Add(new Bead { Description = "DarkGray", Color = Color.DarkGray });
             OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
-            ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(Palette));
+            ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(Palette, new DeltaE94Distance()), _ => Pattern != null);
         }
 
         public ICommand OpenImageCmd { get; }
