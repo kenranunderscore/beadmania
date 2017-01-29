@@ -25,7 +25,7 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar ToolBarTray.IsLocked="True">
                 <Button ToolTip="Open image" Command="{Binding OpenImageCmd}">
-                    <Image Source="/Icons/OpenFolder_16x_32.bmp" />
+                    <Image Source="/Icons/OpenFolder.ico" Width="16" Height="16" />
                 </Button>
                 <ToggleButton ToolTip="Show grid lines" IsChecked="{Binding ShowGrid}">
                     <Image Source="/Icons/ShowGrid_16x_32.bmp" />
