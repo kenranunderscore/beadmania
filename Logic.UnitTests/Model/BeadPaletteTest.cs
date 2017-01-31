@@ -38,7 +38,7 @@ namespace beadmania.Logic.UnitTests.Model
         public void Empty_palette_produces_XML_with_only_a_root_node()
         {
             BeadPalette palette = new BeadPalette("Foo");
-            Assert.That(palette.ToXml().ToString(), Is.EqualTo("<BeadPalette />"));
+            Assert.That(palette.ToXml().ToString(), Is.EqualTo("<BeadPalette Name=\"Foo\" />"));
         }
 
         [Test]

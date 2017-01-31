@@ -5,6 +5,7 @@ using beadmania.UI.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Input;
 using System.Xml.Linq;
 
@@ -17,14 +18,16 @@ namespace beadmania.UI.ViewModels
         private BeadPattern pattern;
         private bool showGrid = true;
         private string imagePath;
+        private BeadPalette selectedPalette;
         private ObservableCollection<BeadPalette> allPalettes = new ObservableCollection<BeadPalette>();
 
         public MainViewModel(IIOService ioService)
         {
             this.ioService = ioService;
             OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
-            ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(Palette, new DeltaE94Distance()), _ => Pattern != null);
+            ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(SelectedPalette, new DeltaE94Distance()), _ => Pattern != null && SelectedPalette != null);
             AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
+            SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
         public ICommand OpenImageCmd { get; }
@@ -33,7 +36,11 @@ namespace beadmania.UI.ViewModels
 
         public ObservableCollection<BeadPalette> AllPalettes { get; }
 
-        public BeadPalette Palette { get; set; }
+        public BeadPalette SelectedPalette
+        {
+            get { return selectedPalette; }
+            set { SetProperty(ref selectedPalette, value); }
+        }
 
         public BeadPattern Pattern
         {
@@ -67,7 +74,7 @@ namespace beadmania.UI.ViewModels
             }
         }
 
-        private IReadOnlyCollection<BeadPalette> LoadPalettesFromXml()
+        private IEnumerable<BeadPalette> LoadPalettesFromXml()
         {
             List<BeadPalette> palettes = new List<BeadPalette>();
             foreach (string fileName in ioService.GetFileNamesInCurrentDirectory("*.bpal"))
@@ -79,7 +86,7 @@ namespace beadmania.UI.ViewModels
                     palettes.Add(palette);
                 }
             }
-            return palettes;
+            return palettes.OrderBy(x => x.Name);
         }
     }
 }

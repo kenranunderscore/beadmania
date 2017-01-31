@@ -1,4 +1,5 @@
-﻿using beadmania.Logic.Model;
+﻿using beadmania.Logic.Delta;
+using beadmania.Logic.Model;
 using NUnit.Framework;
 using System.Drawing;
 
@@ -30,6 +31,26 @@ namespace beadmania.Logic.UnitTests.Model
             bmp.SetPixel(1, 1, Color.ForestGreen);
             BeadPattern pattern = BeadPattern.FromBitmap(bmp);
             Assert.That(pattern[1, 1].Color.ToArgb(), Is.EqualTo(Color.ForestGreen.ToArgb()));
+        }
+
+        [Test]
+        public void Converted_pattern_keeps_width()
+        {
+            Bitmap bmp = new Bitmap(2, 2);
+            BeadPattern pattern = BeadPattern.FromBitmap(bmp);
+            BeadPalette palette = new BeadPalette("foo");
+            var convertedPattern = pattern.Convert(palette, new EuclideanDistance());
+            Assert.That(convertedPattern.Width, Is.EqualTo(pattern.Width));
+        }
+
+        [Test]
+        public void Converted_pattern_keeps_height()
+        {
+            Bitmap bmp = new Bitmap(2, 2);
+            BeadPattern pattern = BeadPattern.FromBitmap(bmp);
+            BeadPalette palette = new BeadPalette("foo");
+            var convertedPattern = pattern.Convert(palette, new EuclideanDistance());
+            Assert.That(convertedPattern.Height, Is.EqualTo(pattern.Height));
         }
     }
 }

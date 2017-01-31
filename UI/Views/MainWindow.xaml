@@ -21,8 +21,13 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Convert" Command="{Binding ConvertCmd}" />
-            <MenuItem Header="Colors">
-                <MenuItem Header="Palettes" ItemsSource="{Binding AllPalettes}" DisplayMemberPath="Name" />
+            <MenuItem Header="Color palettes">
+                <MenuItem Header="Create new" />
+                <MenuItem Header="Load" />
+                <Separator />
+                <MenuItem Header="View selected" />
+                <MenuItem Header="Edit selected" />
+                <MenuItem Header="Delete selected" />
             </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
@@ -33,6 +38,12 @@
                 <ToggleButton ToolTip="Show grid lines" IsChecked="{Binding ShowGrid}">
                     <Image Source="/Icons/ShowGrid_16x_32.bmp" />
                 </ToggleButton>
+                <Label Content="Target color palette:" />
+                <ComboBox
+                    MinWidth="200"
+                    ItemsSource="{Binding AllPalettes}"
+                    SelectedItem="{Binding SelectedPalette}"
+                    DisplayMemberPath="Name" />
             </ToolBar>
         </ToolBarTray>
         <controls:PatternCanvas
