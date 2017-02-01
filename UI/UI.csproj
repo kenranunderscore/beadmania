@@ -66,9 +66,9 @@
     <Compile Include="Services\IOService.cs" />
     <Compile Include="GridLineAlignment.cs" />
     <Compile Include="Services\IIOService.cs" />
-    <Compile Include="ViewModels\ColorPaletteEditorViewModel.cs" />
+    <Compile Include="ViewModels\PaletteEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Page Include="Views\ColorPaletteEditor.xaml">
+    <Page Include="Views\PaletteEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,8 +82,8 @@
     </Compile>
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />
-    <Compile Include="Views\ColorPaletteEditor.xaml.cs">
-      <DependentUpon>ColorPaletteEditor.xaml</DependentUpon>
+    <Compile Include="Views\PaletteEditor.xaml.cs">
+      <DependentUpon>PaletteEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

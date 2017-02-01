@@ -15,6 +15,7 @@ namespace beadmania.UI.ViewModels
     internal class MainViewModel : ViewModel
     {
         private readonly IIOService ioService;
+        private readonly IDialogService dialogService;
 
         private BeadPattern pattern;
         private bool showGrid = true;
@@ -22,14 +23,17 @@ namespace beadmania.UI.ViewModels
         private BeadPalette selectedPalette;
         private ObservableCollection<BeadPalette> allPalettes = new ObservableCollection<BeadPalette>();
 
-        public MainViewModel(IIOService ioService)
+        public MainViewModel(IIOService ioService, IDialogService dialogService)
         {
             this.ioService = ioService;
+            this.dialogService = dialogService;
             AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
-        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
+        public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel()));
+
+        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 
         public ICommand LoadPaletteCmd => new RelayCommand(_ =>
         {

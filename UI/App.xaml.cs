@@ -18,6 +18,7 @@ namespace beadmania.UI
 
             ninjectKernel = new StandardKernel();
             ninjectKernel.Bind<IIOService>().To<IOService>();
+            ninjectKernel.Bind<IDialogService>().To<DialogService>();
 
             var mainWindow = ninjectKernel.Get<MainWindow>();
             Current.MainWindow = mainWindow;

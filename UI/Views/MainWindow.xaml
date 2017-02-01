@@ -21,14 +21,15 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Convert" Command="{Binding ConvertCmd, Mode=OneTime}" />
-            <MenuItem Header="Color palettes">
-                <MenuItem Header="Create new" />
+            <MenuItem Header="Palettes">
+                <MenuItem Header="New" Command="{Binding NewPaletteCmd, Mode=OneTime}" />
                 <MenuItem Header="Load" Command="{Binding LoadPaletteCmd, Mode=OneTime}" />
                 <Separator />
                 <MenuItem Header="View selected" />
                 <MenuItem Header="Edit selected" />
                 <MenuItem Header="Delete selected" />
             </MenuItem>
+            <MenuItem Header="?" />
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar ToolBarTray.IsLocked="True">
@@ -38,7 +39,7 @@
                 <ToggleButton ToolTip="Show grid lines" IsChecked="{Binding ShowGrid}">
                     <Image Source="/Icons/ShowGrid_16x_32.bmp" />
                 </ToggleButton>
-                <Label Content="Target color palette:" />
+                <Label Content="Target palette:" />
                 <ComboBox
                     MinWidth="200"
                     ItemsSource="{Binding AllPalettes}"

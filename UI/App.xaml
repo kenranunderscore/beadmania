@@ -4,7 +4,7 @@
              xmlns:views="clr-namespace:beadmania.UI.Views"
              xmlns:viewModels="clr-namespace:beadmania.UI.ViewModels">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type viewModels:ColorPaletteEditorViewModel}">
+        <DataTemplate DataType="{x:Type viewModels:PaletteEditorViewModel}">
             <views:ColorPaletteEditor />
         </DataTemplate>
 
