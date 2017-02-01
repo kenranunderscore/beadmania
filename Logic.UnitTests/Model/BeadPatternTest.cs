@@ -32,5 +32,15 @@ namespace beadmania.Logic.UnitTests.Model
             BeadPattern pattern = BeadPattern.FromBitmap(bmp);
             Assert.That(pattern[1, 1].Color.ToArgb(), Is.EqualTo(Color.ForestGreen.ToArgb()));
         }
+
+        [Test]
+        public void Can_set_bead_via_indexer()
+        {
+            Bitmap bmp = new Bitmap(2, 2);
+            bmp.SetPixel(1, 1, Color.ForestGreen);
+            BeadPattern pattern = BeadPattern.FromBitmap(bmp);
+            pattern[1, 0] = new Bead { Description = "DsCK" };
+            Assert.That(pattern[1, 0].Description, Is.EqualTo("DsCK"));
+        }
     }
 }
