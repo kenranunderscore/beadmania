@@ -14,16 +14,16 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open image" Command="{Binding OpenImageCmd}">
+                <MenuItem Header="Open image" Command="{Binding OpenImageCmd, Mode=OneTime}">
                     <MenuItem.Icon>
                         <Image Source="/Icons/OpenFolder.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Convert" Command="{Binding ConvertCmd}" />
+            <MenuItem Header="Convert" Command="{Binding ConvertCmd, Mode=OneTime}" />
             <MenuItem Header="Color palettes">
                 <MenuItem Header="Create new" />
-                <MenuItem Header="Load" />
+                <MenuItem Header="Load" Command="{Binding LoadPaletteCmd, Mode=OneTime}" />
                 <Separator />
                 <MenuItem Header="View selected" />
                 <MenuItem Header="Edit selected" />
@@ -32,7 +32,7 @@
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar ToolBarTray.IsLocked="True">
-                <Button ToolTip="Open image" Command="{Binding OpenImageCmd}">
+                <Button ToolTip="Open image" Command="{Binding OpenImageCmd, Mode=OneTime}">
                     <Image Source="/Icons/OpenFolder.ico" Width="16" Height="16" />
                 </Button>
                 <ToggleButton ToolTip="Show grid lines" IsChecked="{Binding ShowGrid}">

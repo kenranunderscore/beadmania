@@ -25,17 +25,22 @@ namespace beadmania.UI.ViewModels
         public MainViewModel(IIOService ioService)
         {
             this.ioService = ioService;
-            OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
-            ConvertCmd = new RelayCommand(
-                _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
-                _ => Pattern != null && SelectedPalette != null);
             AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
-        public ICommand OpenImageCmd { get; }
+        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 
-        public ICommand ConvertCmd { get; }
+        public ICommand LoadPaletteCmd => new RelayCommand(_ =>
+        {
+            string fileName = ioService.ChooseFile(null, "Bead palettes|*.bpal");
+            BeadPalette palette = LoadPalette(fileName);
+            AllPalettes.Add(palette);
+        });
+
+        public ICommand ConvertCmd => new RelayCommand(
+                _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
+                _ => Pattern != null && SelectedPalette != null);
 
         public ObservableCollection<BeadPalette> AllPalettes { get; }
 
@@ -82,14 +87,18 @@ namespace beadmania.UI.ViewModels
             List<BeadPalette> palettes = new List<BeadPalette>();
             foreach (string fileName in ioService.GetFileNamesInCurrentDirectory("*.bpal"))
             {
-                using (var fileStream = ioService.OpenFile(fileName))
-                {
-                    var xml = XDocument.Load(fileStream);
-                    var palette = BeadPalette.FromXml(xml);
-                    palettes.Add(palette);
-                }
+                palettes.Add(LoadPalette(fileName));
             }
             return palettes.OrderBy(x => x.Name);
+        }
+
+        private BeadPalette LoadPalette(string fileName)
+        {
+            using (var fileStream = ioService.OpenFile(fileName))
+            {
+                var xml = XDocument.Load(fileStream);
+                return BeadPalette.FromXml(xml);
+            }
         }
     }
 }
