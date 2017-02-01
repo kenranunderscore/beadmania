@@ -1,4 +1,4 @@
-﻿using beadmania.Logic.ColorSpaceConverters;
+﻿using beadmania.Logic.Converters;
 using beadmania.Logic.Math;
 
 namespace beadmania.Logic.ColorVectors

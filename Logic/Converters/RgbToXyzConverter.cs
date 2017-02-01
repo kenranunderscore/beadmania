@@ -1,7 +1,7 @@
 ﻿using beadmania.Logic.ColorVectors;
 using beadmania.Logic.Math;
 
-namespace beadmania.Logic.ColorSpaceConverters
+namespace beadmania.Logic.Converters
 {
     internal sealed class RgbToXyzConverter
     {

@@ -1,4 +1,4 @@
-﻿using beadmania.Logic.ColorSpaceConverters;
+﻿using beadmania.Logic.Converters;
 using beadmania.Logic.ColorVectors;
 using NUnit.Framework;
 using System;

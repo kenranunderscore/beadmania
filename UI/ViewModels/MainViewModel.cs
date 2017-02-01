@@ -1,4 +1,5 @@
-﻿using beadmania.Logic.Delta;
+﻿using beadmania.Logic.Converters;
+using beadmania.Logic.Delta;
 using beadmania.Logic.Model;
 using beadmania.UI.MVVM;
 using beadmania.UI.Services;
@@ -25,7 +26,9 @@ namespace beadmania.UI.ViewModels
         {
             this.ioService = ioService;
             OpenImageCmd = new RelayCommand(_ => ImagePath = this.ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
-            ConvertCmd = new RelayCommand(_ => Pattern = Pattern.Convert(SelectedPalette, new DeltaE94Distance()), _ => Pattern != null && SelectedPalette != null);
+            ConvertCmd = new RelayCommand(
+                _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
+                _ => Pattern != null && SelectedPalette != null);
             AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
             SelectedPalette = AllPalettes.FirstOrDefault();
         }

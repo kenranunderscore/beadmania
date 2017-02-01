@@ -1,6 +1,6 @@
 ﻿using beadmania.Logic.ColorVectors;
 
-namespace beadmania.Logic.ColorSpaceConverters
+namespace beadmania.Logic.Converters
 {
     internal sealed class XyzToLabConverter
     {

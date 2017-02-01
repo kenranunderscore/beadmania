@@ -60,8 +60,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="ColorSpaceConverters\RgbToXyzConverterTest.cs" />
-    <Compile Include="ColorSpaceConverters\XyzToLabConverterTest.cs" />
+    <Compile Include="Converters\BeadPatternConverterTest.cs" />
+    <Compile Include="Converters\RgbToXyzConverterTest.cs" />
+    <Compile Include="Converters\XyzToLabConverterTest.cs" />
     <Compile Include="ColorVectors\LabVectorTest.cs" />
     <Compile Include="ColorVectors\RgbVectorTest.cs" />
     <Compile Include="ColorVectors\XyzVectorTest.cs" />
