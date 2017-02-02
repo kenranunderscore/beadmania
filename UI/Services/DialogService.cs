@@ -7,7 +7,7 @@ namespace beadmania.UI.Services
     {
         public bool? OpenDialog(ViewModel vm)
         {
-            Window w = new Window { Content = vm };
+            Window w = new Window { Content = vm, SizeToContent = SizeToContent.WidthAndHeight };
             return w.ShowDialog();
         }
     }

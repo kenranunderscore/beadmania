@@ -31,15 +31,18 @@ namespace beadmania.UI.ViewModels
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
-        public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel()));
+        public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(null)));
 
         public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 
         public ICommand LoadPaletteCmd => new RelayCommand(_ =>
         {
             string fileName = ioService.ChooseFile(null, "Bead palettes|*.bpal");
-            BeadPalette palette = LoadPalette(fileName);
-            AllPalettes.Add(palette);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                BeadPalette palette = LoadPalette(fileName);
+                AllPalettes.Add(palette);
+            }
         });
 
         public ICommand ConvertCmd => new RelayCommand(

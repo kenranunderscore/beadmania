@@ -5,10 +5,8 @@
              xmlns:viewModels="clr-namespace:beadmania.UI.ViewModels">
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewModels:PaletteEditorViewModel}">
-            <views:ColorPaletteEditor />
+            <views:PaletteEditor />
         </DataTemplate>
-
-        <!-- Dummy style to work around a WPF resource bug -->
-        <Style TargetType="{x:Type Rectangle}" x:Key="DummyStyle" />
+        <Style x:Key="DummyStyleToPreventWpfBug" TargetType="{x:Type Rectangle}" />
     </Application.Resources>
 </Application>
