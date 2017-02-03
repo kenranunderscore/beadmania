@@ -33,6 +33,8 @@ namespace beadmania.UI.ViewModels
 
         public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(null)));
 
+        public ICommand EditPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(SelectedPalette)));
+
         public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 
         public ICommand LoadPaletteCmd => new RelayCommand(_ =>

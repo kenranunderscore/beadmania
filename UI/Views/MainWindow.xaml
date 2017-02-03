@@ -26,7 +26,7 @@
                 <MenuItem Header="Load" Command="{Binding LoadPaletteCmd, Mode=OneTime}" />
                 <Separator />
                 <MenuItem Header="View selected" />
-                <MenuItem Header="Edit selected" />
+                <MenuItem Header="Edit selected" Command="{Binding EditPaletteCmd, Mode=OneTime}" />
                 <MenuItem Header="Delete selected" />
             </MenuItem>
             <MenuItem Header="?" />

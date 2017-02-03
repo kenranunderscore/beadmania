@@ -7,5 +7,23 @@
              mc:Ignorable="d"
              Width="500"
              Height="800">
-    
+    <StackPanel Margin="10" Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Name:" />
+            <TextBox Text="{Binding Name}" />
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Beads}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="{Binding Description}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
 </UserControl>

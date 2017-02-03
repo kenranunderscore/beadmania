@@ -34,7 +34,7 @@ namespace beadmania.Logic.Model
             return palette;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public IEnumerable<Bead> Beads => beads;
 
