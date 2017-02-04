@@ -4,15 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:beadmania.UI.Views"
+             xmlns:utils="clr-namespace:beadmania.UI.Utils"
              mc:Ignorable="d"
              Width="500"
-             Height="800">
-    <StackPanel Margin="10" Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Name:" />
-            <TextBox Text="{Binding Name}" />
+             Height="800"
+             utils:DialogCloser.DialogResult="{Binding DialogResult}">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label VerticalContentAlignment="Center" MinWidth="100" Content="Name:" />
+            <TextBox HorizontalContentAlignment="Center" Width="200" Text="{Binding Name}" />
         </StackPanel>
-        <ItemsControl ItemsSource="{Binding Beads}">
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Beads}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="10">
@@ -25,5 +32,13 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-    </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="40,10,40,10" Content="Save" />
+            <Button Grid.Column="1" Margin="40,10,40,10" Content="Cancel" Command="{Binding CancelCmd, Mode=OneTime}" />
+        </Grid>
+    </Grid>
 </UserControl>

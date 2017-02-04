@@ -66,6 +66,7 @@
     <Compile Include="Services\IOService.cs" />
     <Compile Include="GridLineAlignment.cs" />
     <Compile Include="Services\IIOService.cs" />
+    <Compile Include="Utils\DialogCloser.cs" />
     <Compile Include="ViewModels\PaletteEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="Views\PaletteEditor.xaml">

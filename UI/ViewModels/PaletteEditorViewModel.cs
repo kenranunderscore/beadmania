@@ -1,6 +1,7 @@
 ﻿using beadmania.Logic.Model;
 using beadmania.UI.MVVM;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace beadmania.UI.ViewModels
 {
@@ -13,6 +14,8 @@ namespace beadmania.UI.ViewModels
             this.palette = palette;
         }
 
+        public ICommand CancelCmd => new RelayCommand(_ => this.DialogResult = true);
+
         public IEnumerable<Bead> Beads => palette.Beads;
 
         public string Name
@@ -23,6 +26,13 @@ namespace beadmania.UI.ViewModels
                 palette.Name = value;
                 OnPropertyChanged();
             }
+        }
+
+        private bool? dialogResult;
+        public bool? DialogResult
+        {
+            get { return dialogResult; }
+            set { SetProperty(ref dialogResult, value); }
         }
     }
 }
