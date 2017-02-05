@@ -15,11 +15,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Label VerticalContentAlignment="Center" MinWidth="100" Content="Name:" />
-            <TextBox HorizontalContentAlignment="Center" Width="200" Text="{Binding Name}" />
-        </StackPanel>
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding Beads}">
+            <Label Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MinWidth="100" Content="{Binding Name}" />
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Beads}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="10">
@@ -37,8 +34,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="40,10,40,10" Content="Save" />
-            <Button Grid.Column="1" Margin="40,10,40,10" Content="Cancel" Command="{Binding CancelCmd, Mode=OneTime}" />
+            <Button Grid.Column="0" Margin="40,10,40,10" Content="Save" Command="{Binding SaveCmd}" />
+            <Button Grid.Column="1" Margin="40,10,40,10" IsCancel="True" Content="Cancel" />
         </Grid>
     </Grid>
 </UserControl>

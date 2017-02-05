@@ -31,9 +31,16 @@ namespace beadmania.UI.ViewModels
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
-        public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(null)));
+        public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(ioService, null)));
 
-        public ICommand EditPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(SelectedPalette)));
+        public ICommand EditPaletteCmd => new RelayCommand(_ =>
+        {
+            var result = dialogService.OpenDialog(new PaletteEditorViewModel(ioService, SelectedPalette));
+            if (result == true)
+            {
+
+            }
+        });
 
         public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 

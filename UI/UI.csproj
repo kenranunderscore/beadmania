@@ -61,6 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\PatternCanvas.cs" />
+    <Compile Include="MVVM\DialogViewModel.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IOService.cs" />

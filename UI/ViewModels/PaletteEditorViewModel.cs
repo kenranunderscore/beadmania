@@ -1,38 +1,44 @@
 ﻿using beadmania.Logic.Model;
 using beadmania.UI.MVVM;
+using beadmania.UI.Services;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Input;
 
 namespace beadmania.UI.ViewModels
 {
-    internal class PaletteEditorViewModel : ViewModel
+    internal class PaletteEditorViewModel : DialogViewModel
     {
+        private const string TargetFolderName = "Palettes";
         private readonly BeadPalette palette;
+        private readonly IIOService ioService;
 
-        public PaletteEditorViewModel(BeadPalette palette)
+        public PaletteEditorViewModel(IIOService ioService, BeadPalette palette)
         {
             this.palette = palette;
+            this.ioService = ioService;
         }
 
-        public ICommand CancelCmd => new RelayCommand(_ => this.DialogResult = true);
+        public ICommand SaveCmd => new RelayCommand(_ => Save());
 
         public IEnumerable<Bead> Beads => palette.Beads;
 
-        public string Name
-        {
-            get { return palette.Name; }
-            set
-            {
-                palette.Name = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name => palette.Name;
 
-        private bool? dialogResult;
-        public bool? DialogResult
+        //TODO: Extract saving logic
+        private void Save()
         {
-            get { return dialogResult; }
-            set { SetProperty(ref dialogResult, value); }
+            string fileName = TargetFolderName + Path.DirectorySeparatorChar + Name;
+            var fileContent = palette.ToXml();
+            if (!Directory.Exists(TargetFolderName))
+                Directory.CreateDirectory(TargetFolderName);
+
+            using (FileStream fs = File.OpenWrite(fileName))
+            {
+                fileContent.Save(fs);
+            }
+
+            DialogResult = true;
         }
     }
 }
