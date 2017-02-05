@@ -5,10 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:beadmania.UI.Views"
              xmlns:utils="clr-namespace:beadmania.UI.Utils"
+             xmlns:converters="clr-namespace:beadmania.UI.Converters"
              mc:Ignorable="d"
              Width="500"
              Height="800"
              utils:DialogCloser.DialogResult="{Binding DialogResult}">
+    <UserControl.Resources>
+        <converters:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter" />
+        <converters:ColorToForegroundConverter x:Key="ColorToForegroundConverter" />
+    </UserControl.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -24,7 +29,10 @@
                             <ColumnDefinition Width="100" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="{Binding Description}" />
+                        <Button Grid.Column="0"
+                                Background="{Binding Color, Converter={StaticResource ColorToSolidBrushConverter}}"
+                                Content="{Binding Description}"
+                                Foreground="{Binding Color, Converter={StaticResource ColorToForegroundConverter}, Mode=OneWay}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

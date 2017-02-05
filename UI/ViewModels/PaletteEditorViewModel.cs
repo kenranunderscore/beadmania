@@ -24,7 +24,7 @@ namespace beadmania.UI.ViewModels
         public IEnumerable<Bead> Beads => palette.Beads;
 
         public string Name => palette.Name;
-
+        
         //TODO: Extract saving logic
         private void Save()
         {
