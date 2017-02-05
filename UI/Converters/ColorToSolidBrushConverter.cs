@@ -15,7 +15,9 @@ namespace beadmania.UI.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var brush = (SolidColorBrush)value;
+            var mediaColor = brush.Color;
+            return System.Drawing.Color.FromArgb(mediaColor.A, mediaColor.R, mediaColor.G, mediaColor.B);
         }
     }
 }

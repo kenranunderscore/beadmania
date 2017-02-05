@@ -26,12 +26,12 @@
                 <DataTemplate>
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="120" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0"
+                                Height="40"
                                 Background="{Binding Color, Converter={StaticResource ColorToSolidBrushConverter}}"
-                                Content="{Binding Description}"
                                 Foreground="{Binding Color, Converter={StaticResource ColorToForegroundConverter}, Mode=OneWay}" />
                     </Grid>
                 </DataTemplate>
