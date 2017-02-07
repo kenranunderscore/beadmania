@@ -35,7 +35,7 @@ namespace beadmania.UI.ViewModels
 
         public ICommand EditPaletteCmd => new RelayCommand(_ =>
         {
-            var result = dialogService.OpenDialog(new PaletteEditorViewModel(ioService, SelectedPalette));
+            var result = dialogService.OpenDialog(new PaletteEditorViewModel(ioService, SelectedPalette.Clone()));
             if (result == true)
             {
 

@@ -21,14 +21,13 @@ namespace beadmania.UI.ViewModels
 
         public ICommand SaveCmd => new RelayCommand(_ => Save());
 
-        public IEnumerable<Bead> Beads => palette.Beads;
-
-        public string Name => palette.Name;
+        public BeadPalette Palette => palette;
         
         //TODO: Extract saving logic
+        //TODO: Make file extension a constant
         private void Save()
         {
-            string fileName = TargetFolderName + Path.DirectorySeparatorChar + Name;
+            string fileName = TargetFolderName + Path.DirectorySeparatorChar + palette.Name + "*.bpal";
             var fileContent = palette.ToXml();
             if (!Directory.Exists(TargetFolderName))
                 Directory.CreateDirectory(TargetFolderName);
