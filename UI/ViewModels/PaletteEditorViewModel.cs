@@ -9,7 +9,6 @@ namespace beadmania.UI.ViewModels
 {
     internal class PaletteEditorViewModel : DialogViewModel
     {
-        private const string TargetFolderName = "Palettes";
         private readonly BeadPalette palette;
         private readonly IIOService ioService;
 
@@ -27,10 +26,10 @@ namespace beadmania.UI.ViewModels
         //TODO: Make file extension a constant
         private void Save()
         {
-            string fileName = TargetFolderName + Path.DirectorySeparatorChar + palette.Name + "*.bpal";
+            string fileName = ConfigConstants.PaletteFolderName + Path.DirectorySeparatorChar + palette.Name + $".{ConfigConstants.PaletteFileExtension}";
             var fileContent = palette.ToXml();
-            if (!Directory.Exists(TargetFolderName))
-                Directory.CreateDirectory(TargetFolderName);
+            if (!Directory.Exists(ConfigConstants.PaletteFolderName))
+                Directory.CreateDirectory(ConfigConstants.PaletteFolderName);
 
             using (FileStream fs = File.OpenWrite(fileName))
             {

@@ -101,7 +101,7 @@ namespace beadmania.UI.ViewModels
         private IEnumerable<BeadPalette> LoadPalettesFromXml()
         {
             List<BeadPalette> palettes = new List<BeadPalette>();
-            foreach (string fileName in ioService.GetFileNamesInCurrentDirectory("*.bpal"))
+            foreach (string fileName in ioService.GetFileNamesInCurrentDirectory($"*.{ConfigConstants.PaletteFileExtension}"))
             {
                 palettes.Add(LoadPalette(fileName));
             }
