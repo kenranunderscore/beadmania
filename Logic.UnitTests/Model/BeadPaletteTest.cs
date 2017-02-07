@@ -82,5 +82,41 @@ namespace beadmania.Logic.UnitTests.Model
             Bead expectedBead = new Bead { Description = "MrBead", Color = Color.FromArgb(123) };
             Assert.That(palette.Beads, Contains.Item(expectedBead));
         }
+
+        [Test]
+        public void A_cloned_palette_is_a_new_reference()
+        {
+            BeadPalette palette = new BeadPalette("Foo");
+            var clone = palette.Clone();
+            Assert.That(clone, Is.Not.SameAs(palette));
+        }
+
+        [Test]
+        public void A_cloned_palette_retains_its_name()
+        {
+            BeadPalette palette = new BeadPalette("FooPalette");
+            var clone = palette.Clone();
+            Assert.That(clone.Name, Is.EqualTo(palette.Name));
+        }
+
+        [Test]
+        public void A_cloned_palette_retains_its_bead_count()
+        {
+            BeadPalette palette = new BeadPalette("FooPalette");
+            palette.Add(new Bead { Description = "A", Color = Color.DarkOrchid });
+            palette.Add(new Bead { Description = "B", Color = Color.GreenYellow });
+            var clone = palette.Clone();
+            Assert.That(clone.Beads.Count(), Is.EqualTo(palette.Beads.Count()));
+        }
+
+        [Test]
+        public void A_cloned_palette_produces_XML_identical_to_the_original()
+        {
+            BeadPalette palette = new BeadPalette("FooPalette");
+            palette.Add(new Bead { Description = "A", Color = Color.DarkOrchid });
+            palette.Add(new Bead { Description = "B", Color = Color.GreenYellow });
+            var clone = palette.Clone();
+            Assert.That(clone.ToXml().ToString(), Is.EqualTo(palette.ToXml().ToString()));
+        }
     }
 }

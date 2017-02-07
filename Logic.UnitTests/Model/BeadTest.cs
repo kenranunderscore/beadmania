@@ -89,5 +89,29 @@ namespace beadmania.Logic.UnitTests.Model
             Bead bead = new Bead();
             Assert.That(bead, Is.Not.EqualTo("abc"));
         }
+
+        [Test]
+        public void A_cloned_bead_is_a_new_reference()
+        {
+            Bead bead = new Bead();
+            Bead clone = bead.Clone();
+            Assert.That(clone, Is.Not.SameAs(bead));
+        }
+
+        [Test]
+        public void A_cloned_bead_retains_its_color()
+        {
+            Bead bead = new Bead { Color = Color.Aquamarine };
+            Bead clone = bead.Clone();
+            Assert.That(clone.Color, Is.EqualTo(bead.Color));
+        }
+
+        [Test]
+        public void A_cloned_bead_retains_its_description()
+        {
+            Bead bead = new Bead { Description = "FooBead" };
+            Bead clone = bead.Clone();
+            Assert.That(clone.Description, Is.EqualTo(bead.Description));
+        }
     }
 }

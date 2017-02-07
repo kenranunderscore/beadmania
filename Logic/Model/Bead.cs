@@ -33,5 +33,7 @@ namespace beadmania.Logic.Model
                 return hash;
             }
         }
+
+        public Bead Clone() => new Bead { Color = Color, Description = Description };
     }
 }

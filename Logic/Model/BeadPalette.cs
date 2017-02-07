@@ -53,5 +53,15 @@ namespace beadmania.Logic.Model
                             new XElement(nameof(Bead.Description), b.Description),
                             new XElement(nameof(Bead.Color), b.Color.ToArgb())))));
         }
+
+        public BeadPalette Clone()
+        {
+            BeadPalette clone = new BeadPalette(Name);
+            foreach (var bead in beads)
+            {
+                clone.beads.Add(bead.Clone());
+            }
+            return clone;
+        }
     }
 }
