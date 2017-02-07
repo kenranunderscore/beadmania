@@ -1,7 +1,7 @@
-﻿using beadmania.Logic.ColorVectors;
-
-namespace beadmania.Logic.Converters
+﻿namespace beadmania.Logic.Converters
 {
+    using beadmania.Logic.ColorVectors;
+
     internal sealed class XyzToLabConverter
     {
         private const double RefX = 95.047d;

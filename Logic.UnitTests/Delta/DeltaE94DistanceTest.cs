@@ -1,9 +1,9 @@
-﻿using beadmania.Logic.ColorVectors;
-using beadmania.Logic.Delta;
-using NUnit.Framework;
-
-namespace beadmania.Logic.UnitTests.Delta
+﻿namespace beadmania.Logic.UnitTests.Delta
 {
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Delta;
+    using NUnit.Framework;
+
     [TestFixture]
     public class DeltaE94DistanceTest
     {

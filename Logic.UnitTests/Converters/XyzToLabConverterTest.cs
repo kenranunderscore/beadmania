@@ -1,9 +1,9 @@
-﻿using beadmania.Logic.Converters;
-using beadmania.Logic.ColorVectors;
-using NUnit.Framework;
-
-namespace beadmania.Logic.UnitTests.Converters
+﻿namespace beadmania.Logic.UnitTests.Converters
 {
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Converters;
+    using NUnit.Framework;
+
     [TestFixture]
     public class XyzToLabConverterTest
     {

@@ -1,10 +1,7 @@
-﻿using beadmania.Logic.ColorVectors;
-using beadmania.Logic.Delta;
-using System.Drawing;
-using System.Linq;
-
-namespace beadmania.Logic.Model
+﻿namespace beadmania.Logic.Model
 {
+    using System.Drawing;
+
     public sealed class BeadPattern
     {
         private readonly Bead[,] beads;

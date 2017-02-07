@@ -1,9 +1,9 @@
-﻿using beadmania.Logic.Math;
-using NUnit.Framework;
-using System;
-
-namespace beadmania.Logic.UnitTests.Math
+﻿namespace beadmania.Logic.UnitTests.Math
 {
+    using System;
+    using beadmania.Logic.Math;
+    using NUnit.Framework;
+
     [TestFixture]
     public class Vector3DTest
     {

@@ -1,8 +1,7 @@
-﻿using System;
-using beadmania.Logic.ColorVectors;
-
-namespace beadmania.Logic.Delta
+﻿namespace beadmania.Logic.Delta
 {
+    using beadmania.Logic.ColorVectors;
+
     public sealed class DeltaE94Distance : IColorDistance<RgbVector>, IColorDistance<LabVector>
     {
         private const double K1 = 0.045d;

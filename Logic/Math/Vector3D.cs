@@ -1,8 +1,8 @@
-﻿using System;
-using System.Globalization;
-
-namespace beadmania.Logic.Math
+﻿namespace beadmania.Logic.Math
 {
+    using System;
+    using System.Globalization;
+
     public class Vector3D : IEquatable<Vector3D>
     {
         private const int Dimensions = 3;

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Xml.Linq;
-
-namespace beadmania.Logic.Model
+﻿namespace beadmania.Logic.Model
 {
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Xml.Linq;
+
     public class BeadPalette
     {
         private readonly HashSet<Bead> beads = new HashSet<Bead>();

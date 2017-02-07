@@ -1,11 +1,11 @@
-﻿using beadmania.Logic.Model;
-using NUnit.Framework;
-using System.Drawing;
-using System.Linq;
-using System.Xml.Linq;
-
-namespace beadmania.Logic.UnitTests.Model
+﻿namespace beadmania.Logic.UnitTests.Model
 {
+    using System.Drawing;
+    using System.Linq;
+    using System.Xml.Linq;
+    using beadmania.Logic.Model;
+    using NUnit.Framework;
+
     [TestFixture]
     public class BeadPaletteTest
     {

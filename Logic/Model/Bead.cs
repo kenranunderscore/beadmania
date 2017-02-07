@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
-
-namespace beadmania.Logic.Model
+﻿namespace beadmania.Logic.Model
 {
+    using System;
+    using System.Drawing;
+
     public sealed class Bead : IEquatable<Bead>
     {
         public string Description { get; set; }

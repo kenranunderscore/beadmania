@@ -1,8 +1,8 @@
-﻿using beadmania.Logic.Converters;
-using beadmania.Logic.Math;
-
-namespace beadmania.Logic.ColorVectors
+﻿namespace beadmania.Logic.ColorVectors
 {
+    using beadmania.Logic.Converters;
+    using beadmania.Logic.Math;
+
     public sealed class XyzVector : Vector3D
     {
         public XyzVector(double x, double y, double z)

@@ -1,8 +1,8 @@
-﻿using beadmania.Logic.ColorVectors;
-using beadmania.Logic.Math;
-
-namespace beadmania.Logic.Converters
+﻿namespace beadmania.Logic.Converters
 {
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Math;
+
     internal sealed class RgbToXyzConverter
     {
         private static readonly Matrix3D transformation

@@ -1,12 +1,11 @@
-﻿using beadmania.Logic.Model;
-using beadmania.UI.MVVM;
-using beadmania.UI.Services;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Input;
-
-namespace beadmania.UI.ViewModels
+﻿namespace beadmania.UI.ViewModels
 {
+    using System.IO;
+    using System.Windows.Input;
+    using beadmania.Logic.Model;
+    using beadmania.UI.MVVM;
+    using beadmania.UI.Services;
+
     internal class PaletteEditorViewModel : DialogViewModel
     {
         private readonly BeadPalette palette;

@@ -1,13 +1,13 @@
-﻿using beadmania.UI.Services;
-using beadmania.UI.ViewModels;
-using Moq;
-using NUnit.Framework;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-
-namespace beadmania.UI.UnitTests.ViewModels
+﻿namespace beadmania.UI.UnitTests.ViewModels
 {
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using beadmania.UI.Services;
+    using beadmania.UI.ViewModels;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class MainViewModelTest
     {

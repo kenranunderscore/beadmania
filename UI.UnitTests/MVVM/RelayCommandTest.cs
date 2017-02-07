@@ -1,9 +1,9 @@
-﻿using beadmania.UI.MVVM;
-using NUnit.Framework;
-using System;
-
-namespace beadmania.UI.UnitTests.MVVM
+﻿namespace beadmania.UI.UnitTests.MVVM
 {
+    using System;
+    using beadmania.UI.MVVM;
+    using NUnit.Framework;
+
     [TestFixture]
     public class RelayCommandTest
     {

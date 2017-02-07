@@ -1,10 +1,10 @@
-﻿using beadmania.Logic.ColorVectors;
-using beadmania.Logic.Delta;
-using beadmania.Logic.Model;
-using System.Drawing;
-
-namespace beadmania.Logic.Converters
+﻿namespace beadmania.Logic.Converters
 {
+    using System.Drawing;
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Delta;
+    using beadmania.Logic.Model;
+
     public class BeadPatternConverter
     {
         private readonly IColorDistance<RgbVector> colorDistance;

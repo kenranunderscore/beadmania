@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-
-namespace beadmania.UI.MVVM
+﻿namespace beadmania.UI.MVVM
 {
+    using System;
+    using System.Windows.Input;
+
     internal class RelayCommand : ICommand
     {
         private readonly Action<object> execute;

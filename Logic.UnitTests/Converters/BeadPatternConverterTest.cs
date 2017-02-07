@@ -1,13 +1,13 @@
-﻿using beadmania.Logic.ColorVectors;
-using beadmania.Logic.Converters;
-using beadmania.Logic.Delta;
-using beadmania.Logic.Model;
-using Moq;
-using NUnit.Framework;
-using System.Drawing;
-
-namespace beadmania.Logic.UnitTests.Converters
+﻿namespace beadmania.Logic.UnitTests.Converters
 {
+    using System.Drawing;
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Converters;
+    using beadmania.Logic.Delta;
+    using beadmania.Logic.Model;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class BeadPatternConverterTest
     {

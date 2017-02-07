@@ -1,9 +1,9 @@
-﻿using beadmania.Logic.Delta;
-using beadmania.Logic.Math;
-using NUnit.Framework;
-
-namespace beadmania.Logic.UnitTests.Delta
+﻿namespace beadmania.Logic.UnitTests.Delta
 {
+    using beadmania.Logic.Delta;
+    using beadmania.Logic.Math;
+    using NUnit.Framework;
+
     [TestFixture]
     public class EuclideanDistanceTest
     {

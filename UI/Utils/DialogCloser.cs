@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace beadmania.UI.Utils
+﻿namespace beadmania.UI.Utils
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
     internal static class DialogCloser
     {
         private static readonly DependencyProperty DialogResultProperty

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace beadmania.UI.MVVM
+﻿namespace beadmania.UI.MVVM
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
     public abstract class ViewModel : INotifyPropertyChanged
     {
         protected bool SetProperty<T>(ref T backingField, T value, [CallerMemberName]string propertyName = "")

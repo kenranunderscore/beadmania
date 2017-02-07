@@ -1,10 +1,10 @@
-﻿using beadmania.Logic.Converters;
-using beadmania.Logic.Math;
-using System;
-using System.Drawing;
-
-namespace beadmania.Logic.ColorVectors
+﻿namespace beadmania.Logic.ColorVectors
 {
+    using System;
+    using System.Drawing;
+    using beadmania.Logic.Converters;
+    using beadmania.Logic.Math;
+
     public sealed class RgbVector : Vector3D
     {
         private const int MinValue = 0;

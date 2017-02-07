@@ -1,17 +1,17 @@
-﻿using beadmania.Logic.Converters;
-using beadmania.Logic.Delta;
-using beadmania.Logic.Model;
-using beadmania.UI.MVVM;
-using beadmania.UI.Services;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Input;
-using System.Xml.Linq;
-
-namespace beadmania.UI.ViewModels
+﻿namespace beadmania.UI.ViewModels
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Input;
+    using System.Xml.Linq;
+    using beadmania.Logic.Converters;
+    using beadmania.Logic.Delta;
+    using beadmania.Logic.Model;
+    using beadmania.UI.MVVM;
+    using beadmania.UI.Services;
+
     internal class MainViewModel : ViewModel
     {
         private readonly IIOService ioService;

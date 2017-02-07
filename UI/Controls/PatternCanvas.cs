@@ -1,11 +1,11 @@
-﻿using beadmania.Logic.Model;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-
-namespace beadmania.UI.Controls
+﻿namespace beadmania.UI.Controls
 {
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using beadmania.Logic.Model;
+
     internal class PatternCanvas : Canvas
     {
         private const double ScalingFactor = 1.5d;

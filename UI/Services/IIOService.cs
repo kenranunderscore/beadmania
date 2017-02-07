@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-namespace beadmania.UI.Services
+﻿namespace beadmania.UI.Services
 {
+    using System.Collections.Generic;
+    using System.IO;
+
     public interface IIOService
     {
         string ChooseFile(string initialPath);

@@ -1,10 +1,10 @@
-﻿using beadmania.UI.Services;
-using beadmania.UI.Views;
-using Ninject;
-using System.Windows;
-
-namespace beadmania.UI
+﻿namespace beadmania.UI
 {
+    using System.Windows;
+    using beadmania.UI.Services;
+    using beadmania.UI.Views;
+    using Ninject;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

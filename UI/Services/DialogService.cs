@@ -1,8 +1,8 @@
-﻿using beadmania.UI.MVVM;
-using System.Windows;
-
-namespace beadmania.UI.Services
+﻿namespace beadmania.UI.Services
 {
+    using System.Windows;
+    using beadmania.UI.MVVM;
+
     internal class DialogService : IDialogService
     {
         public bool? OpenDialog(ViewModel vm)

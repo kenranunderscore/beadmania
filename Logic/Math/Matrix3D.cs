@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace beadmania.Logic.Math
+﻿namespace beadmania.Logic.Math
 {
+    using System;
+
     public sealed class Matrix3D : IEquatable<Matrix3D>
     {
         private const int Dimension = 3;

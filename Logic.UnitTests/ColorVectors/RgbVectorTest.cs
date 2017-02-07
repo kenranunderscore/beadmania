@@ -1,11 +1,11 @@
-﻿using beadmania.Logic.Converters;
-using beadmania.Logic.ColorVectors;
-using NUnit.Framework;
-using System;
-using System.Drawing;
-
-namespace beadmania.Logic.UnitTests.ColorVectors
+﻿namespace beadmania.Logic.UnitTests.ColorVectors
 {
+    using System;
+    using System.Drawing;
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Converters;
+    using NUnit.Framework;
+
     [TestFixture]
     public class RgbVectorTest
     {

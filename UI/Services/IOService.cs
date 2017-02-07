@@ -1,10 +1,9 @@
-﻿using Microsoft.Win32;
-using System.IO;
-using System;
-using System.Collections.Generic;
-
-namespace beadmania.UI.Services
+﻿namespace beadmania.UI.Services
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using Microsoft.Win32;
+
     internal class IOService : IIOService
     {
         public bool FileExists(string path)

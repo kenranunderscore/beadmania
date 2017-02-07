@@ -1,10 +1,10 @@
-﻿using beadmania.Logic.Converters;
-using beadmania.Logic.ColorVectors;
-using NUnit.Framework;
-using System.Drawing;
-
-namespace beadmania.Logic.UnitTests.Converters
+﻿namespace beadmania.Logic.UnitTests.Converters
 {
+    using System.Drawing;
+    using beadmania.Logic.ColorVectors;
+    using beadmania.Logic.Converters;
+    using NUnit.Framework;
+
     [TestFixture]
     public class RgbToXyzConverterTest
     {
