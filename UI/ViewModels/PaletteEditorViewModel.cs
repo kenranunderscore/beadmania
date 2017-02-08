@@ -4,21 +4,22 @@
     using System.Windows.Input;
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
+    using Logic;
     using Logic.IO;
-    using Services;
 
     internal class PaletteEditorViewModel : DialogViewModel
     {
         private readonly BeadPalette palette;
-        private readonly IFileSystemService ioService;
 
-        public PaletteEditorViewModel(IFileSystemService ioService, BeadPalette palette)
+        public PaletteEditorViewModel(IFileSystemService fileSystemService, BeadPalette palette)
         {
             this.palette = palette;
-            this.ioService = ioService;
+            this.FileSystemService = fileSystemService;
         }
 
         public ICommand SaveCmd => new RelayCommand(_ => Save());
+
+        private IFileSystemService FileSystemService { get; }
 
         public BeadPalette Palette => palette;
         

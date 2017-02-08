@@ -7,33 +7,32 @@
     using System.Linq;
     using System.Windows.Input;
     using System.Xml.Linq;
+    using beadmania.Logic;
     using beadmania.Logic.Converters;
     using beadmania.Logic.Delta;
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
     using beadmania.UI.Services;
     using Logic.IO;
+    using Logic.Repositories;
 
     internal class MainViewModel : ViewModel
     {
-        private readonly IFileSystemService ioService;
-        private readonly IDialogService dialogService;
-
         private BeadPattern pattern;
         private bool showGrid = true;
         private string imagePath;
         private BeadPalette selectedPalette;
         private ObservableCollection<BeadPalette> allPalettes = new ObservableCollection<BeadPalette>();
 
-        public MainViewModel(IFileSystemService ioService, IDialogService dialogService)
+        public MainViewModel(IFileSystemService fileSystemService, IPaletteRepository paletteRepository, IDialogService dialogService)
         {
-            this.ioService = ioService;
-            this.dialogService = dialogService;
+            FileSystemService = fileSystemService;
+            DialogService = dialogService;
             AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
-        public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(ioService, null)));
+        public ICommand NewPaletteCmd => new RelayCommand(_ => DialogService.OpenDialog(new PaletteEditorViewModel(FileSystemService, null)));
 
         public ICommand DeletePaletteCmd => new RelayCommand(_ =>
         {
@@ -43,21 +42,21 @@
 
         public ICommand EditPaletteCmd => new RelayCommand(_ =>
         {
-            var result = dialogService.OpenDialog(new PaletteEditorViewModel(ioService, SelectedPalette.Clone()));
+            var result = DialogService.OpenDialog(new PaletteEditorViewModel(FileSystemService, SelectedPalette.Clone()));
             if (result == true)
             {
 
             }
         }, _ => SelectedPalette != null);
 
-        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = dialogService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
+        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = DialogService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 
         public ICommand LoadPaletteCmd => new RelayCommand(_ =>
         {
-            string fileName = dialogService.ChooseFile(null, "Bead palettes|*.bpal");
+            string fileName = DialogService.ChooseFile(null, "Bead palettes|*.bpal");
             if (!string.IsNullOrEmpty(fileName))
             {
-                BeadPalette palette = LoadPalette(fileName);
+                BeadPalette palette = PaletteRepository.Load(fileName);
                 AllPalettes.Add(palette);
             }
         });
@@ -65,6 +64,12 @@
         public ICommand ConvertCmd => new RelayCommand(
                 _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
                 _ => Pattern != null && SelectedPalette != null);
+
+        private IFileSystemService FileSystemService { get; }
+
+        private IDialogService DialogService { get; }
+
+        private IPaletteRepository PaletteRepository { get; }
 
         public ObservableCollection<BeadPalette> AllPalettes { get; }
 
@@ -92,14 +97,14 @@
             set
             {
                 SetProperty(ref imagePath, value);
-                if (ioService.FileExists(imagePath))
+                if (FileSystemService.FileExists(imagePath))
                     LoadBitmap();
             }
         }
 
         private void LoadBitmap()
         {
-            using (var fileStream = ioService.OpenFile(ImagePath))
+            using (var fileStream = FileSystemService.OpenFile(ImagePath))
             {
                 Bitmap image = (Bitmap)Image.FromStream(fileStream);
                 Pattern = BeadPattern.FromBitmap(image);
@@ -109,20 +114,11 @@
         private IEnumerable<BeadPalette> LoadPalettesFromXml()
         {
             List<BeadPalette> palettes = new List<BeadPalette>();
-            foreach (string fileName in ioService.GetFileNamesInCurrentDirectory($"*.{ConfigConstants.PaletteFileExtension}"))
+            foreach (string fileName in FileSystemService.GetFileNamesInCurrentDirectory($"*.{ConfigConstants.PaletteFileExtension}"))
             {
-                palettes.Add(LoadPalette(fileName));
+                palettes.Add(PaletteRepository.Load(fileName));
             }
             return palettes.OrderBy(x => x.Name);
-        }
-
-        private BeadPalette LoadPalette(string fileName)
-        {
-            using (var fileStream = ioService.OpenFile(fileName))
-            {
-                var xml = XDocument.Load(fileStream);
-                return BeadPalette.FromXml(xml);
-            }
         }
     }
 }

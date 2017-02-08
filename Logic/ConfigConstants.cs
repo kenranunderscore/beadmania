@@ -1,6 +1,6 @@
-﻿namespace beadmania.UI
+﻿namespace beadmania.Logic
 {
-    internal static class ConfigConstants
+    public static class ConfigConstants
     {
         public const string PaletteFileExtension = "bpal";
         public const string PaletteFolderName = "Palettes";

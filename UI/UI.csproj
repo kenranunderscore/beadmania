@@ -61,7 +61,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapping\UIModule.cs" />
-    <Compile Include="ConfigConstants.cs" />
     <Compile Include="Controls\PatternCanvas.cs" />
     <Compile Include="Converters\ColorToForegroundConverter.cs" />
     <Compile Include="Converters\ColorToSolidBrushConverter.cs" />
