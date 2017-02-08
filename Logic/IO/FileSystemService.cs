@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.IO;
 
-    public class FileSystemService : IFileSystemService
+    internal class FileSystemService : IFileSystemService
     {
         public bool FileExists(string path)
         {

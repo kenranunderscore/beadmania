@@ -1,9 +1,9 @@
 ﻿namespace beadmania.UI
 {
+    using System;
     using System.Windows;
-    using beadmania.UI.Services;
     using beadmania.UI.Views;
-    using Logic.IO;
+    using Bootstrapping;
     using Ninject;
 
     /// <summary>
@@ -19,8 +19,8 @@
             base.OnStartup(e);
 
             ninjectKernel = new StandardKernel();
-            ninjectKernel.Bind<IFileSystemService>().To<FileSystemService>();
-            ninjectKernel.Bind<IDialogService>().To<DialogService>();
+            ninjectKernel.Load("beadmania*.dll");
+            ninjectKernel.Load<UIModule>();
 
             var mainWindow = ninjectKernel.Get<MainWindow>();
             Current.MainWindow = mainWindow;
