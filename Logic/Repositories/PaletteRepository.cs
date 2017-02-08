@@ -1,5 +1,6 @@
 ﻿namespace beadmania.Logic.Repositories
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Xml.Linq;
     using beadmania.Logic.IO;
@@ -21,6 +22,17 @@
                 var xml = XDocument.Load(stream);
                 return BeadPalette.FromXml(xml);
             }
+        }
+
+        public IEnumerable<BeadPalette> Load()
+        {
+            var palettes = new List<BeadPalette>();
+            foreach (string fileName in FileSystemService.GetFileNamesInCurrentDirectory($".{ConfigConstants.PaletteFileExtension}"))
+            {
+                var palette = Load(fileName);
+                palettes.Add(palette);
+            }
+            return palettes;
         }
     }
 }

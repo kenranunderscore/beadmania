@@ -6,7 +6,6 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Input;
-    using System.Xml.Linq;
     using beadmania.Logic;
     using beadmania.Logic.Converters;
     using beadmania.Logic.Delta;
@@ -28,7 +27,9 @@
         {
             FileSystemService = fileSystemService;
             DialogService = dialogService;
-            AllPalettes = new ObservableCollection<BeadPalette>(LoadPalettesFromXml());
+            PaletteRepository = paletteRepository;
+
+            AllPalettes = new ObservableCollection<BeadPalette>(PaletteRepository.Load());
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
 
@@ -109,16 +110,6 @@
                 Bitmap image = (Bitmap)Image.FromStream(fileStream);
                 Pattern = BeadPattern.FromBitmap(image);
             }
-        }
-
-        private IEnumerable<BeadPalette> LoadPalettesFromXml()
-        {
-            List<BeadPalette> palettes = new List<BeadPalette>();
-            foreach (string fileName in FileSystemService.GetFileNamesInCurrentDirectory($"*.{ConfigConstants.PaletteFileExtension}"))
-            {
-                palettes.Add(PaletteRepository.Load(fileName));
-            }
-            return palettes.OrderBy(x => x.Name);
         }
     }
 }
