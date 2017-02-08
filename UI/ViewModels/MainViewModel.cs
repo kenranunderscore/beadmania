@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Windows.Input;
     using System.Xml.Linq;
@@ -11,10 +12,11 @@
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
     using beadmania.UI.Services;
+    using Logic.IO;
 
     internal class MainViewModel : ViewModel
     {
-        private readonly IIOService ioService;
+        private readonly IFileSystemService ioService;
         private readonly IDialogService dialogService;
 
         private BeadPattern pattern;
@@ -23,7 +25,7 @@
         private BeadPalette selectedPalette;
         private ObservableCollection<BeadPalette> allPalettes = new ObservableCollection<BeadPalette>();
 
-        public MainViewModel(IIOService ioService, IDialogService dialogService)
+        public MainViewModel(IFileSystemService ioService, IDialogService dialogService)
         {
             this.ioService = ioService;
             this.dialogService = dialogService;
@@ -33,6 +35,12 @@
 
         public ICommand NewPaletteCmd => new RelayCommand(_ => dialogService.OpenDialog(new PaletteEditorViewModel(ioService, null)));
 
+        public ICommand DeletePaletteCmd => new RelayCommand(_ =>
+        {
+            string paletteFile = ConfigConstants.PaletteFolderName + Path.DirectorySeparatorChar + SelectedPalette.Name + $".{ConfigConstants.PaletteFileExtension}";
+            File.Delete(paletteFile);
+        }, _ => SelectedPalette != null);
+
         public ICommand EditPaletteCmd => new RelayCommand(_ =>
         {
             var result = dialogService.OpenDialog(new PaletteEditorViewModel(ioService, SelectedPalette.Clone()));
@@ -40,13 +48,13 @@
             {
 
             }
-        });
+        }, _ => SelectedPalette != null);
 
-        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = ioService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
+        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = dialogService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
 
         public ICommand LoadPaletteCmd => new RelayCommand(_ =>
         {
-            string fileName = ioService.ChooseFile(null, "Bead palettes|*.bpal");
+            string fileName = dialogService.ChooseFile(null, "Bead palettes|*.bpal");
             if (!string.IsNullOrEmpty(fileName))
             {
                 BeadPalette palette = LoadPalette(fileName);

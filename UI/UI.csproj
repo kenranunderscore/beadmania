@@ -67,8 +67,6 @@
     <Compile Include="MVVM\DialogViewModel.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IDialogService.cs" />
-    <Compile Include="Services\IOService.cs" />
-    <Compile Include="Services\IIOService.cs" />
     <Compile Include="Utils\DialogCloser.cs" />
     <Compile Include="ViewModels\PaletteEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

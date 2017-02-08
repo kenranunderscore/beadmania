@@ -1,0 +1,18 @@
+<BeadPalette Name="FooBar">
+    <Bead>
+        <Description>Blue</Description>
+        <Color>255</Color>
+    </Bead>
+    <Bead>
+        <Description>Green</Description>
+        <Color>255000</Color>
+    </Bead>
+    <Bead>
+        <Description>Red</Description>
+        <Color>255000000</Color>
+    </Bead>
+    <Bead>
+        <Description>Test</Description>
+        <Color>123023200</Color>
+    </Bead>
+</BeadPalette>

@@ -4,14 +4,15 @@
     using System.Windows.Input;
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
-    using beadmania.UI.Services;
+    using Logic.IO;
+    using Services;
 
     internal class PaletteEditorViewModel : DialogViewModel
     {
         private readonly BeadPalette palette;
-        private readonly IIOService ioService;
+        private readonly IFileSystemService ioService;
 
-        public PaletteEditorViewModel(IIOService ioService, BeadPalette palette)
+        public PaletteEditorViewModel(IFileSystemService ioService, BeadPalette palette)
         {
             this.palette = palette;
             this.ioService = ioService;
@@ -22,7 +23,6 @@
         public BeadPalette Palette => palette;
         
         //TODO: Extract saving logic
-        //TODO: Make file extension a constant
         private void Save()
         {
             string fileName = ConfigConstants.PaletteFolderName + Path.DirectorySeparatorChar + palette.Name + $".{ConfigConstants.PaletteFileExtension}";

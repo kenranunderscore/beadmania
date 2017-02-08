@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -49,6 +50,8 @@
     <Compile Include="ColorVectors\XyzVector.cs" />
     <Compile Include="Delta\DeltaE94Distance.cs" />
     <Compile Include="Delta\IColorDistance.cs" />
+    <Compile Include="IO\IFileSystemService.cs" />
+    <Compile Include="IO\FileSystemService.cs" />
     <Compile Include="Math\Matrix3D.cs" />
     <Compile Include="Math\Vector3D.cs" />
     <Compile Include="Delta\EuclideanDistance.cs" />

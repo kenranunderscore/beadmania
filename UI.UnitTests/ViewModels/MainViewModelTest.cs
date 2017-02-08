@@ -5,6 +5,7 @@
     using System.IO;
     using beadmania.UI.Services;
     using beadmania.UI.ViewModels;
+    using Logic.IO;
     using Moq;
     using NUnit.Framework;
 
@@ -14,7 +15,7 @@
         [Test]
         public void Grid_is_shown_by_default()
         {
-            var ioService = new Mock<IIOService>().Object;
+            var ioService = new Mock<IFileSystemService>().Object;
             var dialogService = new Mock<IDialogService>().Object;
             MainViewModel vm = new MainViewModel(ioService, dialogService);
             Assert.IsTrue(vm.ShowGrid);
@@ -23,7 +24,7 @@
         [Test]
         public void Can_toggle_grid_visibility()
         {
-            var ioService = new Mock<IIOService>().Object;
+            var ioService = new Mock<IFileSystemService>().Object;
             var dialogService = new Mock<IDialogService>().Object;
             MainViewModel vm = new MainViewModel(ioService, dialogService);
             vm.ShowGrid = false;
@@ -38,7 +39,7 @@
             using (var stream = new MemoryStream())
             {
                 bmp.Save(stream, ImageFormat.Bmp);
-                var ioServiceMock = new Mock<IIOService>();
+                var ioServiceMock = new Mock<IFileSystemService>();
                 ioServiceMock.Setup(_ => _.FileExists(path)).Returns(true);
                 ioServiceMock.Setup(_ => _.OpenFile(path)).Returns(stream);
                 var dialogService = new Mock<IDialogService>().Object;
@@ -52,7 +53,7 @@
         [Test]
         public void Setting_image_path_to_nonexistent_file_does_not_load_image()
         {
-            var ioServiceMock = new Mock<IIOService>();
+            var ioServiceMock = new Mock<IFileSystemService>();
             ioServiceMock.Setup(_ => _.FileExists(It.IsAny<string>())).Returns(false);
             var dialogService = new Mock<IDialogService>().Object;
             MainViewModel vm = new MainViewModel(ioServiceMock.Object, dialogService);
@@ -63,20 +64,20 @@
         [Test]
         public void Opening_image_triggers_open_file_dialog()
         {
-            var ioServiceMock = new Mock<IIOService>();
-            var dialogService = new Mock<IDialogService>().Object;
-            MainViewModel vm = new MainViewModel(ioServiceMock.Object, dialogService);
+            var ioServiceMock = new Mock<IFileSystemService>();
+            var dialogServiceMock = new Mock<IDialogService>();
+            MainViewModel vm = new MainViewModel(ioServiceMock.Object, dialogServiceMock.Object);
             vm.OpenImageCmd.Execute(null);
-            ioServiceMock.Verify(_ => _.ChooseFile(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
+            dialogServiceMock.Verify(_ => _.ChooseFile(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
         }
 
         [Test]
         public void Opening_image_sets_image_path()
         {
-            var ioServiceMock = new Mock<IIOService>();
-            ioServiceMock.Setup(_ => _.ChooseFile(It.IsAny<string>(), It.IsAny<string>())).Returns("foo");
-            var dialogService = new Mock<IDialogService>().Object;
-            MainViewModel vm = new MainViewModel(ioServiceMock.Object, dialogService);
+            var ioServiceMock = new Mock<IFileSystemService>();
+            var dialogServiceMock = new Mock<IDialogService>();
+            dialogServiceMock.Setup(_ => _.ChooseFile(It.IsAny<string>(), It.IsAny<string>())).Returns("foo");
+            MainViewModel vm = new MainViewModel(ioServiceMock.Object, dialogServiceMock.Object);
             vm.OpenImageCmd.Execute(null);
             Assert.AreEqual("foo", vm.ImagePath);
         }

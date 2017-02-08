@@ -3,6 +3,7 @@
     using System.Windows;
     using beadmania.UI.Services;
     using beadmania.UI.Views;
+    using Logic.IO;
     using Ninject;
 
     /// <summary>
@@ -12,12 +13,13 @@
     {
         private IKernel ninjectKernel;
 
+        //TODO: Extract bootstrapping
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             ninjectKernel = new StandardKernel();
-            ninjectKernel.Bind<IIOService>().To<IOService>();
+            ninjectKernel.Bind<IFileSystemService>().To<FileSystemService>();
             ninjectKernel.Bind<IDialogService>().To<DialogService>();
 
             var mainWindow = ninjectKernel.Get<MainWindow>();
