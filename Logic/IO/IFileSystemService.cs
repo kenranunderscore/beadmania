@@ -5,7 +5,7 @@
 
     public interface IFileSystemService
     {
-        IEnumerable<string> GetFileNamesInCurrentDirectory(string filter);
+        IEnumerable<string> FileNamesInFolder(string path, string filter);
         Stream OpenFile(string path);
         Stream OpenWrite(string path);
         bool FileExists(string path);

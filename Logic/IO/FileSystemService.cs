@@ -11,7 +11,7 @@
 
         public Stream OpenWrite(string path) => File.OpenWrite(path);
 
-        public IEnumerable<string> GetFileNamesInCurrentDirectory(string filter) =>
-            Directory.EnumerateFiles(".", filter, SearchOption.TopDirectoryOnly);
+        public IEnumerable<string> FileNamesInFolder(string path, string filter) =>
+            Directory.EnumerateFiles(path, filter, SearchOption.TopDirectoryOnly);
     }
 }

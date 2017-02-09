@@ -30,16 +30,16 @@
             using (Stream stream = FileSystemService.OpenFile(fileName))
             {
                 var xml = XDocument.Load(stream);
-                var palette = BeadPalette.FromXml(xml);
-                Save(palette);
-                return palette;
+                return BeadPalette.FromXml(xml);
             }
         }
 
         public IEnumerable<BeadPalette> Load()
         {
             var palettes = new List<BeadPalette>();
-            foreach (string fileName in FileSystemService.GetFileNamesInCurrentDirectory($".{ConfigConstants.PaletteFileExtension}"))
+            foreach (string fileName in FileSystemService.FileNamesInFolder(
+                ConfigConstants.PaletteFolderName,
+                $"*.{ConfigConstants.PaletteFileExtension}"))
             {
                 var palette = Load(fileName);
                 palettes.Add(palette);
