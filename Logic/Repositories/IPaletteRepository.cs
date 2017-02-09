@@ -7,5 +7,7 @@
     {
         BeadPalette Load(string fileName);
         IEnumerable<BeadPalette> Load();
+        void Delete(BeadPalette palette);
+        void Save(BeadPalette palette);
     }
 }

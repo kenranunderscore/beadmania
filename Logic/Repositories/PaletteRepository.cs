@@ -15,12 +15,24 @@
 
         private IFileSystemService FileSystemService { get; }
 
+        public void Save(BeadPalette palette)
+        {
+            string fileName = DetermineFullFileNameFromPaletteName(palette.Name);
+            var fileContent = palette.ToXml();
+            using (Stream stream = FileSystemService.OpenWrite(fileName))
+            {
+                fileContent.Save(stream);
+            }
+        }
+
         public BeadPalette Load(string fileName)
         {
             using (Stream stream = FileSystemService.OpenFile(fileName))
             {
                 var xml = XDocument.Load(stream);
-                return BeadPalette.FromXml(xml);
+                var palette = BeadPalette.FromXml(xml);
+                Save(palette);
+                return palette;
             }
         }
 
@@ -33,6 +45,21 @@
                 palettes.Add(palette);
             }
             return palettes;
+        }
+
+        public void Delete(BeadPalette palette)
+        {
+            string fileName = DetermineFullFileNameFromPaletteName(palette.Name);
+            File.Delete(fileName);
+        }
+
+        private static string DetermineFullFileNameFromPaletteName(string paletteName) =>
+            ConfigConstants.PaletteFolderName + Path.DirectorySeparatorChar + paletteName + $".{ConfigConstants.PaletteFileExtension}";
+
+        private static void CreatePaletteFolderIfNecessary()
+        {
+            if (!Directory.Exists(ConfigConstants.PaletteFolderName))
+                Directory.CreateDirectory(ConfigConstants.PaletteFolderName);
         }
     }
 }

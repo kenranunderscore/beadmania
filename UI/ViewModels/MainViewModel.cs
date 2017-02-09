@@ -1,9 +1,7 @@
 ﻿namespace beadmania.UI.ViewModels
 {
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Drawing;
-    using System.IO;
     using System.Linq;
     using System.Windows.Input;
     using beadmania.Logic;
@@ -32,39 +30,6 @@
             AllPalettes = new ObservableCollection<BeadPalette>(PaletteRepository.Load());
             SelectedPalette = AllPalettes.FirstOrDefault();
         }
-
-        public ICommand NewPaletteCmd => new RelayCommand(_ => DialogService.OpenDialog(new PaletteEditorViewModel(FileSystemService, null)));
-
-        public ICommand DeletePaletteCmd => new RelayCommand(_ =>
-        {
-            string paletteFile = ConfigConstants.PaletteFolderName + Path.DirectorySeparatorChar + SelectedPalette.Name + $".{ConfigConstants.PaletteFileExtension}";
-            File.Delete(paletteFile);
-        }, _ => SelectedPalette != null);
-
-        public ICommand EditPaletteCmd => new RelayCommand(_ =>
-        {
-            var result = DialogService.OpenDialog(new PaletteEditorViewModel(FileSystemService, SelectedPalette.Clone()));
-            if (result == true)
-            {
-
-            }
-        }, _ => SelectedPalette != null);
-
-        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = DialogService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
-
-        public ICommand LoadPaletteCmd => new RelayCommand(_ =>
-        {
-            string fileName = DialogService.ChooseFile(null, "Bead palettes|*.bpal");
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                BeadPalette palette = PaletteRepository.Load(fileName);
-                AllPalettes.Add(palette);
-            }
-        });
-
-        public ICommand ConvertCmd => new RelayCommand(
-                _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
-                _ => Pattern != null && SelectedPalette != null);
 
         private IFileSystemService FileSystemService { get; }
 
@@ -102,6 +67,37 @@
                     LoadBitmap();
             }
         }
+
+        public ICommand NewPaletteCmd => new RelayCommand(_ => DialogService.OpenDialog(new PaletteEditorViewModel(PaletteRepository, null)));
+
+        public ICommand DeletePaletteCmd =>
+            new RelayCommand(_ => PaletteRepository.Delete(SelectedPalette), _ => SelectedPalette != null);
+
+        public ICommand EditPaletteCmd => new RelayCommand(_ =>
+        {
+            var result = DialogService.OpenDialog(new PaletteEditorViewModel(PaletteRepository, SelectedPalette.Clone()));
+            if (result == true)
+            {
+
+            }
+        }, _ => SelectedPalette != null);
+
+        public ICommand OpenImageCmd => new RelayCommand(_ => ImagePath = DialogService.ChooseFile(null, "Image files|*.png;*.jpg;*.bmp"));
+
+        public ICommand LoadPaletteCmd => new RelayCommand(_ =>
+        {
+            string fileName = DialogService.ChooseFile(null, $"Bead palettes|*.{ConfigConstants.PaletteFileExtension}");
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                BeadPalette palette = PaletteRepository.Load(fileName);
+                AllPalettes.Add(palette);
+                SelectedPalette = palette;
+            }
+        });
+
+        public ICommand ConvertCmd => new RelayCommand(
+                _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
+                _ => Pattern != null && SelectedPalette != null);
 
         private void LoadBitmap()
         {

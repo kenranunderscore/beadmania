@@ -1,41 +1,29 @@
 ﻿namespace beadmania.UI.ViewModels
 {
-    using System.IO;
     using System.Windows.Input;
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
-    using Logic;
-    using Logic.IO;
+    using Logic.Repositories;
 
     internal class PaletteEditorViewModel : DialogViewModel
     {
         private readonly BeadPalette palette;
 
-        public PaletteEditorViewModel(IFileSystemService fileSystemService, BeadPalette palette)
+        public PaletteEditorViewModel(IPaletteRepository paletteRepository, BeadPalette palette)
         {
             this.palette = palette;
-            this.FileSystemService = fileSystemService;
+            PaletteRepository = paletteRepository;
         }
 
         public ICommand SaveCmd => new RelayCommand(_ => Save());
 
-        private IFileSystemService FileSystemService { get; }
+        private IPaletteRepository PaletteRepository { get; }
 
         public BeadPalette Palette => palette;
-        
-        //TODO: Extract saving logic
+
         private void Save()
         {
-            string fileName = ConfigConstants.PaletteFolderName + Path.DirectorySeparatorChar + palette.Name + $".{ConfigConstants.PaletteFileExtension}";
-            var fileContent = palette.ToXml();
-            if (!Directory.Exists(ConfigConstants.PaletteFolderName))
-                Directory.CreateDirectory(ConfigConstants.PaletteFolderName);
-
-            using (FileStream fs = File.OpenWrite(fileName))
-            {
-                fileContent.Save(fs);
-            }
-
+            PaletteRepository.Save(palette);
             DialogResult = true;
         }
     }

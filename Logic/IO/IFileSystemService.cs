@@ -7,6 +7,7 @@
     {
         IEnumerable<string> GetFileNamesInCurrentDirectory(string filter);
         Stream OpenFile(string path);
+        Stream OpenWrite(string path);
         bool FileExists(string path);
     }
 }

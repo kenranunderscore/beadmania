@@ -5,19 +5,13 @@
 
     internal class FileSystemService : IFileSystemService
     {
-        public bool FileExists(string path)
-        {
-            return File.Exists(path);
-        }
+        public bool FileExists(string path) => File.Exists(path);
 
-        public Stream OpenFile(string path)
-        {
-            return File.Open(path, FileMode.Open);
-        }
+        public Stream OpenFile(string path) => File.OpenRead(path);
 
-        public IEnumerable<string> GetFileNamesInCurrentDirectory(string filter)
-        {
-            return Directory.EnumerateFiles(".", filter, SearchOption.TopDirectoryOnly);
-        }
+        public Stream OpenWrite(string path) => File.OpenWrite(path);
+
+        public IEnumerable<string> GetFileNamesInCurrentDirectory(string filter) =>
+            Directory.EnumerateFiles(".", filter, SearchOption.TopDirectoryOnly);
     }
 }
