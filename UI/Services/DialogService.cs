@@ -3,6 +3,7 @@
     using System.Windows;
     using beadmania.UI.MVVM;
     using Microsoft.Win32;
+    using Views;
 
     internal class DialogService : IDialogService
     {
@@ -26,6 +27,12 @@
             }
 
             return null;
+        }
+
+        public void PickColor()
+        {
+            ColorEditor colorEditor = new ColorEditor();
+            colorEditor.ShowDialog();
         }
     }
 }

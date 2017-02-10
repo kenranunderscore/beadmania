@@ -9,7 +9,7 @@
 
         public Stream OpenFile(string path) => File.OpenRead(path);
 
-        public Stream OpenWrite(string path) => File.OpenWrite(path);
+        public Stream OpenWrite(string path) => File.Open(path, FileMode.Create);
 
         public IEnumerable<string> FileNamesInFolder(string path, string filter) =>
             Directory.EnumerateFiles(path, filter, SearchOption.TopDirectoryOnly);

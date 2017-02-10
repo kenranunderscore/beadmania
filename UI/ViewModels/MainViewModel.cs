@@ -68,17 +68,22 @@
             }
         }
 
-        public ICommand NewPaletteCmd => new RelayCommand(_ => DialogService.OpenDialog(new PaletteEditorViewModel(PaletteRepository, null)));
+        public ICommand NewPaletteCmd => new RelayCommand(_ => DialogService.OpenDialog(new PaletteEditorViewModel(PaletteRepository, DialogService, null)));
 
         public ICommand DeletePaletteCmd =>
             new RelayCommand(_ => PaletteRepository.Delete(SelectedPalette), _ => SelectedPalette != null);
 
         public ICommand EditPaletteCmd => new RelayCommand(_ =>
         {
-            var result = DialogService.OpenDialog(new PaletteEditorViewModel(PaletteRepository, SelectedPalette.Clone()));
+            var editorViewModel = new PaletteEditorViewModel(PaletteRepository, DialogService, SelectedPalette.Clone());
+            var result = DialogService.OpenDialog(editorViewModel);
             if (result == true)
             {
-
+                AllPalettes.Remove(SelectedPalette);
+                var editedPalette = editorViewModel.Palette;
+                PaletteRepository.Save(editedPalette);
+                AllPalettes.Add(editedPalette);
+                SelectedPalette = editedPalette;
             }
         }, _ => SelectedPalette != null);
 

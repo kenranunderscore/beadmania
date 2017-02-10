@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:beadmania.UI.Views"
              xmlns:utils="clr-namespace:beadmania.UI.Utils"
              xmlns:converters="clr-namespace:beadmania.UI.Converters"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              mc:Ignorable="d"
              Width="500"
              Height="800"
              utils:DialogCloser.DialogResult="{Binding DialogResult}">
     <UserControl.Resources>
-        <converters:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter" />
+        <converters:ColorConverter x:Key="ColorToSolidBrushConverter" />
         <converters:ColorToForegroundConverter x:Key="ColorToForegroundConverter" />
     </UserControl.Resources>
     <Grid Margin="10">
@@ -29,10 +30,13 @@
                             <ColumnDefinition Width="120" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0"
+                        <!--<Button Grid.Column="0"
                                 Height="40"
                                 Background="{Binding Color, Converter={StaticResource ColorToSolidBrushConverter}}"
-                                Foreground="{Binding Color, Converter={StaticResource ColorToForegroundConverter}, Mode=OneWay}" />
+                                Foreground="{Binding Color, Converter={StaticResource ColorToForegroundConverter}, Mode=OneWay}"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.EditColorCmd}"
+                                CommandParameter="{Binding Description}" />-->
+                        <xctk:ColorPicker Grid.Column="0" Height="40" Width="120" SelectedColor="{Binding Color, Converter={StaticResource ColorToSolidBrushConverter}}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

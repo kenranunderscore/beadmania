@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Text;
     using System.Xml.Linq;
     using beadmania.Logic.IO;
     using Model;
@@ -19,7 +20,7 @@
         {
             string fileName = DetermineFullFileNameFromPaletteName(palette.Name);
             var fileContent = palette.ToXml();
-            using (Stream stream = FileSystemService.OpenWrite(fileName))
+            using (var stream = FileSystemService.OpenWrite(fileName))
             {
                 fileContent.Save(stream);
             }
