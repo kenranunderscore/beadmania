@@ -1,8 +1,10 @@
 ﻿namespace beadmania.UI.ViewModels
 {
+    using System.Linq;
     using System.Windows.Input;
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
+    using Logic.Extensions;
     using Logic.Repositories;
     using Services;
 
@@ -23,13 +25,13 @@
 
         public BeadPalette Palette => palette;
 
-        public ICommand EditColorCmd => new RelayCommand(_ => DialogService.PickColor());
-
-        public ICommand SaveCmd => new RelayCommand(_ => Save());
-
-        private void Save()
+        public ICommand EditColorCmd => new RelayCommand(p =>
         {
-            DialogResult = true;
-        }
+            string description = (string)p;
+            Bead bead = Palette.Beads.Single(b => b.Description == description);
+            var pickedColor = DialogService.PickColor(bead.Color.ToMediaColor());
+        });
+
+        public ICommand SaveCmd => new RelayCommand(_ => DialogResult = true);
     }
 }

@@ -1,9 +1,10 @@
 ﻿namespace beadmania.Logic.Model
 {
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
+    using System.Windows.Media;
     using System.Xml.Linq;
+    using beadmania.Logic.Extensions;
 
     public class BeadPalette
     {
@@ -24,7 +25,7 @@
                 .Select(x => new Bead
                 {
                     Description = x.Element(nameof(Bead.Description)).Value,
-                    Color = System.Drawing.Color.FromArgb(int.Parse(x.Element(nameof(Bead.Color)).Value, CultureInfo.InvariantCulture))
+                    Color = ((Color)ColorConverter.ConvertFromString(x.Element(nameof(Bead.Color)).Value)).ToDrawingColor()
                 });
             foreach (var bead in beads)
             {
@@ -50,7 +51,7 @@
                     beads.Select(b =>
                         new XElement(nameof(Bead),
                             new XElement(nameof(Bead.Description), b.Description),
-                            new XElement(nameof(Bead.Color), b.Color.ToArgb())))));
+                            new XElement(nameof(Bead.Color), b.Color.ToMediaColor().ToHexCode())))));
         }
 
         public BeadPalette Clone()

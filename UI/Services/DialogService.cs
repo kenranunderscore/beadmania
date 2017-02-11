@@ -1,8 +1,10 @@
 ﻿namespace beadmania.UI.Services
 {
     using System.Windows;
+    using System.Windows.Media;
     using beadmania.UI.MVVM;
     using Microsoft.Win32;
+    using ViewModels;
     using Views;
 
     internal class DialogService : IDialogService
@@ -29,10 +31,13 @@
             return null;
         }
 
-        public void PickColor()
+        public Color? PickColor(Color? initialColor)
         {
-            ColorEditor colorEditor = new ColorEditor();
-            colorEditor.ShowDialog();
+            ColorPicker colorPicker = new ColorPicker(initialColor);
+            if (colorPicker.ShowDialog() == true)
+                return colorPicker.SelectedColor;
+
+            return initialColor;
         }
     }
 }

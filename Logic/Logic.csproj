@@ -34,6 +34,7 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +57,7 @@
     <Compile Include="ColorVectors\XyzVector.cs" />
     <Compile Include="Delta\DeltaE94Distance.cs" />
     <Compile Include="Delta\IColorDistance.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="IO\IFileSystemService.cs" />
     <Compile Include="IO\FileSystemService.cs" />
     <Compile Include="Math\Matrix3D.cs" />
