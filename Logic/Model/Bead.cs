@@ -3,18 +3,24 @@
     using System;
     using System.Drawing;
 
-    public sealed class Bead : IEquatable<Bead>
+    public sealed class Bead : PropertyChangedNotifier, IEquatable<Bead>
     {
-        public string Description { get; set; }
+        private Color color;
 
-        public Color Color { get; set; }
+        public string Identifier { get; set; }
+
+        public Color Color
+        {
+            get { return color; }
+            set { SetProperty(ref color, value); }
+        }
 
         public bool Equals(Bead other)
         {
             if (other == null)
                 return false;
 
-            return Description == other.Description && Color.ToArgb() == other.Color.ToArgb();
+            return Identifier == other.Identifier && Color.ToArgb() == other.Color.ToArgb();
         }
 
         public override bool Equals(object obj)
@@ -28,12 +34,12 @@
             unchecked
             {
                 int hash = 17;
-                hash = hash * 486187739 + (Description ?? string.Empty).GetHashCode();
+                hash = hash * 486187739 + (Identifier ?? string.Empty).GetHashCode();
                 hash = hash * 486187739 + Color.GetHashCode();
                 return hash;
             }
         }
 
-        public Bead Clone() => new Bead { Color = Color, Description = Description };
+        public Bead Clone() => new Bead { Color = Color, Identifier = Identifier };
     }
 }

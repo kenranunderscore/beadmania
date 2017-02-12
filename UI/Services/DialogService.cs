@@ -9,7 +9,7 @@
 
     internal class DialogService : IDialogService
     {
-        public bool? OpenDialog(ViewModel vm)
+        public bool? OpenDialog(object vm)
         {
             Window w = new Window { Content = vm, SizeToContent = SizeToContent.WidthAndHeight };
             return w.ShowDialog();
@@ -31,9 +31,9 @@
             return null;
         }
 
-        public Color? PickColor(Color? initialColor)
+        public Color PickColor(Color initialColor)
         {
-            ColorPickerViewModel vm = new ColorPickerViewModel { SelectedColor = initialColor ?? Colors.Black };
+            ColorDialogViewModel vm = new ColorDialogViewModel { SelectedColor = initialColor };
             return OpenDialog(vm) == true ? vm.SelectedColor : initialColor;
         }
     }

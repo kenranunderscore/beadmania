@@ -1,6 +1,8 @@
-﻿namespace beadmania.UI.MVVM
+﻿using beadmania.Logic.Model;
+
+namespace beadmania.UI.MVVM
 {
-    internal class DialogViewModel : ViewModel
+    internal class DialogViewModel : PropertyChangedNotifier
     {
         private bool? dialogResult;
 

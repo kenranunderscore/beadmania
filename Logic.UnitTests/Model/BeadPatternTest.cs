@@ -38,8 +38,8 @@
             Bitmap bmp = new Bitmap(2, 2);
             bmp.SetPixel(1, 1, Color.ForestGreen);
             BeadPattern pattern = BeadPattern.FromBitmap(bmp);
-            pattern[1, 0] = new Bead { Description = "DsCK" };
-            Assert.That(pattern[1, 0].Description, Is.EqualTo("DsCK"));
+            pattern[1, 0] = new Bead { Identifier = "DsCK" };
+            Assert.That(pattern[1, 0].Identifier, Is.EqualTo("DsCK"));
         }
     }
 }

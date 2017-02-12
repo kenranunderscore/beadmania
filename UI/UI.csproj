@@ -68,7 +68,7 @@
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Utils\DialogCloser.cs" />
-    <Compile Include="ViewModels\ColorPickerViewModel.cs" />
+    <Compile Include="ViewModels\ColorDialogViewModel.cs" />
     <Compile Include="ViewModels\PaletteEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="Controls\ColorPicker.xaml">
@@ -92,7 +92,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MVVM\RelayCommand.cs" />
-    <Compile Include="MVVM\ViewModel.cs" />
     <Compile Include="Controls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>

@@ -37,8 +37,8 @@
             Bitmap bmp = new Bitmap(2, 2);
             BeadPattern pattern = BeadPattern.FromBitmap(bmp);
             BeadPalette palette = new BeadPalette("foo");
-            palette.Add(new Bead { Description = "Black", Color = Color.Black });
-            palette.Add(new Bead { Description = "Gray", Color = Color.Gray });
+            palette.Add(new Bead { Identifier = "Black", Color = Color.Black });
+            palette.Add(new Bead { Identifier = "Gray", Color = Color.Gray });
             var colorDistanceMock = new Mock<IColorDistance<RgbVector>>();
             BeadPatternConverter converter = new BeadPatternConverter(palette, colorDistanceMock.Object);
             var convertedPattern = converter.Convert(pattern);

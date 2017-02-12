@@ -73,6 +73,7 @@
     <Compile Include="Model\BeadPaletteTest.cs" />
     <Compile Include="Model\BeadPatternTest.cs" />
     <Compile Include="Model\BeadTest.cs" />
+    <Compile Include="Model\PropertyChangedNotifierTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

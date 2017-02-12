@@ -4,7 +4,7 @@
     using System.Windows.Media;
     using beadmania.UI.MVVM;
 
-    internal class ColorPickerViewModel : DialogViewModel
+    internal class ColorDialogViewModel : DialogViewModel
     {
         private Color selectedColor;
 

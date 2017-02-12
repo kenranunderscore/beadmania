@@ -11,15 +11,15 @@
         public void Description_is_initially_null()
         {
             Bead bead = new Bead();
-            Assert.That(bead.Description, Is.Null);
+            Assert.That(bead.Identifier, Is.Null);
         }
 
         [Test]
         public void Can_set_description()
         {
             Bead bead = new Bead();
-            bead.Description = "foo";
-            Assert.That(bead.Description, Is.EqualTo("foo"));
+            bead.Identifier = "foo";
+            Assert.That(bead.Identifier, Is.EqualTo("foo"));
         }
 
         [Test]
@@ -40,8 +40,8 @@
         [Test]
         public void Beads_are_equal_if_color_and_description_coincide()
         {
-            Bead bead1 = new Bead { Description = "Abc", Color = Color.FromArgb(55, 10, 20, 30) };
-            Bead bead2 = new Bead { Description = "Abc", Color = Color.FromArgb(55, 10, 20, 30) };
+            Bead bead1 = new Bead { Identifier = "Abc", Color = Color.FromArgb(55, 10, 20, 30) };
+            Bead bead2 = new Bead { Identifier = "Abc", Color = Color.FromArgb(55, 10, 20, 30) };
             Assert.That(bead1, Is.EqualTo(bead2));
         }
 
@@ -78,8 +78,8 @@
         [Test]
         public void Two_distinct_references_of_equal_vectors_have_identical_hash_codes()
         {
-            Bead bead1 = new Bead { Description = "A", Color = Color.Aqua };
-            Bead bead2 = new Bead { Description = "A", Color = Color.Aqua };
+            Bead bead1 = new Bead { Identifier = "A", Color = Color.Aqua };
+            Bead bead2 = new Bead { Identifier = "A", Color = Color.Aqua };
             Assert.That(bead1.GetHashCode(), Is.EqualTo(bead2.GetHashCode()));
         }
 
@@ -109,9 +109,9 @@
         [Test]
         public void A_cloned_bead_retains_its_description()
         {
-            Bead bead = new Bead { Description = "FooBead" };
+            Bead bead = new Bead { Identifier = "FooBead" };
             Bead clone = bead.Clone();
-            Assert.That(clone.Description, Is.EqualTo(bead.Description));
+            Assert.That(clone.Identifier, Is.EqualTo(bead.Identifier));
         }
     }
 }

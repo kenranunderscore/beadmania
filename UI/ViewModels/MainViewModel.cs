@@ -13,7 +13,7 @@
     using Logic.IO;
     using Logic.Repositories;
 
-    internal class MainViewModel : ViewModel
+    internal class MainViewModel : PropertyChangedNotifier
     {
         private BeadPattern pattern;
         private bool showGrid = true;

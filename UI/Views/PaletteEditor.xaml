@@ -34,7 +34,7 @@
                                 Background="{Binding Color, Converter={StaticResource ColorToSolidBrushConverter}}"
                                 Foreground="{Binding Color, Converter={StaticResource ColorToForegroundConverter}, Mode=OneWay}"
                                 Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.EditColorCmd}"
-                                CommandParameter="{Binding Description}" />
+                                CommandParameter="{Binding Identifier}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -44,7 +44,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="40,10,40,10" Content="Save" Command="{Binding SaveCmd}" />
+            <Button Grid.Column="0" Margin="40,10,40,10" Content="Save" IsDefault="True" Command="{Binding SaveCmd}" />
             <Button Grid.Column="1" Margin="40,10,40,10" IsCancel="True" Content="Cancel" />
         </Grid>
     </Grid>

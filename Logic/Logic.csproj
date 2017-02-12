@@ -66,6 +66,7 @@
     <Compile Include="Model\BeadPalette.cs" />
     <Compile Include="Model\BeadPattern.cs" />
     <Compile Include="Model\Bead.cs" />
+    <Compile Include="Model\PropertyChangedNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPaletteRepository.cs" />
     <Compile Include="Repositories\PaletteRepository.cs" />

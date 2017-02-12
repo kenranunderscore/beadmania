@@ -45,8 +45,8 @@
         public void Correct_number_of_beads_is_saved()
         {
             BeadPalette palette = new BeadPalette("Foo");
-            palette.Add(new Bead { Description = "Check", Color = Color.Firebrick });
-            palette.Add(new Bead { Description = "Mate", Color = Color.DeepSkyBlue });
+            palette.Add(new Bead { Identifier = "Check", Color = Color.Firebrick });
+            palette.Add(new Bead { Identifier = "Mate", Color = Color.DeepSkyBlue });
             var numberOfBeads = palette.ToXml()
                 .Descendants(nameof(Bead))
                 .Count();
@@ -75,11 +75,11 @@
                 @"<BeadPalette Name=""Abc"">
                     <Bead>
                         <Description>MrBead</Description>
-                        <Color>123</Color>
+                        <Color>#ff00ff</Color>
                     </Bead>
                 </BeadPalette>";
             var palette = BeadPalette.FromXml(XDocument.Parse(xml));
-            Bead expectedBead = new Bead { Description = "MrBead", Color = Color.FromArgb(123) };
+            Bead expectedBead = new Bead { Identifier = "MrBead", Color = Color.FromArgb(255, 0, 255) };
             Assert.That(palette.Beads, Contains.Item(expectedBead));
         }
 
@@ -103,8 +103,8 @@
         public void A_cloned_palette_retains_its_bead_count()
         {
             BeadPalette palette = new BeadPalette("FooPalette");
-            palette.Add(new Bead { Description = "A", Color = Color.DarkOrchid });
-            palette.Add(new Bead { Description = "B", Color = Color.GreenYellow });
+            palette.Add(new Bead { Identifier = "A", Color = Color.DarkOrchid });
+            palette.Add(new Bead { Identifier = "B", Color = Color.GreenYellow });
             var clone = palette.Clone();
             Assert.That(clone.Beads.Count(), Is.EqualTo(palette.Beads.Count()));
         }
@@ -113,8 +113,8 @@
         public void A_cloned_palette_produces_XML_identical_to_the_original()
         {
             BeadPalette palette = new BeadPalette("FooPalette");
-            palette.Add(new Bead { Description = "A", Color = Color.DarkOrchid });
-            palette.Add(new Bead { Description = "B", Color = Color.GreenYellow });
+            palette.Add(new Bead { Identifier = "A", Color = Color.DarkOrchid });
+            palette.Add(new Bead { Identifier = "B", Color = Color.GreenYellow });
             var clone = palette.Clone();
             Assert.That(clone.ToXml().ToString(), Is.EqualTo(palette.ToXml().ToString()));
         }

@@ -27,9 +27,10 @@
 
         public ICommand EditColorCmd => new RelayCommand(p =>
         {
-            string description = (string)p;
-            Bead bead = Palette.Beads.Single(b => b.Description == description);
+            string identifier = (string)p;
+            Bead bead = Palette.Beads.Single(b => b.Identifier == identifier);
             var pickedColor = DialogService.PickColor(bead.Color.ToMediaColor());
+            bead.Color = pickedColor.ToDrawingColor();
         });
 
         public ICommand SaveCmd => new RelayCommand(_ => DialogResult = true);

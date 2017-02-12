@@ -24,7 +24,7 @@
                 .Descendants(nameof(Bead))
                 .Select(x => new Bead
                 {
-                    Description = x.Element(nameof(Bead.Description)).Value,
+                    Identifier = x.Element(nameof(Bead.Identifier)).Value,
                     Color = ((Color)ColorConverter.ConvertFromString(x.Element(nameof(Bead.Color)).Value)).ToDrawingColor()
                 });
             foreach (var bead in beads)
@@ -50,7 +50,7 @@
                     new XAttribute(nameof(Name), Name),
                     beads.Select(b =>
                         new XElement(nameof(Bead),
-                            new XElement(nameof(Bead.Description), b.Description),
+                            new XElement(nameof(Bead.Identifier), b.Identifier),
                             new XElement(nameof(Bead.Color), b.Color.ToMediaColor().ToHexCode())))));
         }
 
