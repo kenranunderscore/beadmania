@@ -33,11 +33,8 @@
 
         public Color? PickColor(Color? initialColor)
         {
-            ColorPicker colorPicker = new ColorPicker(initialColor);
-            if (colorPicker.ShowDialog() == true)
-                return colorPicker.SelectedColor;
-
-            return initialColor;
+            ColorPickerViewModel vm = new ColorPickerViewModel { SelectedColor = initialColor ?? Colors.Black };
+            return OpenDialog(vm) == true ? vm.SelectedColor : initialColor;
         }
     }
 }

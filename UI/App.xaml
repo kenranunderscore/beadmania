@@ -7,6 +7,9 @@
         <DataTemplate DataType="{x:Type viewModels:PaletteEditorViewModel}">
             <views:PaletteEditor />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ColorPickerViewModel}">
+            <views:ColorDialog />
+        </DataTemplate>
         <Style x:Key="DummyStyleToPreventWpfBug" TargetType="{x:Type Rectangle}" />
     </Application.Resources>
 </Application>
