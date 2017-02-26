@@ -1,6 +1,7 @@
 ﻿namespace beadmania.Logic.Model
 {
     using System.Drawing;
+    using Extensions;
 
     public sealed class BeadPattern
     {
@@ -21,6 +22,8 @@
                 for (int j = 0; j < bitmap.Height; ++j)
                 {
                     Color color = bitmap.GetPixel(i, j);
+                    if (color.IsTransparentWhiteOrBlack())
+                        color = Color.White;
                     pattern.beads[i, j] = new Bead { Color = color };
                 }
             }

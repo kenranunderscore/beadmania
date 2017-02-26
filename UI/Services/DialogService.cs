@@ -9,7 +9,12 @@
     {
         public bool? OpenDialog(object vm)
         {
-            Window w = new Window { Content = vm, SizeToContent = SizeToContent.WidthAndHeight };
+            Window w = new Window
+            {
+                Content = vm,
+                SizeToContent = SizeToContent.WidthAndHeight,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
             return w.ShowDialog();
         }
 

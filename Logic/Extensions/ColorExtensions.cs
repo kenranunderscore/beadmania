@@ -15,5 +15,12 @@
             string b = color.B.ToString("X2");
             return $"#{r}{g}{b}";
         }
+
+        public static bool IsTransparentWhiteOrBlack(this System.Drawing.Color color)
+        {
+            int argb = color.ToArgb();
+            return argb == System.Drawing.Color.Transparent.ToArgb()
+                || argb == System.Drawing.Color.FromArgb(0, 0, 0, 0).ToArgb();
+        }
     }
 }
