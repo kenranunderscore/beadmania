@@ -74,7 +74,7 @@
             const string xml =
                 @"<BeadPalette Name=""Abc"">
                     <Bead>
-                        <Description>MrBead</Description>
+                        <Identifier>MrBead</Identifier>
                         <Color>#ff00ff</Color>
                     </Bead>
                 </BeadPalette>";

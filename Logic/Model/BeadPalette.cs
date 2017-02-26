@@ -6,7 +6,7 @@
     using System.Xml.Linq;
     using beadmania.Logic.Extensions;
 
-    public class BeadPalette
+    public class BeadPalette : PropertyChangedNotifier
     {
         private readonly HashSet<Bead> beads = new HashSet<Bead>();
 
@@ -38,9 +38,20 @@
 
         public IEnumerable<Bead> Beads => beads;
 
-        public void Add(Bead bead)
+        public bool Add(Bead bead)
         {
-            beads.Add(bead);
+            if (!beads.Any(b => b.Identifier == bead.Identifier))
+            {
+                beads.Add(bead);
+                return true;
+            }
+
+            return false;
+        }
+
+        public void Remove(Bead bead)
+        {
+            beads.Remove(bead);
         }
 
         public XDocument ToXml()

@@ -6,8 +6,13 @@
     public sealed class Bead : PropertyChangedNotifier, IEquatable<Bead>
     {
         private Color color;
+        private string identifier;
 
-        public string Identifier { get; set; }
+        public string Identifier
+        {
+            get { return identifier; }
+            set { SetProperty(ref identifier, value); }
+        }
 
         public Color Color
         {

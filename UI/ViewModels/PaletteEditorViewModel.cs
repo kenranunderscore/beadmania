@@ -1,7 +1,8 @@
 ﻿namespace beadmania.UI.ViewModels
 {
-    using System.Linq;
+    using System.Collections.ObjectModel;
     using System.Windows.Input;
+    using System.Windows.Media;
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
     using Logic.Extensions;
@@ -11,10 +12,12 @@
     internal class PaletteEditorViewModel : DialogViewModel
     {
         private readonly BeadPalette palette;
+        private ObservableCollection<Bead> beads;
 
         public PaletteEditorViewModel(IPaletteRepository paletteRepository, IDialogService dialogService, BeadPalette palette)
         {
             this.palette = palette;
+            beads = new ObservableCollection<Bead>(this.palette.Beads);
             PaletteRepository = paletteRepository;
             DialogService = dialogService;
         }
@@ -25,14 +28,31 @@
 
         public BeadPalette Palette => palette;
 
+        public ObservableCollection<Bead> Beads => beads;
+
         public ICommand EditColorCmd => new RelayCommand(p =>
         {
-            string identifier = (string)p;
-            Bead bead = Palette.Beads.Single(b => b.Identifier == identifier);
+            Bead bead = (Bead)p;
             var pickedColor = DialogService.PickColor(bead.Color.ToMediaColor());
             bead.Color = pickedColor.ToDrawingColor();
         });
 
-        public ICommand SaveCmd => new RelayCommand(_ => DialogResult = true);
+        public ICommand AddColorCmd => new RelayCommand(_ =>
+        {
+            Bead bead = new Bead();
+            var pickedColor = DialogService.PickColor(Colors.Black);
+            bead.Color = pickedColor.ToDrawingColor();
+            if (Palette.Add(bead))
+                Beads.Add(bead);
+        });
+
+        public ICommand DeleteColorCmd => new RelayCommand(p =>
+        {
+            Bead bead = (Bead)p;
+            Palette.Remove(bead);
+            Beads.Remove(bead);
+        });
+
+        public ICommand SaveCmd => new RelayCommand(_ => DialogResult = true, _ => !string.IsNullOrWhiteSpace(Palette.Name));
     }
 }

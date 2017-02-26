@@ -68,7 +68,7 @@
             }
         }
 
-        public ICommand NewPaletteCmd => new RelayCommand(_ => DialogService.OpenDialog(new PaletteEditorViewModel(PaletteRepository, DialogService, null)));
+        public ICommand NewPaletteCmd => new RelayCommand(_ => FillNewPalette());
 
         public ICommand DeletePaletteCmd =>
             new RelayCommand(_ => PaletteRepository.Delete(SelectedPalette), _ => SelectedPalette != null);
@@ -103,6 +103,19 @@
         public ICommand ConvertCmd => new RelayCommand(
                 _ => Pattern = new BeadPatternConverter(SelectedPalette, new DeltaE94Distance()).Convert(Pattern),
                 _ => Pattern != null && SelectedPalette != null);
+
+        private void FillNewPalette()
+        {
+            var editorViewModel = new PaletteEditorViewModel(PaletteRepository, DialogService, new BeadPalette(null));
+            bool? result = DialogService.OpenDialog(editorViewModel);
+            if (result == true)
+            {
+                var newPalette = editorViewModel.Palette;
+                PaletteRepository.Save(newPalette);
+                AllPalettes.Add(newPalette);
+                SelectedPalette = newPalette;
+            }
+        }
 
         private void LoadBitmap()
         {
