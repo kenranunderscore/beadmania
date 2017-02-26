@@ -71,6 +71,7 @@
     <Compile Include="ViewModels\ColorDialogViewModel.cs" />
     <Compile Include="ViewModels\PaletteEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="XamlExtensions\SelectTextOnFocus.cs" />
     <Page Include="Controls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
