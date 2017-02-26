@@ -2,10 +2,8 @@
 {
     using System.Windows;
     using System.Windows.Media;
-    using beadmania.UI.MVVM;
     using Microsoft.Win32;
     using ViewModels;
-    using Views;
 
     internal class DialogService : IDialogService
     {
@@ -31,9 +29,9 @@
             return null;
         }
 
-        public Color PickColor(Color initialColor)
+        public Color? PickColor(Color? initialColor)
         {
-            ColorDialogViewModel vm = new ColorDialogViewModel { SelectedColor = initialColor };
+            ColorDialogViewModel vm = new ColorDialogViewModel { SelectedColor = initialColor ?? Colors.Black };
             return OpenDialog(vm) == true ? vm.SelectedColor : initialColor;
         }
     }

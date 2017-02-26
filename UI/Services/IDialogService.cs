@@ -10,6 +10,6 @@
 
         string ChooseFile(string initialPath, string filter);
 
-        Color PickColor(Color initialColor);
+        Color? PickColor(Color? initialColor);
     }
 }

@@ -34,16 +34,19 @@
         {
             Bead bead = (Bead)p;
             var pickedColor = DialogService.PickColor(bead.Color.ToMediaColor());
-            bead.Color = pickedColor.ToDrawingColor();
+            bead.Color = pickedColor.Value.ToDrawingColor();
         });
 
         public ICommand AddColorCmd => new RelayCommand(_ =>
         {
             Bead bead = new Bead();
-            var pickedColor = DialogService.PickColor(Colors.Black);
-            bead.Color = pickedColor.ToDrawingColor();
-            if (Palette.Add(bead))
-                Beads.Add(bead);
+            var pickedColor = DialogService.PickColor(null);
+            if (pickedColor.HasValue)
+            {
+                bead.Color = pickedColor.Value.ToDrawingColor();
+                if (Palette.Add(bead))
+                    Beads.Add(bead);
+            }
         });
 
         public ICommand DeleteColorCmd => new RelayCommand(p =>
