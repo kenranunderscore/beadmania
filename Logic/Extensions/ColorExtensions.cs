@@ -16,6 +16,14 @@
             return $"#{r}{g}{b}";
         }
 
+        public static string ToHexCode(this System.Drawing.Color color)
+        {
+            string r = color.R.ToString("X2");
+            string g = color.G.ToString("X2");
+            string b = color.B.ToString("X2");
+            return $"#{r}{g}{b}";
+        }
+
         public static bool IsTransparentWhiteOrBlack(this System.Drawing.Color color)
         {
             int argb = color.ToArgb();

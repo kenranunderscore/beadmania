@@ -10,6 +10,7 @@
     using beadmania.Logic.Model;
     using beadmania.UI.MVVM;
     using beadmania.UI.Services;
+    using Logic.Extensions;
     using Logic.IO;
     using Logic.Repositories;
 
@@ -18,6 +19,7 @@
         private BeadPattern pattern;
         private bool showGrid = true;
         private string imagePath;
+        private Bead hoveredBead;
         private BeadPalette selectedPalette;
         private ObservableCollection<BeadPalette> allPalettes = new ObservableCollection<BeadPalette>();
 
@@ -38,6 +40,27 @@
         private IPaletteRepository PaletteRepository { get; }
 
         public ObservableCollection<BeadPalette> AllPalettes { get; }
+
+        public string StatusMessage
+        {
+            get
+            {
+                if (HoveredBead == null)
+                    return null;
+
+                return $"Bead: {HoveredBead.Identifier}, Color: {HoveredBead.Color.ToHexCode()}";
+            }
+        }
+
+        public Bead HoveredBead
+        {
+            get { return hoveredBead; }
+            set
+            {
+                SetProperty(ref hoveredBead, value);
+                OnPropertyChanged(nameof(StatusMessage));
+            }
+        }
 
         public BeadPalette SelectedPalette
         {

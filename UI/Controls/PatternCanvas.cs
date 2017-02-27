@@ -22,12 +22,24 @@
                 typeof(PatternCanvas),
                 new PropertyMetadata(PatternChanged));
 
-        private static DependencyProperty ShowGridProp =
+        private static DependencyProperty ShowGridProperty =
             DependencyProperty.Register(
                 nameof(ShowGrid),
                 typeof(bool),
                 typeof(PatternCanvas),
                 new PropertyMetadata(ShowGridChanged));
+
+        private static DependencyProperty HoveredBeadProperty =
+            DependencyProperty.Register(
+                nameof(HoveredBead),
+                typeof(Bead),
+                typeof(PatternCanvas));
+
+        public Bead HoveredBead
+        {
+            get { return (Bead)GetValue(HoveredBeadProperty); }
+            set { SetValue(HoveredBeadProperty, value); }
+        }
 
         public BeadPattern Pattern
         {
@@ -37,8 +49,8 @@
 
         public bool ShowGrid
         {
-            get { return (bool)GetValue(ShowGridProp); }
-            set { SetValue(ShowGridProp, value); }
+            get { return (bool)GetValue(ShowGridProperty); }
+            set { SetValue(ShowGridProperty, value); }
         }
 
         private static void PatternChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
@@ -62,13 +74,14 @@
             {
                 for (int y = 0; y < Pattern.Height; ++y)
                 {
-                    double scaledX = x * currentPixelSize;
-                    double scaledY = y * currentPixelSize;
+                    int scaledX = x * currentPixelSize;
+                    int scaledY = y * currentPixelSize;
                     var pixelColor = Pattern[x, y].Color;
                     var fillBrush = new SolidColorBrush(Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B));
                     dc.DrawRectangle(fillBrush, null, new Rect(scaledX, scaledY, currentPixelSize, currentPixelSize));
                 }
             }
+
             if (ShowGrid)
                 RenderGrid(dc);
         }
@@ -100,6 +113,20 @@
 
             currentPixelSize = (int)scaledPixelSize;
             InvalidateVisual();
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (Pattern == null)
+                return;
+
+            double x = e.GetPosition(this).X;
+            double y = e.GetPosition(this).Y;
+            int horizontalIndex = (int)(x / currentPixelSize);
+            int verticalIndex = (int)(y / currentPixelSize);
+            HoveredBead = Pattern[horizontalIndex, verticalIndex];
         }
     }
 }
