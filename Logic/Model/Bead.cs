@@ -3,22 +3,11 @@
     using System;
     using System.Drawing;
 
-    public sealed class Bead : PropertyChangedNotifier, IEquatable<Bead>
+    public sealed class Bead : IEquatable<Bead>
     {
-        private Color color;
-        private string identifier;
+        public string Identifier { get; set; }
 
-        public string Identifier
-        {
-            get { return identifier; }
-            set { SetProperty(ref identifier, value); }
-        }
-
-        public Color Color
-        {
-            get { return color; }
-            set { SetProperty(ref color, value); }
-        }
+        public Color Color { get; set; }
 
         public bool Equals(Bead other)
         {

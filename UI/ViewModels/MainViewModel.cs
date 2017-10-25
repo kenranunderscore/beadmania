@@ -142,11 +142,11 @@
 
         private void LoadBitmap()
         {
-            using (var fileStream = FileSystemService.OpenFile(ImagePath))
-            {
-                Bitmap image = (Bitmap)Image.FromStream(fileStream);
-                Pattern = BeadPattern.FromBitmap(image);
-            }
+            //using (var fileStream = FileSystemService.OpenFile(ImagePath))
+            //{
+            //    Bitmap image = (Bitmap)Image.FromStream(fileStream);
+            //    Pattern = BeadPattern.FromBitmap(image);
+            //}
         }
     }
 }

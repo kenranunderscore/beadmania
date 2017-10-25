@@ -34,25 +34,25 @@
             Assert.IsFalse(vm.ShowGrid);
         }
 
-        [Test]
-        public void Changing_image_path_reloads_image_if_path_exists()
-        {
-            string path = "foo.bar";
-            using (var bmp = new Bitmap(2, 2))
-            using (var stream = new MemoryStream())
-            {
-                bmp.Save(stream, ImageFormat.Bmp);
-                var fileSystemServiceMock = new Mock<IFileSystemService>();
-                fileSystemServiceMock.Setup(_ => _.FileExists(path)).Returns(true);
-                fileSystemServiceMock.Setup(_ => _.OpenFile(path)).Returns(stream);
-                var dialogService = new Mock<IDialogService>().Object;
-                var paletteRepository = new Mock<IPaletteRepository>().Object;
-                MainViewModel vm = new MainViewModel(fileSystemServiceMock.Object, paletteRepository, dialogService);
-                vm.ImagePath = path;
-                fileSystemServiceMock.Verify(_ => _.OpenFile(path), Times.Once());
-                Assert.IsNotNull(vm.Pattern);
-            }
-        }
+        //[Test]
+        //public void Changing_image_path_reloads_image_if_path_exists()
+        //{
+        //    string path = "foo.bar";
+        //    using (var bmp = new Bitmap(2, 2))
+        //    using (var stream = new MemoryStream())
+        //    {
+        //        bmp.Save(stream, ImageFormat.Bmp);
+        //        var fileSystemServiceMock = new Mock<IFileSystemService>();
+        //        fileSystemServiceMock.Setup(_ => _.FileExists(path)).Returns(true);
+        //        fileSystemServiceMock.Setup(_ => _.OpenFile(path)).Returns(stream);
+        //        var dialogService = new Mock<IDialogService>().Object;
+        //        var paletteRepository = new Mock<IPaletteRepository>().Object;
+        //        MainViewModel vm = new MainViewModel(fileSystemServiceMock.Object, paletteRepository, dialogService);
+        //        vm.ImagePath = path;
+        //        fileSystemServiceMock.Verify(_ => _.OpenFile(path), Times.Once());
+        //        Assert.IsNotNull(vm.Pattern);
+        //    }
+        //}
 
         [Test]
         public void Setting_image_path_to_nonexistent_file_does_not_load_image()

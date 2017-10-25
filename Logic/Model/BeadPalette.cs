@@ -6,7 +6,7 @@
     using System.Xml.Linq;
     using beadmania.Logic.Extensions;
 
-    public class BeadPalette : PropertyChangedNotifier
+    public class BeadPalette
     {
         private readonly HashSet<Bead> beads = new HashSet<Bead>();
 
