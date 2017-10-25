@@ -1,7 +1,7 @@
 ﻿namespace beadmania.UI.UnitTests.MVVM
 {
     using System.Reflection;
-    using Logic.Model;
+    using beadmania.UI.MVVM;
     using NUnit.Framework;
 
     [TestFixture]

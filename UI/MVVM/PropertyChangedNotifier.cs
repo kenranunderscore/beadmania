@@ -1,4 +1,4 @@
-﻿namespace beadmania.Logic.Model
+﻿namespace beadmania.UI.MVVM
 {
     using System.Collections.Generic;
     using System.ComponentModel;

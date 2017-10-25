@@ -65,6 +65,7 @@
     <Compile Include="Converters\ColorToForegroundConverter.cs" />
     <Compile Include="Converters\ColorToSolidBrushConverter.cs" />
     <Compile Include="MVVM\DialogViewModel.cs" />
+    <Compile Include="MVVM\PropertyChangedNotifier.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Utils\DialogCloser.cs" />
