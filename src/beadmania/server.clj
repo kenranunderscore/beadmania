@@ -1,8 +1,11 @@
-(ns beadmania.server)
+(ns beadmania.server
+  (:require [compojure.core :as compojure]
+            [compojure.route :as route]
+            [compojure.handler :as handler]))
 
-(defn ring-handler
-  [request]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body "beadmania"})
+(compojure/defroutes main-routes
+  (compojure/GET "/" [] "<script src=\"js/compiled/beadmania.js\" type=\"text/javascript\"></script>beadmania")
+  (route/not-found "Page could not be found"))
 
+(def ring-handler
+  (handler/site main-routes))
