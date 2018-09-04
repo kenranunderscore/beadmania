@@ -10,7 +10,8 @@
                  [org.clojure/clojurescript "1.10.238"]
                  [org.clojure/core.async  "0.4.474"]
                  [ring "1.7.0-RC2"]
-                 [compojure "1.6.1"]]
+                 [compojure "1.6.1"]
+                 [hiccup "1.0.5"]]
 
   :plugins [[lein-figwheel "0.5.16"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
@@ -29,7 +30,7 @@
                            ;; in the default browser once Figwheel has
                            ;; started and compiled your application.
                            ;; Comment this out once it no longer serves you.
-                           :open-urls ["http://localhost:3449/index.html"]}
+                           :open-urls ["http://localhost:3449"]}
 
                 :compiler {:main beadmania.core
                            :asset-path "js/compiled/out"
