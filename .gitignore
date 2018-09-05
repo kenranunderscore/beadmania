@@ -11,3 +11,7 @@ pom.xml
 .lein-plugins/
 .repl
 .nrepl-port
+
+# macOS
+.DS_Store
+

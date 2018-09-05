@@ -11,7 +11,8 @@
                  [org.clojure/core.async  "0.4.474"]
                  [ring "1.7.0-RC2"]
                  [compojure "1.6.1"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [reacl "2.0.1"]]
 
   :plugins [[lein-figwheel "0.5.16"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
@@ -25,14 +26,15 @@
                 ;; The presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "beadmania.core/on-js-reload"
+                :figwheel {:on-jsload "beadmania.client.core/on-js-reload"
                            ;; :open-urls will pop open your application
                            ;; in the default browser once Figwheel has
                            ;; started and compiled your application.
                            ;; Comment this out once it no longer serves you.
-                           :open-urls ["http://localhost:3449"]}
+                           ;; :open-urls ["http://localhost:3449"]
+                           }
 
-                :compiler {:main beadmania.core
+                :compiler {:main beadmania.client.core
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/beadmania.js"
                            :output-dir "resources/public/js/compiled/out"
@@ -46,7 +48,7 @@
                {:id "min"
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/beadmania.js"
-                           :main beadmania.core
+                           :main beadmania.client.core
                            :optimizations :advanced
                            :pretty-print false}}]}
 
