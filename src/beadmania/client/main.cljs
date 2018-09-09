@@ -5,7 +5,7 @@
 (defn foo
   [& args]
   (dom/div
-   "FOO"))
+   "Foo"))
 
 (reacl/defclass beadmania
   this app-state []
@@ -21,3 +21,8 @@
   (reacl/render-component
    dom
    beadmania))
+
+(reacl/render-component
+ (.getElementById js/document "root")
+ beadmania
+ {})

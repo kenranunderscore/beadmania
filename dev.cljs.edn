@@ -1,0 +1,5 @@
+^{:watch-dirs ["src" "test"]
+  :css-dirs ["resources/public/css"]
+  :auto-testing true
+  :ring-handler beadmania.server/ring-handler}
+{:main beadmania.client.core}

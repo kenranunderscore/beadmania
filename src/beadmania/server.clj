@@ -4,10 +4,6 @@
             [compojure.handler :as handler]
             [hiccup.page :as h]))
 
-(defn script
-  [code]
-  [:script {:type "text/javascript"} code])
-
 (defn script-file
   [filename]
   [:script {:type "text/javascript" :src filename}])
@@ -19,8 +15,7 @@
      [:title "beadmania"]]
     [:body {}
      [:div {:id "root"}]
-     (script-file "js/compiled/beadmania.js")
-     (script "beadmania.client.main.run(document.getElementById('root'))")]]))
+     (script-file "cljs-out/dev-main.js")]]))
 
 (compojure/defroutes main-routes
   (compojure/GET "/" [] index)
