@@ -1,3 +1,4 @@
 {:watch-dirs ["src" "test"]
  :css-dirs ["resources/public/css"]
- :ring-handler beadmania.server/ring-handler}
+ :ring-handler beadmania.server/ring-handler
+ :open-url :false}
