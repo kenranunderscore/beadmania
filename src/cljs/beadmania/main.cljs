@@ -1,4 +1,4 @@
-(ns beadmania.client.main
+(ns beadmania.main
   (:require [reacl2.core :as reacl :include-macros true]
             [reacl2.dom :as dom :include-macros true]))
 

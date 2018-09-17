@@ -1,5 +1,5 @@
-(ns beadmania.client.core
-  (:require [beadmania.client.main :as main]))
+(ns beadmania.core
+  (:require [beadmania.main :as main]))
 
 (enable-console-print!)
 

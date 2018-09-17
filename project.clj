@@ -17,7 +17,7 @@
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
-  :source-paths ["src"]
+  :source-paths ["src/clj" "src/cljs"]
 
   :aliases {"fig"       ["trampoline" "run" "-m" "figwheel.main"]
             "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
@@ -29,7 +29,7 @@
 
   :cljsbuild {:builds
               [{:source-paths ["src"]
-                :compiler {:main beadmania.client.core
+                :compiler {:main beadmania.core
                            :output-to "resources/public/cljs-out/dev-main.js"
                            :optimizations :simple
                            :pretty-print false}}]}
