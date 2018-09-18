@@ -16,12 +16,6 @@
   (fn [msg]
     (reacl/return :app-state app-state)))
 
-(defn ^:export run
-  [dom]
-  (reacl/render-component
-   dom
-   beadmania))
-
 (reacl/render-component
  (.getElementById js/document "root")
  beadmania

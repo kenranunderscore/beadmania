@@ -6,10 +6,6 @@
             [ring.adapter.jetty :as jetty]
             [hiccup.page :as h]))
 
-(defn script-file
-  [filename]
-  [:script {:type "text/javascript" :src filename}])
-
 (def index
   (h/html5
    [:html
@@ -17,7 +13,7 @@
      [:title "beadmania"]]
     [:body {}
      [:div {:id "root"}]
-     (script-file "cljs-out/dev-main.js")]]))
+     (h/include-js "cljs-out/dev-main.js")]]))
 
 (compojure/defroutes main-routes
   (compojure/GET "/" [] index)
