@@ -17,3 +17,5 @@ pom.xml
 # macOS
 .DS_Store
 
+# misc
+.rebel_readline_history
