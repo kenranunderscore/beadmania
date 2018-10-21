@@ -2,19 +2,18 @@
   (:require [reacl2.core :as reacl :include-macros true]
             [reacl2.dom :as dom :include-macros true]))
 
-(defn foo
-  [& args]
-  (dom/div
-   "Foo"))
-
-(reacl/defclass beadmania
-  this app-state []
+(reacl/defclass beadmania this []
   render
   (dom/div
-   (foo this app-state))
+   (dom/nav
+    {:class "navbar navbar-expand-lg navbar-dark bg-dark"}
+    (dom/a
+     {:class "navbar-brand"
+            :href "#"}
+     "beadmania")))
+
   handle-message
-  (fn [msg]
-    (reacl/return :app-state app-state)))
+  #(reacl/return))
 
 (reacl/render-component
  (.getElementById js/document "root")
