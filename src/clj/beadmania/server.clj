@@ -1,10 +1,11 @@
 (ns beadmania.server
   (:gen-class)
   (:require [compojure.core :as compojure]
-            [compojure.route :as route]
             [compojure.handler :as handler]
+            [compojure.route :as route]
+            [hiccup.page :as h]
             [ring.adapter.jetty :as jetty]
-            [hiccup.page :as h]))
+            [ring.middleware.reload :refer [wrap-reload]]))
 
 (defn include-stylesheet
   [href & [integrity crossorigin]]
@@ -49,10 +50,13 @@
   (route/resources "/")
   (route/not-found "Page could not be found"))
 
-(def ring-handler
+(def prod-ring-handler
   (handler/site main-routes))
+
+(def dev-ring-handler
+  (wrap-reload #'prod-ring-handler))
 
 (defn -main
   [& args]
   (let [port (Integer/parseInt (get (System/getenv) "port" "9500"))]
-    (jetty/run-jetty ring-handler {:port port})))
+    (jetty/run-jetty prod-ring-handler {:port port})))
