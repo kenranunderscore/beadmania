@@ -4,13 +4,13 @@
 
 (defrecord UploadFile [file])
 
-(reacl/defclass file-chooser this file []
+(reacl/defclass file-chooser this file [accept]
   render
   (dom/form
    (dom/input
     {:type "file"
      :class "form-control-file"
-     :accept "image/png, image/bmp, image/jpeg"
+     :accept accept
      :onchange (fn [e]
                  (let [files (.. e -target -files)]
                    (when (pos? (alength files))
@@ -19,7 +19,7 @@
   (fn [msg]
     (cond
       (instance? UploadFile msg)
-      (.log js/console (:file msg)))))
+      (reacl/return :app-state (:file msg)))))
 
 (reacl/defclass beadmania this []
   render
@@ -30,7 +30,12 @@
      {:class "navbar-brand"
       :href "#"}
      "beadmania"))
-   (file-chooser nil))
+   (file-chooser
+    (reacl/opt :embed-app-state
+               (fn [as image]
+                 (assoc as :file image)))
+    nil
+    "image/png, image/bmp, image/jpeg, image/jpg"))
 
   handle-message
   #(reacl/return))
