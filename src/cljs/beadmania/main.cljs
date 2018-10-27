@@ -1,8 +1,10 @@
 (ns beadmania.main
   (:require [reacl2.core :as reacl :include-macros true]
-            [reacl2.dom :as dom :include-macros true]))
+            [reacl2.dom :as dom :include-macros true]
+            [beadmania.actions :as actions]))
 
 (defrecord UploadFile [file])
+(defrecord TransformImage [image])
 
 (reacl/defclass file-chooser this file [id accept]
   render
@@ -37,17 +39,19 @@
       :href "#"}
      "beadmania"))
    (file-chooser
-    (reacl/opt :embed-app-state
-               (fn [as image]
-                 (assoc as :file image)))
+    (reacl/opt :reaction (reacl/reaction this ->TransformImage))
     nil
     "image-upload"
     "image/png, image/bmp, image/jpeg, image/jpg"))
 
   handle-message
-  #(reacl/return))
+  (fn [msg]
+    (cond
+      (instance? TransformImage msg)
+      (reacl/return :action (actions/->TransformImage (:image msg))))))
 
 (reacl/render-component
  (.getElementById js/document "root")
  beadmania
+ (reacl/opt :reduce-action actions/handle-action)
  {})
