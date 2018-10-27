@@ -4,12 +4,18 @@
 
 (defrecord UploadFile [file])
 
-(reacl/defclass file-chooser this file [accept]
+(reacl/defclass file-chooser this file [id accept]
   render
-  (dom/form
+  (dom/div
+   (dom/button
+    {:class "btn btn-primary"
+     :type "button"
+     :onclick #(.click (.getElementById js/document id))}
+    "Choose File")
    (dom/input
     {:type "file"
-     :class "form-control-file"
+     :id id
+     :style {:display "none"}
      :accept accept
      :onchange (fn [e]
                  (let [files (.. e -target -files)]
@@ -35,6 +41,7 @@
                (fn [as image]
                  (assoc as :file image)))
     nil
+    "image-upload"
     "image/png, image/bmp, image/jpeg, image/jpg"))
 
   handle-message
