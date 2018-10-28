@@ -45,7 +45,14 @@
                  "anonymous")
      (include-js "cljs-out/dev-main.js")]]))
 
+(defn handle-image-upload
+  [{:keys [filename size tempfile] :as params}]
+  (str "File " filename " uploaded successfully"))
+
 (compojure/defroutes main-routes
+  (compojure/POST "/upload"
+                  [image]
+                  (handle-image-upload image))
   (compojure/GET "/" [] index)
   (route/resources "/")
   (route/not-found "Page could not be found"))
