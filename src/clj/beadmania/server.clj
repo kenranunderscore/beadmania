@@ -5,7 +5,10 @@
             [compojure.route :as route]
             [hiccup.page :as h]
             [ring.adapter.jetty :as jetty]
-            [ring.middleware.reload :refer [wrap-reload]]))
+            [ring.middleware.reload :refer [wrap-reload]]
+            [ring.util.response :as resp]
+            [mikera.image.core :as imagez]
+            [beadmania.image-operations :as image-op]))
 
 (defn include-stylesheet
   [href & [integrity crossorigin]]
@@ -45,9 +48,16 @@
                  "anonymous")
      (include-js "cljs-out/dev-main.js")]]))
 
+(defn edn-response
+  [edn]
+  (-> (resp/response edn)
+      (resp/status 200)
+      (resp/content-type "application/edn")
+      (resp/charset "utf-8")))
+
 (defn handle-image-upload
   [{:keys [filename size tempfile] :as params}]
-  (str "File " filename " uploaded successfully"))
+  (edn-response (image-op/transform tempfile filename)))
 
 (compojure/defroutes main-routes
   (compojure/POST "/upload"

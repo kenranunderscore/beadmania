@@ -1,15 +1,18 @@
 (ns beadmania.actions
-  (:require [ajax.core :refer [POST]]))
+  (:require [ajax.core :refer [POST]]
+            [reacl2.core :as reacl]))
 
-(defrecord TransformImage [image])
+(defrecord TransformImage [target image])
+(defrecord TransformImageSuccess [image-edn])
+(defrecord Error [error])
 
 (defn handle-action
   [app-state action]
-  (.log js/console (:image action))
   (cond
     (instance? TransformImage action)
-    (POST "/upload" {:body (doto (js/FormData.)
+    (let [target (:target action)]
+      (POST "/upload" {:body (doto (js/FormData.)
                                (.append "image" (:image action)))
-                     :keywords? true
-                     :handler (fn [e] (.log js/console e))
-                     :error-handler (fn [e] (.log js/console e))})))
+                       :keywords? true
+                       :handler (fn [e] (reacl/send-message! target (->TransformImageSuccess e)))
+                       :error-handler (fn [e] (reacl/send-message! target (->Error e)))}))))

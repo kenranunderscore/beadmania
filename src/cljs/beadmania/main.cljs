@@ -48,7 +48,13 @@
   (fn [msg]
     (cond
       (instance? TransformImage msg)
-      (reacl/return :action (actions/->TransformImage (:image msg))))))
+      (reacl/return :action (actions/->TransformImage this (:image msg)))
+
+      (instance? actions/TransformImageSuccess msg)
+      (reacl/return :app-state (:image-edn msg))
+
+      (instance? actions/Error msg)
+      (.log js/console (:error msg)))))
 
 (reacl/render-component
  (.getElementById js/document "root")

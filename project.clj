@@ -14,7 +14,8 @@
                  [hiccup "1.0.5"]
                  [reacl "2.0.5"]
                  [compojure "1.6.1"]
-                 [cljs-ajax "0.7.5"]]
+                 [cljs-ajax "0.7.5"]
+                 [net.mikera/imagez "0.12.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
