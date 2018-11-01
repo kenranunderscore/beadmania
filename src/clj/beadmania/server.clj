@@ -1,10 +1,10 @@
 (ns beadmania.server
   (:gen-class)
   (:require [compojure.core :as compojure]
-            [compojure.handler :as handler]
             [compojure.route :as route]
             [hiccup.page :as h]
             [ring.adapter.jetty :as jetty]
+            [ring.middleware.edn :refer [wrap-edn-params]]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.util.response :as resp]
             [mikera.image.core :as imagez]
@@ -50,7 +50,9 @@
 
 (defn edn-response
   [edn]
-  (-> (resp/response edn)
+  (-> edn
+      (pr-str)
+      (resp/response)
       (resp/status 200)
       (resp/content-type "application/edn")
       (resp/charset "utf-8")))
@@ -68,10 +70,13 @@
   (route/not-found "Page could not be found"))
 
 (def prod-ring-handler
-  (handler/site main-routes))
+  (-> main-routes
+      (wrap-edn-params)))
 
 (def dev-ring-handler
-  (wrap-reload #'prod-ring-handler))
+  (-> main-routes
+      (wrap-reload)
+      (wrap-edn-params)))
 
 (defn -main
   [& args]
