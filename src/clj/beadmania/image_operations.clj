@@ -18,4 +18,4 @@
   (let [image (imagez/load-image tempfile-path)
         pixels (vec (imagez/get-pixels image))
         colors (map argb->color pixels)]
-    colors))
+    (partition (.getWidth image) colors)))
