@@ -7,7 +7,7 @@
 
 (defrecord TransformImage [image])
 
-(reacl/defclass beadmania this []
+(reacl/defclass beadmania this app-state []
   render
   (dom/div
    (dom/nav
@@ -21,7 +21,8 @@
     nil
     "image-upload"
     "image/png, image/bmp, image/jpeg, image/jpg")
-   (viewer/viewer))
+   (when-let [image-edn (:image-edn app-state)]
+     (viewer/viewer image-edn)))
 
   handle-message
   (fn [msg]
@@ -30,7 +31,9 @@
       (reacl/return :action (actions/->TransformImage this (:image msg)))
 
       (instance? actions/TransformImageSuccess msg)
-      (reacl/return :app-state (:image-edn msg))
+      (reacl/return :app-state (assoc app-state
+                                      :image-edn
+                                      (:image-edn msg)))
 
       (instance? actions/Error msg)
       (.log js/console (:error msg)))))
