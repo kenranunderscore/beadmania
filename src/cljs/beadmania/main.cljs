@@ -2,7 +2,8 @@
   (:require [reacl2.core :as reacl :include-macros true]
             [reacl2.dom :as dom :include-macros true]
             [beadmania.actions :as actions]
-            [beadmania.files :as files]))
+            [beadmania.files :as files]
+            [beadmania.viewer :as viewer]))
 
 (defrecord TransformImage [image])
 
@@ -19,7 +20,8 @@
     (reacl/opt :reaction (reacl/reaction this ->TransformImage))
     nil
     "image-upload"
-    "image/png, image/bmp, image/jpeg, image/jpg"))
+    "image/png, image/bmp, image/jpeg, image/jpg")
+   (viewer/viewer))
 
   handle-message
   (fn [msg]
