@@ -32,7 +32,7 @@
   (route/not-found "Page could not be found"))
 
 (def prod-ring-handler
-  (-> main-route
+  (-> main-routes
       (wrap-edn-params)))
 
 (def dev-ring-handler
