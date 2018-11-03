@@ -9,6 +9,18 @@
     (set! (.-fillStyle ctx) color)
     (.fillRect ctx (offset x) (offset y) scaling-factor scaling-factor)))
 
+(defn draw-pixel-as-circle!
+  [ctx x y color scaling-factor distance]
+  (let [radius (/ scaling-factor 2)]
+    (letfn [(offset [index]
+              (+ (* index
+                    (+ distance scaling-factor))
+                 radius))]
+      (.beginPath ctx)
+      (set! (.-fillStyle ctx) color)
+      (.arc ctx (offset x) (offset y) radius 0 6.29 false)
+      (.fill ctx))))
+
 (defn draw-pixels!
   [ctx pixels scaling-factor distance]
   (letfn [(offset [index]
