@@ -10,7 +10,7 @@
                    (map-indexed (fn [i [a r g b]]
                                   (let [color (str "rgba(" r "," g "," b "," a ")")]
                                     (set! (.-fillStyle ctx) color)
-                                    (.fillRect ctx i j (inc i) (inc j))))
+                                    (.fillRect ctx i j 1 1)))
                                 line)))
                 pixels)))
 
