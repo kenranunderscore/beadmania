@@ -2,6 +2,13 @@
   (:require [reacl2.core :as reacl :include-macros true]
             [reacl2.dom :as dom :include-macros true]))
 
+(defn draw-pixel-as-rect!
+  [ctx x y color scaling-factor distance]
+  (letfn [(offset [index]
+            (* index (+ distance scaling-factor)))]
+    (set! (.-fillStyle ctx) color)
+    (.fillRect ctx (offset x) (offset y) scaling-factor scaling-factor)))
+
 (defn draw-pixels!
   [ctx pixels scaling-factor distance]
   (letfn [(offset [index]
@@ -11,8 +18,7 @@
                     (doall
                      (map-indexed (fn [i [a r g b]]
                                     (let [color (str "rgba(" r "," g "," b "," a ")")]
-                                      (set! (.-fillStyle ctx) color)
-                                      (.fillRect ctx (offset i) (offset j) scaling-factor scaling-factor)))
+                                      (draw-pixel-as-rect! ctx i j color scaling-factor distance)))
                                   line)))
                   pixels))))
 
@@ -27,8 +33,8 @@
        :height (scale orig-height)})))
 
 (reacl/defclass viewer this [pixels]
-  local-state [local-state {:scaling-factor 10
-                            :distance 1}]
+  local-state [local-state {:scaling-factor 20
+                            :distance 2}]
 
   component-did-mount
   (fn []
