@@ -15,17 +15,20 @@
                 pixels)))
 
 (reacl/defclass viewer this [pixels]
+  local-state [local-state nil]
+
   component-did-mount
   (fn []
     (let [canvas (.getElementById js/document "image")
           ctx (.getContext canvas "2d")
           _ (draw-pixels! ctx pixels)]
-      (reacl/return)))
+      (reacl/return :local-state {:context ctx :canvas canvas})))
 
   component-did-update
   (fn []
-    (let [canvas (.getElementById js/document "image")
-          ctx (.getContext canvas "2d")
+    (let [ctx (:context local-state)
+          canvas (:canvas local-state)
+          _ (.clearRect ctx 0 0 (.-width canvas) (.-height canvas))
           _ (draw-pixels! ctx pixels)]))
 
   render
