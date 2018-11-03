@@ -3,36 +3,40 @@
             [reacl2.dom :as dom :include-macros true]))
 
 (defn draw-pixels!
-  [ctx pixels]
+  [ctx pixels scale]
   (doall
    (map-indexed (fn [j line]
                   (doall
                    (map-indexed (fn [i [a r g b]]
                                   (let [color (str "rgba(" r "," g "," b "," a ")")]
                                     (set! (.-fillStyle ctx) color)
-                                    (.fillRect ctx i j 1 1)))
+                                    (.fillRect ctx (* scale i) (* scale j) scale scale)))
                                 line)))
                 pixels)))
 
 (reacl/defclass viewer this [pixels]
-  local-state [local-state nil]
+  local-state [local-state {:scale 5}]
 
   component-did-mount
   (fn []
     (let [canvas (.getElementById js/document "image")
           ctx (.getContext canvas "2d")
-          _ (draw-pixels! ctx pixels)]
-      (reacl/return :local-state {:context ctx :canvas canvas})))
+          _ (draw-pixels! ctx pixels (:scale local-state))]
+      (reacl/return :local-state
+                    (-> local-state
+                        (assoc :context ctx)
+                        (assoc :canvas canvas)))))
 
   component-did-update
   (fn []
     (let [ctx (:context local-state)
           canvas (:canvas local-state)
           _ (.clearRect ctx 0 0 (.-width canvas) (.-height canvas))
-          _ (draw-pixels! ctx pixels)]))
+          _ (draw-pixels! ctx pixels (:scale local-state))]))
 
   render
-  (dom/canvas
-   {:id "image"
-    :width (* 1 (count (first pixels)))
-    :height (* 1 (count pixels))}))
+  (let [scale (:scale local-state)]
+    (dom/canvas
+     {:id "image"
+      :width (* scale (count (first pixels)))
+      :height (* scale (count pixels))})))
