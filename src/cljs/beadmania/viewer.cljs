@@ -4,17 +4,32 @@
 
 (defn draw-pixels!
   [ctx pixels]
-  (set! (.-fillStyle ctx) "#ff0000")
-  (.fillRect ctx 0 0 2 3))
+  (doall
+   (map-indexed (fn [j line]
+                  (doall
+                   (map-indexed (fn [i [a r g b]]
+                                  (let [color (str "rgba(" r "," g "," b "," a ")")]
+                                    (set! (.-fillStyle ctx) color)
+                                    (.fillRect ctx i j (inc i) (inc j))))
+                                line)))
+                pixels)))
 
-(reacl/defclass viewer this [image-edn]
+(reacl/defclass viewer this [pixels]
   component-did-mount
-  #(let [canvas (.getElementById js/document "image")
-         ctx (.getContext canvas "2d")]
-     (draw-pixels! ctx image-edn))
+  (fn []
+    (let [canvas (.getElementById js/document "image")
+          ctx (.getContext canvas "2d")
+          _ (draw-pixels! ctx pixels)]
+      (reacl/return)))
+
+  component-did-update
+  (fn []
+    (let [canvas (.getElementById js/document "image")
+          ctx (.getContext canvas "2d")
+          _ (draw-pixels! ctx pixels)]))
 
   render
   (dom/canvas
    {:id "image"
-    :width (count (first image-edn))
-    :height (count image-edn)}))
+    :width (* 1 (count (first pixels)))
+    :height (* 1 (count pixels))}))
