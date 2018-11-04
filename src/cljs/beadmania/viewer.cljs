@@ -44,6 +44,13 @@
       {:width (scale orig-width)
        :height (scale orig-height)})))
 
+;; FIXME: find a way to abstract over "rect"/"circle" calculations
+;; to be able to just plug in another calculation
+(defn find-index-rect
+  [coord scaling-factor distance]
+  (int (/ coord
+          (+ scaling-factor distance))))
+
 (reacl/defclass viewer this [pixels]
   local-state [local-state {:scaling-factor 20
                             :distance 2}]
@@ -69,5 +76,14 @@
   (let [dimensions (canvas-dimensions pixels (:scaling-factor local-state) (:distance local-state))]
     (dom/canvas
      {:id "image"
+      :onmousemove (fn [e]
+                     (let [canvas (:canvas local-state)
+                           scaling-factor (:scaling-factor local-state)
+                           distance (:distance local-state)
+                           x (- (.-pageX e) (.-offsetLeft canvas))
+                           y (- (.-pageY e) (.-offsetTop canvas))
+                           i (find-index-rect x scaling-factor distance)
+                           j (find-index-rect y scaling-factor distance)]
+                       nil))
       :width (:width dimensions)
       :height (:height dimensions)})))
