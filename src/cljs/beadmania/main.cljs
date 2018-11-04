@@ -21,13 +21,15 @@
      {:class "col-3"}
      (sidebar/sidebar-content
       (reacl/opt :reduce-action actions/handle-action
-                 :embed-app-state merge)))
+                 :embed-app-state merge)
+      (select-keys app-state [:pixel-size :pixel-distance])))
     (dom/div
      {:class "col-9"}
      (when-let [pixels (:pixels app-state)]
-       (viewer/viewer pixels))))))
+       (viewer/viewer pixels (:pixel-size app-state) (:pixel-distance app-state)))))))
 
 (reacl/render-component
  (.getElementById js/document "root")
  beadmania
- {})
+ {:pixel-size 20
+  :pixel-distance 2})

@@ -52,35 +52,33 @@
   (int (/ coord
           (+ pixel-size pixel-distance))))
 
-(reacl/defclass viewer this [pixels]
-  local-state [local-state {:pixel-size 20
-                            :pixel-distance 2}]
+(reacl/defclass viewer this [pixels pixel-size pixel-distance]
+  local-state [local-state {}]
 
   component-did-mount
   (fn []
     (let [canvas (.getElementById js/document "image")
           ctx (.getContext canvas "2d")
-          _ (draw-pixels! ctx pixels (:pixel-size local-state) (:pixel-distance local-state))]
+          _ (draw-pixels! ctx pixels pixel-size pixel-distance)]
       (reacl/return :local-state
                     (-> local-state
-                        (assoc :context ctx)
-                        (assoc :canvas canvas)))))
+                        (assoc :context ctx)))))
 
   component-did-update
   (fn []
     (let [ctx (:context local-state)
-          canvas (:canvas local-state)
+          canvas (.-canvas ctx)
           _ (.clearRect ctx 0 0 (.-width canvas) (.-height canvas))
-          _ (draw-pixels! ctx pixels (:pixel-size local-state) (:pixel-distance local-state))]))
+          _ (draw-pixels! ctx pixels pixel-size pixel-distance)]))
 
   render
-  (let [dimensions (canvas-dimensions pixels (:pixel-size local-state) (:pixel-distance local-state))]
+  (let [dimensions (canvas-dimensions pixels pixel-size pixel-distance)]
     (dom/canvas
      {:id "image"
       :onmousemove (fn [e]
-                     (let [canvas (:canvas local-state)
-                           pixel-size (:pixel-size local-state)
-                           pixel-distance (:pixel-distance local-state)
+                     (let [canvas (.getElementById js/document "image")
+                           pixel-size pixel-size
+                           pixel-distance pixel-distance
                            x (- (.-pageX e) (.-offsetLeft canvas))
                            y (- (.-pageY e) (.-offsetTop canvas))
                            i (find-index-rect x pixel-size pixel-distance)
