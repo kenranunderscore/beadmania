@@ -6,7 +6,7 @@
 
 (defrecord TransformImage [image])
 
-(reacl/defclass sidebar this app-state []
+(reacl/defclass sidebar-content this app-state []
   render
   (dom/div
    (files/file-chooser

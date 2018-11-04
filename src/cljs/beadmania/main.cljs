@@ -19,7 +19,7 @@
     {:class "row"}
     (dom/div
      {:class "col-3"}
-     (sidebar/sidebar
+     (sidebar/sidebar-content
       (reacl/opt :reduce-action actions/handle-action
                  :embed-app-state merge)))
     (dom/div
