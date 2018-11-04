@@ -4,7 +4,7 @@
             [cljs.reader :as reader]))
 
 (defrecord TransformImage [target image])
-(defrecord TransformImageSuccess [image-edn])
+(defrecord TransformImageSuccess [pixels])
 (defrecord Error [error])
 
 (defn handle-action
@@ -15,5 +15,7 @@
       (POST "/upload" {:body (doto (js/FormData.)
                                (.append "image" (:image action)))
                        :keywords? true
-                       :handler (fn [e] (reacl/send-message! target (->TransformImageSuccess (reader/read-string e))))
+                       :handler (fn [e]
+                                  (reacl/send-message! target
+                                                       (->TransformImageSuccess (reader/read-string e))))
                        :error-handler (fn [e] (reacl/send-message! target (->Error e)))}))))

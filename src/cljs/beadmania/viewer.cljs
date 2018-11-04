@@ -1,6 +1,7 @@
 (ns beadmania.viewer
   (:require [reacl2.core :as reacl :include-macros true]
-            [reacl2.dom :as dom :include-macros true]))
+            [reacl2.dom :as dom :include-macros true]
+            [beadmania.sidebar :as sidebar]))
 
 (defn draw-pixel-as-rect!
   [ctx x y color pixel-size pixel-distance]
