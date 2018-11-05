@@ -22,14 +22,18 @@
      (sidebar/sidebar-content
       (reacl/opt :reduce-action actions/handle-action
                  :embed-app-state merge)
-      (select-keys app-state [:pixel-size :pixel-distance])))
+      (select-keys app-state [:pixel-size :pixel-distance :pixel-shape])))
     (dom/div
      {:class "col-9"}
      (when-let [pixels (:pixels app-state)]
-       (viewer/viewer pixels (:pixel-size app-state) (:pixel-distance app-state)))))))
+       (viewer/viewer pixels
+                      (:pixel-size app-state)
+                      (:pixel-distance app-state)
+                      (:pixel-shape app-state)))))))
 
 (reacl/render-component
  (.getElementById js/document "root")
  beadmania
  {:pixel-size 20
-  :pixel-distance 2})
+  :pixel-distance 2
+  :pixel-shape :rect})

@@ -23,7 +23,7 @@
       (.fill ctx))))
 
 (defn draw-pixels!
-  [ctx pixels pixel-size pixel-distance]
+  [ctx draw-fn pixels pixel-size pixel-distance]
   (letfn [(offset [index]
             (* index (+ pixel-distance pixel-size)))]
     (doall
@@ -31,7 +31,7 @@
                     (doall
                      (map-indexed (fn [i [a r g b]]
                                     (let [color (str "rgba(" r "," g "," b "," a ")")]
-                                      (draw-pixel-as-rect! ctx i j color pixel-size pixel-distance)))
+                                      (draw-fn ctx i j color pixel-size pixel-distance)))
                                   line)))
                   pixels))))
 
@@ -52,14 +52,21 @@
   (int (/ coord
           (+ pixel-size pixel-distance))))
 
-(reacl/defclass viewer this [pixels pixel-size pixel-distance]
+(defn determine-draw-fn
+  [pixel-shape]
+  (case pixel-shape
+    :rect draw-pixel-as-rect!
+    :circle draw-pixel-as-circle!))
+
+(reacl/defclass viewer this [pixels pixel-size pixel-distance pixel-shape]
   local-state [local-state {}]
 
   component-did-mount
   (fn []
     (let [canvas (.getElementById js/document "image")
           ctx (.getContext canvas "2d")
-          _ (draw-pixels! ctx pixels pixel-size pixel-distance)]
+          draw-fn (determine-draw-fn pixel-shape)
+          _ (draw-pixels! ctx draw-fn pixels pixel-size pixel-distance)]
       (reacl/return :local-state
                     (-> local-state
                         (assoc :context ctx)))))
@@ -68,8 +75,9 @@
   (fn []
     (let [ctx (:context local-state)
           canvas (.-canvas ctx)
+          draw-fn (determine-draw-fn pixel-shape)
           _ (.clearRect ctx 0 0 (.-width canvas) (.-height canvas))
-          _ (draw-pixels! ctx pixels pixel-size pixel-distance)]))
+          _ (draw-pixels! ctx draw-fn pixels pixel-size pixel-distance)]))
 
   render
   (let [dimensions (canvas-dimensions pixels pixel-size pixel-distance)]

@@ -51,8 +51,8 @@
                                        (->ChangePixelDistance (int (.. e -target -value)))))})
     (controls/radio-group (reacl/opt :embed-app-state
                                      (fn [state shape]
-                                       (assoc state :shape shape)))
-                          (or (:shape app-state) :rect)
+                                       (assoc state :pixel-shape shape)))
+                          (or (:pixel-shape app-state) :rect)
                           [[:rect "Rectangle"] [:circle "Circle"]]
                           "shape-selection")))
 
