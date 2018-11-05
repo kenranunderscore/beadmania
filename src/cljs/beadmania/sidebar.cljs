@@ -12,8 +12,7 @@
 (reacl/defclass sidebar-content this app-state []
   render
   (dom/div
-   {:class "col"
-    :style {:margin-top "1em"}}
+   {:class "col mt-3"}
    (dom/div
     {:class "form-group"}
     (files/file-chooser
@@ -22,8 +21,8 @@
      "image-upload"
      "image/png, image/bmp, image/jpeg, image/jpg")
     (dom/label
-     {:htmlFor "pixel-size"
-      :style {:margin-top "1em"}}
+     {:class "mt-3"
+      :htmlFor "pixel-size"}
      "Adjust pixel size")
     (dom/input
      {:id "pixel-size"
@@ -36,8 +35,8 @@
                   (reacl/send-message! this
                                        (->ChangePixelSize (int (.. e -target -value)))))})
     (dom/label
-     {:htmlFor "pixel-distance"
-      :style {:margin-top "1em"}}
+     {:class "mt-3"
+      :htmlFor "pixel-distance"}
      "Adjust pixel distance")
     (dom/input
      {:id "pixel-distance"
@@ -49,12 +48,14 @@
       :onchange (fn [e]
                   (reacl/send-message! this
                                        (->ChangePixelDistance (int (.. e -target -value)))))})
-    (controls/radio-group (reacl/opt :embed-app-state
-                                     (fn [state shape]
-                                       (assoc state :pixel-shape shape)))
-                          (or (:pixel-shape app-state) :rect)
-                          [[:rect "Rectangle"] [:circle "Circle"]]
-                          "shape-selection")))
+    (dom/div
+     {:class "mt-3"}
+     (controls/radio-group (reacl/opt :embed-app-state
+                                      (fn [state shape]
+                                        (assoc state :pixel-shape shape)))
+                           (or (:pixel-shape app-state) :rect)
+                           [[:rect "Rectangle"] [:circle "Circle"]]
+                           "shape-selection"))))
 
   handle-message
   (fn [msg]
