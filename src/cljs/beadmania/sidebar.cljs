@@ -20,34 +20,20 @@
      nil
      "image-upload"
      "image/png, image/bmp, image/jpeg, image/jpg")
-    (dom/label
-     {:class "mt-3"
-      :htmlFor "pixel-size"}
-     "Adjust pixel size")
-    (dom/input
-     {:id "pixel-size"
-      :type "range"
-      :class "form-control-range"
-      :min 1
-      :max 50
-      :value (:pixel-size app-state)
-      :onchange (fn [e]
-                  (reacl/send-message! this
-                                       (->ChangePixelSize (int (.. e -target -value)))))})
-    (dom/label
-     {:class "mt-3"
-      :htmlFor "pixel-distance"}
-     "Adjust pixel distance")
-    (dom/input
-     {:id "pixel-distance"
-      :type "range"
-      :class "form-control-range"
-      :min 0
-      :max 5
-      :value (:pixel-distance app-state)
-      :onchange (fn [e]
-                  (reacl/send-message! this
-                                       (->ChangePixelDistance (int (.. e -target -value)))))})
+    (dom/div
+     {:class "mt-3"}
+     (controls/range-slider (reacl/opt :reaction (reacl/reaction this ->ChangePixelSize))
+                            (:pixel-size app-state)
+                            1 50
+                            "pixel-size-slider"
+                            "Ajust pixel size"))
+    (dom/div
+     {:class "mt-3"}
+     (controls/range-slider (reacl/opt :reaction (reacl/reaction this ->ChangePixelDistance))
+                            (:pixel-distance app-state)
+                            0 5
+                            "pixel-distance-slider"
+                            "Adjust pixel distance"))
     (dom/div
      {:class "mt-3"}
      (controls/radio-group (reacl/opt :embed-app-state

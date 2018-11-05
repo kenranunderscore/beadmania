@@ -31,3 +31,23 @@
     (cond
       (instance? Select msg)
       (reacl/return :app-state (:value msg)))))
+
+(reacl/defclass range-slider this value [min max id text]
+  render
+  (dom/div
+   (dom/label {:htmlFor id}
+              text)
+   (dom/input {:type "range"
+               :class "form-control-range"
+               :min min
+               :max max
+               :id id
+               :value value
+               :onchange (fn [e]
+                           (reacl/send-message! this (->Select (int (.. e -target -value)))))}))
+
+  handle-message
+  (fn [msg]
+    (cond
+      (instance? Select msg)
+      (reacl/return :app-state (:value msg)))))
