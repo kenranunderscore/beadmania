@@ -1,8 +1,9 @@
 (ns beadmania.sidebar
-  (:require [reacl2.core :as reacl]
-            [reacl2.dom :as dom]
+  (:require [reacl2.core :as reacl :include-macros true]
+            [reacl2.dom :as dom :include-macros true]
             [beadmania.files :as files]
-            [beadmania.actions :as actions]))
+            [beadmania.actions :as actions]
+            [beadmania.controls :as controls]))
 
 (defrecord TransformImage [image])
 (defrecord ChangePixelSize [value])
@@ -47,7 +48,13 @@
       :value (:pixel-distance app-state)
       :onchange (fn [e]
                   (reacl/send-message! this
-                                       (->ChangePixelDistance (int (.. e -target -value)))))})))
+                                       (->ChangePixelDistance (int (.. e -target -value)))))})
+    (controls/radio-group (reacl/opt :embed-app-state
+                                     (fn [state shape]
+                                       (assoc state :shape shape)))
+                          (or (:shape app-state) :rect)
+                          [[:rect "Rectangle"] [:circle "Circle"]]
+                          "shape-selection")))
 
   handle-message
   (fn [msg]
