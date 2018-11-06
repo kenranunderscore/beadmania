@@ -19,10 +19,10 @@
     {:class "row"}
     (dom/div
      {:class "col-3"}
-     (sidebar/sidebar-content
-      (reacl/opt :reduce-action actions/handle-action
-                 :embed-app-state merge)
-      (select-keys app-state [:pixel-size :pixel-distance :pixel-shape])))
+     (sidebar/sidebar-content (reacl/opt :reduce-action actions/handle-action
+                                         :embed-app-state merge)
+                              (select-keys app-state
+                                           [:pixel-size :pixel-distance :pixel-shape :pixels])))
     (dom/div
      {:class "col-9"}
      (when-let [pixels (:pixels app-state)]

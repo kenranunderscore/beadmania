@@ -15,33 +15,34 @@
    {:class "col mt-3"}
    (dom/div
     {:class "form-group"}
-    (files/file-chooser
-     (reacl/opt :reaction (reacl/reaction this ->TransformImage))
-     nil
-     "image-upload"
-     "image/png, image/bmp, image/jpeg, image/jpg")
-    (dom/div
-     {:class "mt-3"}
-     (controls/range-slider (reacl/opt :reaction (reacl/reaction this ->ChangePixelSize))
-                            (:pixel-size app-state)
-                            1 50
-                            "pixel-size-slider"
-                            "Ajust pixel size"))
-    (dom/div
-     {:class "mt-3"}
-     (controls/range-slider (reacl/opt :reaction (reacl/reaction this ->ChangePixelDistance))
-                            (:pixel-distance app-state)
-                            0 5
-                            "pixel-distance-slider"
-                            "Adjust pixel distance"))
-    (dom/div
-     {:class "mt-3"}
-     (controls/radio-group (reacl/opt :embed-app-state
-                                      (fn [state shape]
-                                        (assoc state :pixel-shape shape)))
-                           (or (:pixel-shape app-state) :rect)
-                           [[:rect "Rectangle"] [:circle "Circle"]]
-                           "shape-selection"))))
+    (files/file-chooser (reacl/opt :reaction (reacl/reaction this ->TransformImage))
+                        nil
+                        "image-upload"
+                        "image/png, image/bmp, image/jpeg, image/jpg")
+    (when (:pixels app-state)
+      (dom/div
+       (dom/div
+        {:class "mt-3"}
+        (controls/range-slider (reacl/opt :reaction (reacl/reaction this ->ChangePixelSize))
+                               (:pixel-size app-state)
+                               1 50
+                               "pixel-size-slider"
+                               "Ajust pixel size"))
+       (dom/div
+        {:class "mt-3"}
+        (controls/range-slider (reacl/opt :reaction (reacl/reaction this ->ChangePixelDistance))
+                               (:pixel-distance app-state)
+                               0 5
+                               "pixel-distance-slider"
+                               "Adjust pixel distance"))
+       (dom/div
+        {:class "mt-3"}
+        (controls/radio-group (reacl/opt :embed-app-state
+                                         (fn [state shape]
+                                           (assoc state :pixel-shape shape)))
+                              (or (:pixel-shape app-state) :rect)
+                              [[:rect "Rectangle"] [:circle "Circle"]]
+                              "shape-selection"))))))
 
   handle-message
   (fn [msg]
