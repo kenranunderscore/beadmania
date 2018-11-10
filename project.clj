@@ -20,7 +20,7 @@
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["src" "src/clj" "src/cljs"]
 
   :aliases {"fig"       ["trampoline" "run" "-m" "figwheel.main"]
             "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
