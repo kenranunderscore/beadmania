@@ -1,6 +1,6 @@
 ^{:watch-dirs ["src" "test"]
   :css-dirs ["resources/public/css"]
   :auto-testing true
-  :ring-handler beadmania.server/dev-ring-handler
-  :open-url false}
+  :open-url false
+  :ring-handler beadmania.server/dev-ring-handler}
 {:main beadmania.core}
