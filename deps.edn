@@ -6,8 +6,8 @@
         compojure {:mvn/version "1.6.1"}
         cljs-ajax {:mvn/version "0.7.5"}
         net.mikera/imagez {:mvn/version "0.12.0"}
-        fogus/ring-edn {:mvn/version "0.3.0"}
-        com.bhauman/figwheel-main {:mvn/version "0.1.9"}
-        com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
+        fogus/ring-edn {:mvn/version "0.3.0"}}
  :paths ["src" "src/clj" "src/cljs" "test" "resources"]
- :aliases {:fig {:main-opts ["-m" "figwheel.main" "-b" "dev" "-r"]}}}
+ :aliases {:fig {:main-opts ["-m" "figwheel.main" "-b" "dev" "-r"]
+                 :extra-deps {com.bhauman/figwheel-main {:mvn/version "0.1.9"}
+                              com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}}}}
