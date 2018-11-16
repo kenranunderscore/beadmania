@@ -19,3 +19,4 @@ pom.xml
 
 # misc
 .rebel_readline_history
+.cpcache
