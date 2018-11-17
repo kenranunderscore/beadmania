@@ -22,5 +22,4 @@
                   :main-opts ["-m" "cognitect.test-runner"]}
            :uberjar {:extra-deps {pack/pack.alpha {:git/url "git@github.com:juxt/pack.alpha.git"
                                                    :sha "595388c5b909759445a92a19192df50e427aa9a5"}}
-                     :main-opts ["-m" "mach.pack.alpha.one-jar" "-d" "deps.edn" "beadmania.jar"]
-                     #_["-m" "mach.pack.alpha.capsule" "beadmania.jar" "-d" "deps.edn"]}}}
+                     :main-opts ["-m" "mach.pack.alpha.one-jar" "-d" "deps.edn" "beadmania.jar"]}}}
