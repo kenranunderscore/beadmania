@@ -40,11 +40,8 @@
       wrap-edn-params))
 
 (def dev-ring-handler
-  (-> main-routes
-      wrap-reload
-      wrap-params
-      wrap-multipart-params
-      wrap-edn-params))
+  (-> prod-ring-handler
+      wrap-reload))
 
 (defn -main
   [& args]
