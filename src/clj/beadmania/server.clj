@@ -5,6 +5,8 @@
             [ring.adapter.jetty :as jetty]
             [ring.middleware.edn :refer [wrap-edn-params]]
             [ring.middleware.reload :refer [wrap-reload]]
+            [ring.middleware.params :refer [wrap-params]]
+            [ring.middleware.multipart-params :refer [wrap-multipart-params]]
             [ring.util.response :as resp]
             [mikera.image.core :as imagez]
             [beadmania.image-operations :as image-op]
@@ -13,8 +15,8 @@
 (defn edn-response
   [edn]
   (-> edn
-      (pr-str)
-      (resp/response)
+      pr-str
+      resp/response
       (resp/status 200)
       (resp/content-type "application/edn")
       (resp/charset "utf-8")))
@@ -33,12 +35,16 @@
 
 (def prod-ring-handler
   (-> main-routes
-      (wrap-edn-params)))
+      wrap-params
+      wrap-multipart-params
+      wrap-edn-params))
 
 (def dev-ring-handler
   (-> main-routes
-      (wrap-reload)
-      (wrap-edn-params)))
+      wrap-reload
+      wrap-params
+      wrap-multipart-params
+      wrap-edn-params))
 
 (defn -main
   [& args]
