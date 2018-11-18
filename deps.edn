@@ -7,10 +7,7 @@
 
  :paths ["src" "test" "resources"]
 
- :aliases {:fig {:main-opts ["-m" "figwheel.main" "-b" "dev" "-r"]
-                 :extra-deps {com.bhauman/figwheel-main {:mvn/version "0.1.9"}
-                              com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}}
-           :run {:main-opts ["-m" "beadmania.server"]}
+ :aliases {:run {:main-opts ["-m" "beadmania.server"]}
            :test {:extra-paths ["test"]
                   :extra-deps {com.cognitect/test-runner {:git/url "git@github.com:cognitect-labs/test-runner"
                                                           :sha "5f2b5c2efb444df76fb5252102b33f542ebf7f58"}}
