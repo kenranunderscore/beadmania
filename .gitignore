@@ -6,7 +6,7 @@ pom.xml
 /classes/
 /out/
 /target/
-/resources/public/cljs-out/
+/resources/public/js
 .lein-deps-sum
 .lein-repl-history
 .lein-plugins/
@@ -20,3 +20,8 @@ pom.xml
 # misc
 .rebel_readline_history
 .cpcache
+
+# node
+node_modules
+.shadow-cljs
+yarn-error.log

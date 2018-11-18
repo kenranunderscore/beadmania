@@ -1,0 +1,10 @@
+{:source-paths ["src"]
+ :nrepl {:port 8777}
+ :dependencies [[cljs-ajax "0.7.5"]
+                [reacl "2.0.5"]
+                [org.clojure/clojurescript "1.10.339"]]
+ :builds {:beadmania {:target :browser
+                      :output-dir "resources/public/js"
+                      :asset-path "/js"
+                      :modules {:main {:init-fn beadmania.core/init!}}
+                      :devtools {:after-load beadmania.core/reload!}}}}

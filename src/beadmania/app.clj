@@ -12,6 +12,6 @@
      (page/include-css "/css/bootstrap.min.css")]
     [:body {}
      [:div {:id "root"}]
-     (page/include-js "/js/jquery-3.3.1.slim.min.js")
-     (page/include-js "/js/bootstrap.bundle.min.js")
-     (page/include-js "cljs-out/dev-main.js")]]))
+     (page/include-js "/vendor/js/jquery-3.3.1.slim.min.js")
+     (page/include-js "/vendor/js/bootstrap.bundle.min.js")
+     (page/include-js "/js/main.js")]]))

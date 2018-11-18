@@ -10,3 +10,11 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
   )
+
+(defn init!
+  []
+  (println "Successfully loaded"))
+
+(defn reload!
+  []
+  (println "Code updated"))
