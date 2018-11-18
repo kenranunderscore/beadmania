@@ -1,8 +1,10 @@
 {:source-paths ["src" "test"]
  :nrepl {:port 8777}
  :dependencies [[cljs-ajax "0.7.5"]
-                [reacl "2.0.5"]
-                [org.clojure/clojurescript "1.10.339"]]
+                [reacl "2.0.6"]
+                [org.clojure/clojurescript "1.10.339"]
+                [cider/cider-nrepl "0.18.0"]
+                [refactor-nrepl "2.4.0"]]
  :builds {:beadmania {:target :browser
                       :output-dir "resources/public/js"
                       :asset-path "/js"
