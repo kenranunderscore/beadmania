@@ -26,6 +26,7 @@
                              (select-keys app-state
                                           [:pixel-size :pixel-distance :pixel-shape :pixels])))
    (dom/main
+    {:style {:overflow-y "auto"}}
     (when-let [pixels (:pixels app-state)]
       (viewer/viewer pixels
                      (:pixel-size app-state)
