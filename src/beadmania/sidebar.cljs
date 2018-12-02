@@ -3,11 +3,13 @@
             [reacl2.dom :as dom :include-macros true]
             [beadmania.files :as files]
             [beadmania.actions :as actions]
-            [beadmania.controls :as controls]))
+            [beadmania.controls :as controls]
+            [beadmania.conversion :as conversion]))
 
 (defrecord TransformImage [image])
 (defrecord ChangePixelSize [value])
 (defrecord ChangePixelDistance [value])
+(defrecord Convert [])
 
 (reacl/defclass sidebar-content this app-state []
   render
@@ -42,11 +44,27 @@
                                            (assoc state :pixel-shape shape)))
                               (or (:pixel-shape app-state) :rect)
                               [[:rect "Rectangle"] [:circle "Circle"]]
-                              "shape-selection"))))))
+                              "shape-selection"))
+       (dom/button {:class "btn btn-primary"
+                    :onclick (fn [_]
+                               (reacl/send-message! this (->Convert)))}
+                   "Convert")))))
 
   handle-message
   (fn [msg]
     (cond
+      (instance? Convert msg)
+      (let [converted-image (conversion/convert (:pixels app-state)
+                                                #{[0 0 0]
+                                                  [50 50 50]
+                                                  [100 100 100]
+                                                  [150 150 150]
+                                                  [200 200 200]
+                                                  [255 255 255]})]
+        (reacl/return :app-state (assoc app-state
+                                        :pixels
+                                        converted-image)))
+
       (instance? TransformImage msg)
       (reacl/return :action (actions/->TransformImage this (:image msg)))
 

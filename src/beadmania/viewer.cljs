@@ -30,8 +30,11 @@
   (apply concat
          (map-indexed (fn [j line]
                         (map-indexed (fn [i [a r g b]]
-                                       (let [color (str "rgba(" r "," g "," b "," a ")")]
-                                         (draw-fn i j color pixel-size pixel-distance)))
+                                       (if b
+                                         (let [color (str "rgba(" r "," g "," b "," a ")")]
+                                           (draw-fn i j color pixel-size pixel-distance))
+                                         (let [color (str "rgb(" a "," r "," g ")")]
+                                           (draw-fn i j color pixel-size pixel-distance))))
                                      line))
                       pixels)))
 
