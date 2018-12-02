@@ -1,6 +1,5 @@
 (ns beadmania.conversion
-  (:require [clojure.core.matrix :as matrix]
-            [beadmania.foo-palette :as foo]))
+  (:require [clojure.core.matrix :as matrix]))
 
 (def rgb->xyz-transformation
   (matrix/matrix [[0.4124 0.3576 0.1805]
