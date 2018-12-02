@@ -76,6 +76,7 @@
 
 (defn convert
   [pixels rgb-palette]
+  ;; FIXME: create map of rgb/lab values to improve performance
   (mapv (fn [line]
           (mapv #(best-match (rest %) rgb-palette)
                 line))
