@@ -4,7 +4,8 @@
             [beadmania.files :as files]
             [beadmania.actions :as actions]
             [beadmania.controls :as controls]
-            [beadmania.conversion :as conversion]))
+            [beadmania.conversion :as conversion]
+            [beadmania.palettes :as palettes]))
 
 (defrecord TransformImage [image])
 (defrecord ChangePixelSize [value])
@@ -55,12 +56,7 @@
     (cond
       (instance? Convert msg)
       (let [converted-image (conversion/convert (:pixels app-state)
-                                                #{[0 0 0]
-                                                  [50 50 50]
-                                                  [100 100 100]
-                                                  [150 150 150]
-                                                  [200 200 200]
-                                                  [255 255 255]})]
+                                                palettes/foo-palette)]
         (reacl/return :app-state (assoc app-state
                                         :pixels
                                         converted-image)))
