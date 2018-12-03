@@ -13,6 +13,13 @@
           (bit-shift-left g 8)
           b))
 
+(defn argb->rgb
+  [[a & rgb]]
+  (let [x (* 255 (- 1 a))
+        solid (fn [color-value]
+                (int (+ x (* a color-value) 0.5)))]
+    (mapv solid rgb)))
+
 (defn transform
   [tempfile-path filename]
   (let [image (imagez/load-image tempfile-path)
