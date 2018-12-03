@@ -5,5 +5,5 @@
 (deftest color-conversions-are-inverse
   (is (= [10 20 30 40]
          (image-op/argb->color (image-op/color->argb [10 20 30 40]))))
-  (is (= -123
-         (image-op/color->argb (image-op/argb->color -123)))))
+  (is (= 4294967173
+         (image-op/color->argb (image-op/argb->color 4294967173)))))
