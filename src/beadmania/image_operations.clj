@@ -13,7 +13,7 @@
           (bit-shift-left g 8)
           b))
 
-(defn argb->rgb
+(defn color->rgb-color
   [[a & rgb]]
   (let [x (* 255 (- 1 a))
         solid (fn [color-value]

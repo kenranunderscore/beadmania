@@ -8,6 +8,6 @@
   (is (= 4294967173
          (image-op/color->argb (image-op/argb->color 4294967173)))))
 
-(deftest argb->rgb
+(deftest t-color->rgb-color
   (is (= [253 153 153]
-         (image-op/argb->rgb [0.4 250 0 0]))))
+         (image-op/color->rgb-color [0.4 250 0 0]))))
