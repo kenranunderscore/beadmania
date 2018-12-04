@@ -15,14 +15,17 @@
 
 (defn color->rgb-color
   [[a & rgb]]
-  (let [x (* 255 (- 1 a))
+  (let [x (- 255 a)
         solid (fn [color-value]
-                (int (+ x (* a color-value) 0.5)))]
+                (int (+ x
+                        (* (/ a 255.0)
+                           color-value)
+                        0.5)))]
     (mapv solid rgb)))
 
 (defn transform
   [tempfile-path filename]
   (let [image (imagez/load-image tempfile-path)
         pixels (vec (imagez/get-pixels image))
-        colors (map argb->color pixels)]
+        colors (map (comp color->rgb-color argb->color) pixels)]
     (partition (.getWidth image) colors)))
