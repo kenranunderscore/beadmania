@@ -23,9 +23,14 @@
                         0.5)))]
     (mapv solid rgb)))
 
+(defn transform-pixels
+  [pixels width]
+  (->> pixels
+       (map (comp color->rgb-color argb->color))
+       (partition width)))
+
 (defn transform
   [tempfile-path filename]
   (let [image (imagez/load-image tempfile-path)
-        pixels (vec (imagez/get-pixels image))
-        colors (map (comp color->rgb-color argb->color) pixels)]
-    (partition (.getWidth image) colors)))
+        pixels (vec (imagez/get-pixels image))]
+    (transform-pixels pixels)))
