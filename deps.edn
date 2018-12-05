@@ -3,7 +3,8 @@
         hiccup {:mvn/version "1.0.5"}
         compojure {:mvn/version "1.6.1"}
         net.mikera/imagez {:mvn/version "0.12.0"}
-        fogus/ring-edn {:mvn/version "0.3.0"}}
+        fogus/ring-edn {:mvn/version "0.3.0"}
+        org.clojure/test.check {:mvn/version "0.10.0-alpha3"}}
 
  :paths ["src" "test" "resources"]
 
