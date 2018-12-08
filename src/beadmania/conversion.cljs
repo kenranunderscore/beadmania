@@ -63,17 +63,14 @@
         b2 (last w)
         c1 (Math/sqrt (+ (square a1) (square b1)))
         c2 (Math/sqrt (+ (square a2) (square b2)))
-        _ (println c1 c2 b1 b2 a1 a2)
         da (- a1 a2)
         dc (- c1 c2)
         db (- b1 b2)
         dl (- (first v) (first w))
-        _ (println da dc db dl)
         dh (Math/sqrt (- (+ (square da) (square db))
                           (square dc)))
         sc (inc (* 0.045 c1))
         sh (inc (* 0.015 c1))
-        _ (println dh sc sh)
         radicand (+ (square dl) (square (/ dc sc)) (square (/ dh sh)))]
     (Math/sqrt radicand)))
 
