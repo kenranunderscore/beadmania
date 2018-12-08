@@ -30,17 +30,23 @@
     (+ (* 7.787 v)
        (/ 16.0 116))))
 
-(let [ref-x 95.047
-      ref-y 100.0
-      ref-z 108.883]
-  (defn xyz->lab
-    [[x y z]]
-    (let [nx (normalize-xyz-value (/ x ref-x))
-          ny (normalize-xyz-value (/ y ref-y))
-          nz (normalize-xyz-value (/ z ref-z))]
-      [(- (* 116.0 ny) 16)
-       (* 500.0 (- nx ny))
-       (* 200.0 (- ny nz))])))
+(def reference-x
+  95.047)
+
+(def reference-y
+  100.0)
+
+(def reference-z
+  108.883)
+
+(defn xyz->lab
+  [[x y z]]
+  (let [nx (normalize-xyz-value (/ x reference-x))
+        ny (normalize-xyz-value (/ y reference-y))
+        nz (normalize-xyz-value (/ z reference-z))]
+    [(- (* 116.0 ny) 16)
+     (* 500.0 (- nx ny))
+     (* 200.0 (- ny nz))]))
 
 (def rgb->lab (comp xyz->lab rgb->xyz))
 
@@ -57,15 +63,18 @@
         b2 (last w)
         c1 (Math/sqrt (+ (square a1) (square b1)))
         c2 (Math/sqrt (+ (square a2) (square b2)))
-        d-a (- a1 a2)
-        d-c (- c1 c2)
-        d-b (- b1 b2)
-        d-l (- (first v) (first w))
-        d-h (Math/sqrt (- (+ (square d-a) (square d-b))
-                          (square d-c)))
-        s-c (inc (* 0.045 c1))
-        s-h (inc (* 0.015 c1))
-        radicand (+ (square d-l) (square (/ d-c s-c)) (square (/ d-h s-h)))]
+        _ (println c1 c2 b1 b2 a1 a2)
+        da (- a1 a2)
+        dc (- c1 c2)
+        db (- b1 b2)
+        dl (- (first v) (first w))
+        _ (println da dc db dl)
+        dh (Math/sqrt (- (+ (square da) (square db))
+                          (square dc)))
+        sc (inc (* 0.045 c1))
+        sh (inc (* 0.015 c1))
+        _ (println dh sc sh)
+        radicand (+ (square dl) (square (/ dc sc)) (square (/ dh sh)))]
     (Math/sqrt radicand)))
 
 (defn best-match
