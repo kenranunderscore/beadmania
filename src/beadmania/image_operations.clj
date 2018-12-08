@@ -33,4 +33,4 @@
   [tempfile-path filename]
   (let [image (imagez/load-image tempfile-path)
         pixels (vec (imagez/get-pixels image))]
-    (transform-pixels pixels)))
+    (transform-pixels pixels (.getWidth image))))
