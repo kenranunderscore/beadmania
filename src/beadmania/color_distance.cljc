@@ -19,8 +19,9 @@
         dc (- c1 c2)
         db (- b1 b2)
         dl (- (first v) (first w))
-        dh (Math/sqrt (- (+ (square da) (square db))
-                         (square dc)))
+        rad (- (+ (square da) (square db))
+               (square dc))
+        dh (if (neg? rad) 0 (Math/sqrt rad)) ;; cljs workaround: no bigdec
         sc (inc (* 0.045 c1))
         sh (inc (* 0.015 c1))
         radicand (+ (square dl) (square (/ dc sc)) (square (/ dh sh)))]
