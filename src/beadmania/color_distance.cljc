@@ -6,6 +6,8 @@
   (* x x))
 
 (defn delta-e94
+  "Calculates the Delta E94 distance between two L*a*b*
+  color vectors."
   [v w]
   (let [a1 (second v)
         a2 (second w)
