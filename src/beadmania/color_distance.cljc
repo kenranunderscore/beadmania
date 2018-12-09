@@ -5,8 +5,8 @@
   [x]
   (* x x))
 
-(defn delta-e94
-  "Calculates the Delta E94 distance between two L*a*b*
+(defn delta-e94-squared
+  "Calculates the squared Delta E94 distance between two L*a*b*
   color vectors."
   [v w]
   (let [a1 (second v)
@@ -25,4 +25,10 @@
         sc (inc (* 0.045 c1))
         sh (inc (* 0.015 c1))
         radicand (+ (square dl) (square (/ dc sc)) (square (/ dh sh)))]
-    (Math/sqrt radicand)))
+    radicand))
+
+(defn delta-e94
+  "Calculates the squared Delta E94 distance between two L*a*b*
+  color vectors."
+  [v w]
+  (Math/sqrt (delta-e94-squared v w)))

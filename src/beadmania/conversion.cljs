@@ -5,8 +5,8 @@
 (defn best-match
   [rgb rgb-palette]
   (apply min-key
-         #(color-distance/delta-e94 (color/rgb->lab rgb)
-                                    (color/rgb->lab %))
+         #(color-distance/delta-e94-squared (color/rgb->lab rgb)
+                                            (color/rgb->lab %))
          rgb-palette))
 
 (defn convert
