@@ -1,4 +1,4 @@
-{:deps {org.clojure/clojure {:mvn/version "1.9.0"}
+{:deps {org.clojure/clojure {:mvn/version "1.10.0-RC5"}
         ring {:mvn/version "1.7.0-RC2"}
         hiccup {:mvn/version "1.0.5"}
         compojure {:mvn/version "1.6.1"}
